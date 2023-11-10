@@ -1,6 +1,6 @@
 module.exports = {
   development: {
-    dialect: 'postres',
+    dialect: 'postgres',
     host: 'localhost',
     port: '5432',
     database: 'notes_list',

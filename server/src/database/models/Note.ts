@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize'
-import { sequelize } from '../database/index'
+import { sequelize } from '../index'
 import { User } from './User'
 
 export const Note = sequelize.define('Note', {
