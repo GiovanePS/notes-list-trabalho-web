@@ -9,13 +9,16 @@ Faremos uma note-list padrão, em que os diferentes usuários poderão interagir
 
 ## Build básica de desenvolvimento client-side:
 1. git clone https://github.com/GiovanePS/todo-list-trabalho-web.git
-2. Vá para o diretório _/notetasklist_.
+2. Vá para o diretório _/client_.
 3. Execute `npm install` para instalar todas as dependências.
 4. Execute `npm run dev`.
 
-Dessa forma, o servidor já estará rodando no http://localhost:3000.
+Dessa forma, se tudo der certo, o client já estará rodando no http://localhost:3000.
   
 ## Build básica de desenvolvimento server-side:
 1. git clone https://github.com/GiovanePS/todo-list-trabalho-web.git
 2. Vá para o diretório _/server_
 3. Execute `npm install` para instalar todas as dependências.
+4. Execute `nodemon src/server.ts`.
+
+Dessa forma, se tudo der certo, o servidor já estará rodando no http://localhost:5000.
