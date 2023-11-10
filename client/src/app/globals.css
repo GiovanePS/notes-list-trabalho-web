@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .input-login {
+    @apply border border-gray-400 rounded-md hover:border-gray-800 outline-blue-600;
+  }
+}
