@@ -19,6 +19,8 @@ Dessa forma, se tudo der certo, o client já estará rodando no http://localhost
 1. git clone https://github.com/GiovanePS/todo-list-trabalho-web.git
 2. Vá para o diretório _/server_
 3. Execute `npm install` para instalar todas as dependências.
-4. Execute `nodemon src/server.ts`.
+4. Execute `npx sequelize-cli db:create` para criar a database _notes_list_ no postgres.
+5. Execute `ts-node src/scripts/sync.ts` para criar as tabelas do projeto no posgres.
+6. Execute `nodemon src/server.ts` para iniciar o servidor.
 
 Dessa forma, se tudo der certo, o servidor já estará rodando no http://localhost:5000.
