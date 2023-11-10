@@ -2,7 +2,7 @@ import express from 'express'
 import {sequelize} from './database'
 
 const app = express()
-const PORT = 3000
+const PORT = 5000
 
 app.listen(PORT, () => {
   sequelize.authenticate().then(() => {
