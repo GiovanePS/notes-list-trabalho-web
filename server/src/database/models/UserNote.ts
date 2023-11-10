@@ -1,5 +1,7 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../index'
+import { User } from './User'
+import { Note } from './Note'
 
 export const UserNote = sequelize.define('UserNote', {
   id: {
@@ -22,13 +24,10 @@ export const UserNote = sequelize.define('UserNote', {
       model: 'notes',
       key: 'id'
     }
-  },
-  created_at: {
-    type: DataTypes.NOW
-  },
-  updated_at: {
-    type: DataTypes.DATE
   }
 }, {
   tableName: 'user_notes'
 })
+
+Note.belongsToMany(User, {through: UserNote})
+User.belongsToMany(Note, {through: UserNote})

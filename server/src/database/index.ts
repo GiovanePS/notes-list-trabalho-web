@@ -9,5 +9,6 @@ export const sequelize = new Sequelize({
   password: 'admin',
   define: {
     underscored: true
-  }
+  },
+  logging: false
 })

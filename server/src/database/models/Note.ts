@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../index'
-import { User } from './User'
 
 export const Note = sequelize.define('Note', {
   id: {
@@ -18,5 +17,3 @@ export const Note = sequelize.define('Note', {
 }, {
   tableName: 'notes'
 })
-
-Note.belongsToMany(User, {through: 'user_notes', foreignKey: 'user_id'})
