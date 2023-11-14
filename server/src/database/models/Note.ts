@@ -1,7 +1,21 @@
-import { DataTypes } from 'sequelize'
+import { DataTypes, Model } from 'sequelize'
 import { sequelize } from '../index'
 
-export const Note = sequelize.define('Note', {
+interface NoteAttributes {
+  id: number,
+  titulo: string,
+  texto: string
+}
+
+interface NoteCreationAttributes extends NoteAttributes {}
+
+class Note extends Model<NoteAttributes, NoteCreationAttributes> implements NoteAttributes {
+  public id!: number;
+  public titulo!: string;
+  public texto!: string;
+}
+
+Note.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -15,5 +29,8 @@ export const Note = sequelize.define('Note', {
     type: DataTypes.TEXT,
   }
 }, {
-  tableName: 'notes'
+  tableName: 'notes',
+  sequelize
 })
+
+export default Note
