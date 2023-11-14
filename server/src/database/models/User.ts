@@ -1,7 +1,23 @@
-import { DataTypes } from 'sequelize'
+import { DataTypes, Model } from 'sequelize'
 import { sequelize } from '../index'
 
-export const User = sequelize.define('User', {
+interface UserAttributes {
+  id: number,
+  email: string,
+  nome: string,
+  senha_hash: string
+}
+
+interface UserCreationAttributes extends UserAttributes {}
+
+class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+  public id!: number;
+  public email!: string;
+  public nome!: string;
+  public senha_hash!: string;
+}
+
+User.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -22,4 +38,7 @@ export const User = sequelize.define('User', {
   }
 }, {
   tableName: 'users',
+  sequelize
 })
+
+export default User
