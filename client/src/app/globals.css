@@ -3,11 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-  .input-entry {
-    @apply border border-gray-400 rounded-md hover:border-gray-800 outline-blue-600 mb-4 px-2 font-light;
+  .header1 {
+    @apply flex justify-center mb-4 font-bold text-gray-700;
   }
-}
-
-label {
-  @apply text-lg font-extralight
 }

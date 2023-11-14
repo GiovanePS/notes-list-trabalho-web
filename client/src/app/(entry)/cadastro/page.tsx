@@ -1,27 +1,28 @@
 import type { Metadata } from 'next'
-import Button from '../(components)/Button'
+import Link from "next/link";
+import InputText from '../../(components)/InputText'
+import Button from '../../(components)/Button'
 
 export const metadata: Metadata = {
-  title: 'Cadastre-se!'
+  title: 'Register!'
 }
 
 export default function SignUpPage() {
   return (
-    <>
-      <h1 className='flex justify-center mb-6 font-bold'>Cadastre-se!</h1>
-      <form>
-        <div className='flex flex-col'>
-          <label>Digite um nome de usuário:</label>
-          <input className='input-entry' type='text'></input>
-          <label>Digite seu e-mail:</label>
-          <input className='input-entry' type='email'></input>
-          <label>Digite sua senha:</label>
-          <input className='input-entry' type='password'></input>
-          <div className='flex justify-center mt-2'>
-            <Button texto='Cadastrar'/>
-          </div>
-        </div>
-      </form>
-    </>
-  )
+		<>
+			<h1 className="header1">Sign up</h1>
+			<form className="px-8 pt-6 pb-8 mb-4">
+				<InputText id="username" type="text" placeholder="Username" />
+				<InputText id="email" type="email" placeholder="Email" />
+				<InputText id="password" type="password" placeholder="Password" />
+				<Button text="Register" />
+				<div className="mt-6 text-center text-gray-700 text-[15px]">
+					Already have an account?{" "}
+					<Link href="/login" className="text-blue-400 hover:text-blue-300">
+						Login here
+					</Link>
+				</div>
+			</form>
+		</>
+  );
 }

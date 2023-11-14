@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
-import Button from '../(components)/Button'
+import Link from "next/link";
+import InputText from '@/app/(components)/InputText';
+import Button from '@/app/(components)/Button';
+
 
 export const metadata: Metadata = {
   title: "Login"
@@ -7,19 +10,19 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <>
-      <h1 className='flex justify-center mb-2 font-bold'>Entrar</h1>
-      <form>
-        <div className='flex flex-col'>
-          <label>Usuário </label>
-          <input className='input-entry' type='text'></input>
-          <label>Senha </label>
-          <input className='input-entry' type='password'></input>
-          <div className='flex justify-center mt-2'>
-            <Button texto='Entrar'/>
-          </div>
-        </div>
-      </form>
-    </>
-  )
+		<>
+			<h1 className="header1">Sign in</h1>
+			<form className="px-8 pt-6 pb-8 mb-4">
+				<InputText id="username" type="text" placeholder="Username" />
+				<InputText id="password" type="password" placeholder="Password" />
+				<Button text="Sign in" />
+				<div className="mt-6 text-center text-gray-700 text-sm">
+					Don't have an account?{" "}
+					<Link href="/cadastro" className="text-blue-400 hover:text-blue-300">
+						Register here
+					</Link>
+				</div>
+			</form>
+		</>
+  );
 }
