@@ -1,13 +1,17 @@
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Home',
-}
+	title: "Home",
+};
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
-  return (
-    <html lang="pt-br">
-      <body>{children}</body>
-    </html>
-  )
+export default function RootLayout({
+	children,
+}: {
+	children: React.ReactNode;
+}) {
+	return (
+		<div className="bg-white">
+      		  {children}
+		</div>
+	);
 }
