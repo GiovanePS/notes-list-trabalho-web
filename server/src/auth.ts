@@ -23,11 +23,11 @@ passport.use(new LocalStrategy({usernameField: 'username', passwordField: 'passw
   }
 }))
 
-passport.serializeUser((user: User, done: any) => {
-  done(null, user.id)
+passport.serializeUser((user, done) => {
+  done(null, user['id'])
 })
 
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (id: number, done) => {
   const user = await User.findOne({
     where: {
       id: id
