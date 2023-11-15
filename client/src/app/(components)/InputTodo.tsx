@@ -12,15 +12,15 @@ const InputTodo: React.FC = () => {
     e.preventDefault();
     try {
       const body = { description };
-      const response = await fetch("http://localhost:5000/todos", {
+      const response = await fetch("http://localhost:3000/todos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
 
       window.location.href = "/";
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      console.error(err.message);
     }
   };
 
