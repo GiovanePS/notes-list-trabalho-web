@@ -10,7 +10,7 @@ export  function Header(){
     return(
         <header className="bg-white">
         <nav className="flex justify-between items-center w-[92%]  mx-auto">
-            <div>
+            <div className='flex items-center'>
                 <Link href="/dashboard" legacyBehavior>
                         <Image src="/home/notepad.png"
                             className='cursor-pointer'
@@ -20,7 +20,7 @@ export  function Header(){
 							priority>
                         </Image>
                     </Link>
-
+                <h1 className='ml-2'>Notes list</h1>
             </div>
             <div className="flex items-center gap-6">
             <Button text="Log out" />
