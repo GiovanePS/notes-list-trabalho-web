@@ -6,4 +6,8 @@
   .header1 {
     @apply flex justify-center mb-4 font-bold text-gray-700;
   }
+
+  .link {
+    @apply my-0 mx-4 text-gray-700 leading-5 hover:text-blue-600;
+  }
 }
