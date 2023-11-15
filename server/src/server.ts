@@ -1,10 +1,17 @@
 import express from 'express'
+import session from 'express-session'
 import sequelize from './database'
-import passport, { session } from 'passport'
-import './auth'
+import passport from 'passport'
+import './passport-config'
 
 const app = express()
 const PORT = 5000
+
+app.use(session({
+  secret: 'secret', // alterar secret para não ficar hardcoded.
+  resave: false,
+  saveUninitialized: false
+}))
 
 app.use(passport.initialize())
 app.use(passport.session())

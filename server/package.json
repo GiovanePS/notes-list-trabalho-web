@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/express": "github:types/express",
+    "@types/express-session": "^1.17.10",
     "@types/node": "^20.9.0",
     "@types/passport": "^1.0.15",
     "@types/passport-local": "^1.0.38",

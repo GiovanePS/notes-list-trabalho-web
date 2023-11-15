@@ -29,7 +29,9 @@ Note.init({
     type: DataTypes.TEXT,
   }
 }, {
+  freezeTableName: true,
   tableName: 'notes',
+  modelName: 'note',
   sequelize
 })
 

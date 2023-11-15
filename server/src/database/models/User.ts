@@ -37,7 +37,9 @@ User.init({
     allowNull: false
   }
 }, {
+  freezeTableName: true,
   tableName: 'users',
+  modelName: 'user',
   sequelize
 })
 

@@ -27,7 +27,7 @@ UserNote.init({
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'users',
+      model: User,
       key: 'id'
     }
   },
@@ -35,12 +35,14 @@ UserNote.init({
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'notes',
+      model: Note,
       key: 'id'
     }
   }
 }, {
+  freezeTableName: true,
   tableName: 'user_notes',
+  modelName: 'user_note',
   sequelize
 })
 
