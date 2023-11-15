@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import TopNavBar from "@/app/(components)/HomeNavBar";
 
 export const metadata: Metadata = {
 	title: "Home",
@@ -11,7 +12,8 @@ export default function RootLayout({
 }) {
 	return (
 		<div className="bg-white">
-      		  {children}
+			<TopNavBar />
+			{children}
 		</div>
 	);
 }
