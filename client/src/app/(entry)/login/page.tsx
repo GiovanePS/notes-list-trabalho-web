@@ -18,7 +18,7 @@ export default function LoginPage() {
 				<Button text="Sign in" />
 				<div className="mt-6 text-center text-gray-700 text-sm">
 					Don't have an account?{" "}
-					<Link href="/cadastro" className="text-blue-400 hover:text-blue-300">
+					<Link href="/register" className="text-blue-400 hover:text-blue-300">
 						Register here
 					</Link>
 				</div>
