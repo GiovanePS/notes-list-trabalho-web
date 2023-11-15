@@ -9,13 +9,9 @@ interface NoteAttributes {
 
 interface NoteCreationAttributes extends NoteAttributes {}
 
-class Note extends Model<NoteAttributes, NoteCreationAttributes> implements NoteAttributes {
-  public id!: number;
-  public titulo!: string;
-  public texto!: string;
-}
+interface NoteInstance extends Model<NoteAttributes, NoteCreationAttributes>, NoteAttributes {}
 
-Note.init({
+export const Note = sequelize.define<NoteInstance, NoteAttributes>('note', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -31,8 +27,6 @@ Note.init({
 }, {
   freezeTableName: true,
   tableName: 'notes',
-  modelName: 'note',
-  sequelize
 })
 
 export default Note

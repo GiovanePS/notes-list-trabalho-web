@@ -11,13 +11,10 @@ interface UserNoteAttributes {
 
 interface UserNoteCreationAttributes extends UserNoteAttributes {}
 
-class UserNote extends Model<UserNoteAttributes, UserNoteCreationAttributes> implements UserNoteAttributes {
-  public id!: number;
-  public user_id!: number;
-  public note_id!: number;
-}
+interface UserNoteInstance extends Model<UserNoteAttributes, UserNoteCreationAttributes>, UserNoteAttributes {}
 
-UserNote.init({
+
+export const UserNote = sequelize.define<UserNoteInstance, UserNoteAttributes>('user_note',{
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -42,8 +39,6 @@ UserNote.init({
 }, {
   freezeTableName: true,
   tableName: 'user_notes',
-  modelName: 'user_note',
-  sequelize
 })
 
 Note.belongsToMany(User, {through: UserNote})

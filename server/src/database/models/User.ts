@@ -10,14 +10,9 @@ interface UserAttributes {
 
 interface UserCreationAttributes extends UserAttributes {}
 
-class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
-  public id!: number;
-  public email!: string;
-  public nome!: string;
-  public senha_hash!: string;
-}
+interface UserInstance extends Model<UserAttributes, UserCreationAttributes>, UserAttributes {}
 
-User.init({
+export const User = sequelize.define <UserInstance, UserAttributes>('user', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -39,8 +34,6 @@ User.init({
 }, {
   freezeTableName: true,
   tableName: 'users',
-  modelName: 'user',
-  sequelize
 })
 
 export default User
