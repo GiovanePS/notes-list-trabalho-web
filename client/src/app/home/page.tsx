@@ -1,11 +1,11 @@
 import Button from "@/app/(components)/Button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HomePage() {
 	return (
 		<div className="container mx-auto">
 			<div className="flex justify-center min-h-screen">
-				{/* Top Section with Illustrations and Content */}
 				<div className="flex md:flex-row items-center justify-between py-10">
 					{/* Illustration Left */}
 					<div className="hidden md:block">
@@ -19,12 +19,23 @@ export default function HomePage() {
 					</div>
 					{/* Content Center */}
 					<div className="flex flex-col items-center text-center max-w-sm m-8">
-						<Image
-							src="/home/notepad.png"
-							width={135}
-							height={184}
-							alt="Notepad"
-						/>
+						<div className="block md:hidden">
+							<Image
+								src="/home/notepad.png"
+								width={68}
+								height={93}
+								alt="Notepad"
+							/>
+						</div>
+						<div className="hidden md:block">
+							<Image
+								src="/home/notepad.png"
+								width={135}
+								height={184}
+								alt="Bro and Girl"
+							/>
+						</div>
+						
 						<h1 className="text-5xl  my-10">Note List</h1>
 						<p className="mb-6 text-lg text-gray-700">
 							O Note List possibilita que você tenha mais
@@ -38,7 +49,9 @@ export default function HomePage() {
 								alt="Bro and Girl"
 							/>
 						</div>
-						<Button text="Get Started" />
+						<Link href="/register">
+							<Button text="Get Started" />
+						</Link>
 					</div>
 					{/* Illustration Right */}
 					<div className="hidden md:block">

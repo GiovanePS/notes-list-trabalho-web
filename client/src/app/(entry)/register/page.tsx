@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 import Link from "next/link";
-import InputText from '../../(components)/InputText'
-import Button from '../../(components)/Button'
+import InputText from '@/app/(components)/InputText'
+import Button from '@/app/(components)/Button'
 
 export const metadata: Metadata = {
-  title: 'Register!'
+  title: 'Register'
 }
 
-export default function SignUpPage() {
+export default function RegisterPage() {
   return (
 		<>
 			<h1 className="header1">Sign up</h1>
