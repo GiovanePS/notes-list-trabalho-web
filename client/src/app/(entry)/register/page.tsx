@@ -12,9 +12,9 @@ export default function RegisterPage() {
 		<>
 			<h1 className="header1">Sign up</h1>
 			<form className="px-8 pt-6 pb-8 mb-4">
-				<InputText id="username" type="text" placeholder="Username" />
-				<InputText id="email" type="email" placeholder="Email" />
-				<InputText id="password" type="password" placeholder="Password" />
+				<InputText id="username" type="text" name='username' placeholder="Username" />
+				<InputText id="email" type="email" name='email' placeholder="Email" />
+				<InputText id="password" type="password" name='password' placeholder="Password" />
 				<Button text="Register" />
 				<div className="mt-6 text-center text-gray-700 text-[15px]">
 					Already have an account?{" "}

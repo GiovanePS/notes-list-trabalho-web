@@ -2,19 +2,20 @@ import express, { Request, Response, NextFunction } from 'express'
 import session from 'express-session'
 import sequelize from './database'
 import passport from 'passport'
+import cors from 'cors'
 import './passport-config'
 
 const app = express()
 const PORT = 5000
 
 app.use(express.json())
+app.use(cors())
 
 app.use(session({
-  secret: 'secret', // alterar secret para não ficar hardcoded.
+  secret: 'secret', // alterar secret para não ficar hardcoded através de dotenv.
   resave: false,
   saveUninitialized: false
 }))
-
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -25,7 +26,8 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
 
     req.login(user, (error) => {
       if (error) throw error
-      res.status(201).json({ user })
+      res.status(201)
+      res.send(user)
     })
   })(req, res, next)
 })

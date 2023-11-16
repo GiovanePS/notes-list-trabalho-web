@@ -2,6 +2,7 @@
 .next/
 out/
 *.log
+.env
 
 # Node.js
 node_modules/

@@ -3,11 +3,11 @@ import { Strategy as LocalStrategy } from 'passport-local'
 
 import { User } from './database/models/User'
 
-passport.use(new LocalStrategy({usernameField: 'username', passwordField: 'password'}, async (username, password, done) => {
+passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password'}, async (email, password, done) => {
   try {
     const user = await User.findOne({
       where: {
-        nome: username
+        email: email
       }
     })
     if (!user) {

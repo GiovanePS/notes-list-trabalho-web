@@ -1,7 +1,11 @@
+import { ChangeEvent } from "react";
+
 type InputTextProps = {
 	id: string;
 	type: string;
+	name: string;
 	placeholder: string;
+	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function InputText(props: InputTextProps) {
@@ -11,7 +15,10 @@ export default function InputText(props: InputTextProps) {
 				className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
 				id={props.id}
 				type={props.type}
+				name={props.name}
 				placeholder={props.placeholder}
+				onChange={props.onChange}
+				required
 			/>
 		</div>
 	);
