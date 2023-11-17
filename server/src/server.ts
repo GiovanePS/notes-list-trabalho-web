@@ -15,6 +15,7 @@ app.use(cors({
 }))
 
 app.use(session({
+  name: 'session-id',
   secret: 'secret', // alterar secret para não ficar hardcoded através de dotenv.
   resave: false,
   saveUninitialized: false
@@ -29,9 +30,17 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
 
     req.login(user, (error) => {
       if (error) throw error
-      res.status(200).json({ user })
+      res.status(200).send()
     })
   })(req, res, next)
+})
+
+app.get('/check', (req: Request, res: Response, next: NextFunction) => {
+  if (req.isAuthenticated()) {
+    res.status(200).send()
+  } else {
+    res.status(401).send()
+  }
 })
 
 app.listen(PORT, () => {

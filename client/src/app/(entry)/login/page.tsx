@@ -3,8 +3,9 @@
 import Link from "next/link";
 import InputText from '@/app/(components)/InputText';
 import Button from '@/app/(components)/Button';
-import { FormEvent } from 'react';
+import { FormEvent, useEffect } from 'react';
 import { useRouter } from "next/navigation";
+import { checkAuth } from "@/services/authService";
 
 export default function LoginPage() {
 	const router = useRouter()
