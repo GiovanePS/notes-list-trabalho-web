@@ -5,7 +5,6 @@ type InputTextProps = {
 	type: string;
 	name: string;
 	placeholder: string;
-	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function InputText(props: InputTextProps) {
@@ -17,7 +16,6 @@ export default function InputText(props: InputTextProps) {
 				type={props.type}
 				name={props.name}
 				placeholder={props.placeholder}
-				onChange={props.onChange}
 				required
 			/>
 		</div>
