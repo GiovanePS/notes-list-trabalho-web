@@ -29,7 +29,7 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
 
     req.login(user, (error) => {
       if (error) throw error
-      res.status(201).json({ user })
+      res.status(200).json({ user })
     })
   })(req, res, next)
 })

@@ -4,8 +4,11 @@ import Link from "next/link";
 import InputText from '@/app/(components)/InputText';
 import Button from '@/app/(components)/Button';
 import { FormEvent } from 'react';
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+	const router = useRouter()
+	
 	async function submitHandler(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault()
 		try {
@@ -21,7 +24,9 @@ export default function LoginPage() {
 				credentials: 'include',
 			})
 
-			console.log(await response.json())
+			if (response.status == 200) {
+				router.push('/dashboard')
+			}
 		} catch (error) {
 			console.error(error)
 		}
