@@ -1,16 +1,35 @@
-import type { Metadata } from 'next'
-import Link from "next/link";
-// import InputText from '@/app/(components)/Button'
+"use client"
+
 import {Header} from '@/app/(components)/Header';
 import InputTodo from '../(components)/InputTodo';
 import ListTodos from '../(components)/ListTodos';
-import React, {Fragment} from 'react';
-
-export const metadata: Metadata = {
-  title: 'Notes'
-}
+import React, { useEffect, useState } from 'react';
+import { checkAuth } from '@/services/authService';
+import { useRouter } from 'next/navigation';
 
 export default function Dashboard(){
+  const router = useRouter()
+
+	const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
+
+	useEffect(() => {
+		const fetchAuthStatus = async () => {
+			try {
+				const checkingAuth: any = await checkAuth()
+				setIsAuthenticated(checkingAuth)
+
+				if (!isAuthenticated) {
+					router.push('/login')
+				}
+			} catch (error) {
+				console.error(error)
+			}
+		}
+
+		fetchAuthStatus()
+	}, [router])
+
+  if (isAuthenticated) {
     return(
         <>
         <div>
@@ -24,4 +43,7 @@ export default function Dashboard(){
         
         </>
     )
+  } else {
+    return null
+  }
 }
