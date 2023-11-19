@@ -15,10 +15,14 @@ app.use(cors({
 }))
 
 app.use(session({
-  name: 'session-id',
+  name: process.env.SESSION_SECRET,
   secret: 'secret', // alterar secret para não ficar hardcoded através de dotenv.
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: {
+    secure: false,
+    maxAge: undefined,
+  }
 }))
 
 app.use(passport.initialize())
