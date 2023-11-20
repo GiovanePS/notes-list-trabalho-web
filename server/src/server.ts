@@ -5,6 +5,7 @@ import passport from 'passport'
 import cors from 'cors'
 import './passport-config'
 import 'dotenv/config'
+import User from './database/models/User'
 
 const app = express()
 const PORT = process.env.SERVER_PORT || 5000
@@ -38,6 +39,19 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
       res.status(200).send()
     })
   })(req, res, next)
+})
+
+app.post('/register', async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { username, email, password } = req.body
+    const newUser = await User.create({
+      nome: username,
+      email: email,
+      senha_hash: password,
+    })
+  } catch (error) {
+    console.error(error)
+  }
 })
 
 app.get('/check', (req: Request, res: Response, next: NextFunction) => {

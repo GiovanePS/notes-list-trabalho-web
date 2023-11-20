@@ -1,4 +1,4 @@
-import { DataTypes, Model } from 'sequelize'
+import { DataTypes, Model, Optional } from 'sequelize'
 import sequelize from '../index'
 
 interface UserAttributes {
@@ -8,7 +8,7 @@ interface UserAttributes {
   senha_hash: string
 }
 
-interface UserCreationAttributes extends UserAttributes {}
+interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
 interface UserInstance extends Model<UserAttributes, UserCreationAttributes>, UserAttributes {}
 

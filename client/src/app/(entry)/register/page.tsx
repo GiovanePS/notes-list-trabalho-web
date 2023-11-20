@@ -1,17 +1,39 @@
-import type { Metadata } from 'next'
+"use client"
+
 import Link from "next/link";
 import InputText from '@/app/(components)/InputText'
 import Button from '@/app/(components)/Button'
-
-export const metadata: Metadata = {
-  title: 'Register'
-}
+import { FormEvent } from "react";
 
 export default function RegisterPage() {
-  return (
+  
+	async function submitHandler(event: FormEvent<HTMLFormElement>) {
+		event.preventDefault()
+		try {
+			const formData = new FormData(event.currentTarget)
+			const username = formData.get('username')!.toString()
+			const email = formData.get('email')!.toString()
+			const password = formData.get('password')!.toString()
+
+			const body = { username, email, password }
+			const response = await fetch('http://localhost:5000/register', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body),
+			})
+
+			const jsonData = await response.json()
+
+			console.log(jsonData)
+		} catch (error) {
+			console.error(error)
+		}
+	}
+	
+	return (
 		<>
 			<h1 className="header1">Sign up</h1>
-			<form className="px-8 pt-6 pb-8 mb-4">
+			<form onSubmit={submitHandler} className="px-8 pt-6 pb-8 mb-4">
 				<InputText id="username" type="text" name='username' placeholder="Username" />
 				<InputText id="email" type="email" name='email' placeholder="Email" />
 				<InputText id="password" type="password" name='password' placeholder="Password" />
