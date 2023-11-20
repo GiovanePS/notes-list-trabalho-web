@@ -17,6 +17,9 @@ export default function Dashboard(){
 			try {
 				const checkingAuth: any = await checkAuth()
 				setIsAuthenticated(checkingAuth)
+        if (!checkingAuth) {
+          router.push('/login')
+        }
 			} catch (error) {
 				console.error(error)
 			}
@@ -36,12 +39,6 @@ export default function Dashboard(){
             <ListTodos/>
           </div>
         </div>
-      </>
-    )
-  } else {
-    return (
-      <>
-        401 Unauthorized Error
       </>
     )
   }

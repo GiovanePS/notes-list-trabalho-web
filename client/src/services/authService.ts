@@ -9,7 +9,7 @@ export const checkAuth = async () => {
     return error
   })
 
-  if (response.status === 400) {
+  if (response.status === 401) {
     return false
   }
 
