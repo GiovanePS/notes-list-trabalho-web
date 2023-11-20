@@ -6,7 +6,8 @@ import Note from './Note'
 interface UserNoteAttributes {
   id: number,
   user_id: number,
-  note_id: number
+  note_id: number,
+  admin_id: number,
 }
 
 interface UserNoteCreationAttributes extends UserNoteAttributes {}
@@ -14,7 +15,7 @@ interface UserNoteCreationAttributes extends UserNoteAttributes {}
 interface UserNoteInstance extends Model<UserNoteAttributes, UserNoteCreationAttributes>, UserNoteAttributes {}
 
 
-export const UserNote = sequelize.define<UserNoteInstance, UserNoteAttributes>('user_note',{
+export const UserNote = sequelize.define<UserNoteInstance, UserNoteAttributes>('user_note', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -33,6 +34,14 @@ export const UserNote = sequelize.define<UserNoteInstance, UserNoteAttributes>('
     allowNull: false,
     references: {
       model: Note,
+      key: 'id'
+    }
+  },
+  admin_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: User,
       key: 'id'
     }
   }
