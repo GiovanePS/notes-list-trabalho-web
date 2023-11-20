@@ -4,9 +4,10 @@ import sequelize from './database'
 import passport from 'passport'
 import cors from 'cors'
 import './passport-config'
+import 'dotenv/config'
 
 const app = express()
-const PORT = 5000
+const PORT = process.env.SERVER_PORT || 5000
 
 app.use(express.json())
 app.use(cors({
