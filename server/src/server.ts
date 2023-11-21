@@ -17,14 +17,10 @@ app.use(cors({
 }))
 
 app.use(session({
-  name: process.env.SESSION_SECRET || 'secret',
-  secret: 'secret', // alterar secret para não ficar hardcoded através de dotenv.
+  name: 'session-id',
+  secret: process.env.SESSION_SECRET || 'secret',
   resave: false,
   saveUninitialized: false,
-  cookie: {
-    secure: false,
-    maxAge: undefined,
-  }
 }))
 
 app.use(passport.initialize())
@@ -52,6 +48,16 @@ app.post('/register', async (req: Request, res: Response, next: NextFunction) =>
   } catch (error) {
     console.error(error)
   }
+})
+
+app.get('/logout', (req, res, next) => {
+  req.logout(error => {
+    if (error) {
+      res.status(400).send()
+      return next(error)
+    }
+  })
+  res.status(200).send()
 })
 
 app.get('/check', (req: Request, res: Response) => {
