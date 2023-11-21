@@ -6,6 +6,9 @@ import cors from 'cors'
 import './authentication'
 import 'dotenv/config'
 import User from './database/models/User'
+import Note from './database/models/Note'
+import UserNote from './database/models/UserNote'
+import isAuth from './middlewares/auth'
 
 const app = express()
 const PORT = process.env.SERVER_PORT || 5000
@@ -40,7 +43,7 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
 app.post('/register', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { username, email, password } = req.body
-    const newUser = await User.create({
+    await User.create({
       nome: username,
       email: email,
       senha_hash: password,
@@ -68,9 +71,33 @@ app.get('/check', (req: Request, res: Response) => {
   }
 })
 
+app.get('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = req.user as User
+    const notes_of_user = await UserNote.findAll({
+      where: {
+        user_id: user.id
+      }
+    })
+
+    const allNotes: Note[] = []
+    await Promise.all(notes_of_user.map(async obj => {
+      const note = await Note.findByPk(obj.note_id)
+      if (note) {
+        allNotes.push(note)
+      }
+    })
+    )
+
+    res.json({ user: user.id, notes: allNotes })
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 app.listen(PORT, () => {
   sequelize.authenticate().then(() => {
     console.log('Conexão com o banco de dados bem sucedida.')
     })
   console.log(`Servidor iniciado na porta ${PORT}`)
-  })
+})

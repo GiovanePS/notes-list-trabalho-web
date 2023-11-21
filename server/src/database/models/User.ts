@@ -1,18 +1,18 @@
 import { DataTypes, Model, Optional } from 'sequelize'
 import sequelize from '../index'
 
-interface UserAttributes {
+export interface User {
   id: number,
   email: string,
   nome: string,
   senha_hash: string
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+interface UserCreationAttributes extends Optional<User, 'id'> {}
 
-interface UserInstance extends Model<UserAttributes, UserCreationAttributes>, UserAttributes {}
+interface UserInstance extends Model<User, UserCreationAttributes>, User {}
 
-export const User = sequelize.define <UserInstance, UserAttributes>('user', {
+export const User = sequelize.define <UserInstance, User>('user', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,

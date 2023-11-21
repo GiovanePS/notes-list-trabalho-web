@@ -1,17 +1,17 @@
 import { DataTypes, Model, Optional } from 'sequelize'
 import sequelize from '../index'
 
-interface NoteAttributes {
+export interface Note {
   id: number,
   titulo: string,
   texto: string
 }
 
-interface NoteCreationAttributes extends Optional<NoteAttributes, 'id'> {}
+interface NoteCreationAttributes extends Optional<Note, 'id'> {}
 
-interface NoteInstance extends Model<NoteAttributes, NoteCreationAttributes>, NoteAttributes {}
+interface NoteInstance extends Model<Note, NoteCreationAttributes>, Note {}
 
-export const Note = sequelize.define<NoteInstance, NoteAttributes>('note', {
+export const Note = sequelize.define<NoteInstance, Note>('note', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
