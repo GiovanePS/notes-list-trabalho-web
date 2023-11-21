@@ -1,4 +1,4 @@
-import { DataTypes, Model } from 'sequelize'
+import { DataTypes, Model, Optional } from 'sequelize'
 import sequelize from '../index'
 
 interface NoteAttributes {
@@ -7,7 +7,7 @@ interface NoteAttributes {
   texto: string
 }
 
-interface NoteCreationAttributes extends NoteAttributes {}
+interface NoteCreationAttributes extends Optional<NoteAttributes, 'id'> {}
 
 interface NoteInstance extends Model<NoteAttributes, NoteCreationAttributes>, NoteAttributes {}
 

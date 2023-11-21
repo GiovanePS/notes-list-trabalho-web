@@ -1,4 +1,4 @@
-import { DataTypes, Model } from 'sequelize'
+import { DataTypes, Model, Optional } from 'sequelize'
 import sequelize from '../index'
 import User from './User'
 import Note from './Note'
@@ -10,7 +10,7 @@ interface UserNoteAttributes {
   admin_id: number,
 }
 
-interface UserNoteCreationAttributes extends UserNoteAttributes {}
+interface UserNoteCreationAttributes extends Optional<UserNoteAttributes, 'id'> {}
 
 interface UserNoteInstance extends Model<UserNoteAttributes, UserNoteCreationAttributes>, UserNoteAttributes {}
 

@@ -3,7 +3,7 @@ import session from 'express-session'
 import sequelize from './database'
 import passport from 'passport'
 import cors from 'cors'
-import './passport-config'
+import './authentication'
 import 'dotenv/config'
 import User from './database/models/User'
 
@@ -17,7 +17,7 @@ app.use(cors({
 }))
 
 app.use(session({
-  name: process.env.SESSION_SECRET,
+  name: process.env.SESSION_SECRET || 'secret',
   secret: 'secret', // alterar secret para não ficar hardcoded através de dotenv.
   resave: false,
   saveUninitialized: false,
@@ -54,7 +54,7 @@ app.post('/register', async (req: Request, res: Response, next: NextFunction) =>
   }
 })
 
-app.get('/check', (req: Request, res: Response, next: NextFunction) => {
+app.get('/check', (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     res.status(200).send()
   } else {
