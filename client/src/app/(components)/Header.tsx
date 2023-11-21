@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from "next/image";
 import Button from './Button';
 import { useRouter } from 'next/navigation';
+import notepadImage from './(public)/notepad-mobile.png'
 
 
 export  function Header(){
@@ -22,8 +23,7 @@ export  function Header(){
         <nav className="flex justify-between items-center w-[92%]  mx-auto">
             <div className='flex items-center'>
                 <Link href="/dashboard" legacyBehavior>
-                        <Image src="/home/(public)/notepad-desktop.jpg"
-                            className='cursor-pointer'
+                        <Image src={notepadImage}
 							width={30}
 							height={30}
 							alt="Left Bro"

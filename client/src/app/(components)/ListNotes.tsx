@@ -2,43 +2,46 @@
 import React, { Fragment, useEffect, useState } from "react";
 import EditTodo from "./EditTodo";
 
-interface Todo {
-  todo_id: number;
-  description: string;
+interface Note {
+  id: number;
+  titulo: string;
+  texto: string;
 }
 
-const ListTodos: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+export default function ListNotes() {
+  const [allNotes, setAllNotes] = useState<Note[]>([]);
 
   // delete todo function
-  const deleteTodo = async (id: number) => {
+  const deleteNote = async (id: number) => {
     try {
       const deleteTodo = await fetch(`http://localhost:3000/todos/${id}`, {
         method: "DELETE",
       });
 
-      setTodos((prevTodos) => prevTodos.filter((todo) => todo.todo_id !== id));
+      setAllNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
     } catch (err: any) {
       console.error(err.message);
     }
   };
 
-  const getTodos = async () => {
+  const getNotes = async () => {
     try {
-      const response = await fetch("http://localhost:3000/todos");
+      const response = await fetch("http://localhost:5000/notes", {
+        method: 'GET',
+				headers: { 'Content-Type': 'application/json' },
+				credentials: 'include',
+      });
       const jsonData = await response.json();
 
-      setTodos(jsonData);
+      setAllNotes(jsonData);
     } catch (err: any) {
       console.error(err.message);
     }
   };
 
   useEffect(() => {
-    getTodos();
+    getNotes();
   }, []);
-
-  console.log(todos);
 
   return (
     <Fragment>
@@ -46,22 +49,24 @@ const ListTodos: React.FC = () => {
           <table className="table-auto text-white">
             <thead>
               <tr>
+                <th className="p-8">Title</th>
                 <th className="p-8">Description</th>
                 <th className="p-8">Edit</th>
                 <th className="p-8">Delete</th>
               </tr>
             </thead>
             <tbody>
-              {todos.map((todo) => (
-                <tr key={todo.todo_id}>
-                  <td>{todo.description}</td>
+              {allNotes.map((note) => (
+                <tr key={note.id}>
+                  <td>{note.titulo}</td>
+                  <td>{note.texto}</td>
                   <td>
-                    <EditTodo todo={todo} />
+                    {/* <EditNote note={note} /> */}
                   </td>
                   <td>
                     <button
                       className="bg-red-500 text-white px-3 py-1 rounded"
-                      onClick={() => deleteTodo(todo.todo_id)}
+                      onClick={() => deleteNote(note.id)}
                     >
                       Delete
                     </button>
@@ -74,5 +79,3 @@ const ListTodos: React.FC = () => {
     </Fragment>
   );
 };
-
-export default ListTodos;
