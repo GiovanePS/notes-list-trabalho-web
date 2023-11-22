@@ -50,7 +50,7 @@ export const UserNote = sequelize.define<UserNoteInstance, UserNoteAttributes>('
   tableName: 'user_notes',
 })
 
-Note.belongsToMany(User, {through: UserNote, foreignKey: 'user_id'})
-User.belongsToMany(Note, {through: UserNote, foreignKey: 'note_id'})
+Note.belongsToMany(User, {through: UserNote, foreignKey: 'note_id'})
+User.belongsToMany(Note, {through: UserNote, foreignKey: 'user_id'})
 
 export default UserNote
