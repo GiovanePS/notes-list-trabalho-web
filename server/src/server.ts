@@ -89,7 +89,7 @@ app.get('/notes', isAuth, async (req: Request, res: Response, next: NextFunction
     })
     )
 
-    res.json({ user: user.id, notes: allNotes })
+    res.json(allNotes)
   } catch (error) {
     console.error(error)
   }

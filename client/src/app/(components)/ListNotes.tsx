@@ -33,7 +33,12 @@ export default function ListNotes() {
       });
       const jsonData = await response.json();
 
-      setAllNotes(jsonData);
+      const arr: Note[] = []
+      jsonData.map((note: Note) => {
+        arr.push(note)
+      })
+
+      setAllNotes(arr)
     } catch (err: any) {
       console.error(err.message);
     }
@@ -56,13 +61,13 @@ export default function ListNotes() {
               </tr>
             </thead>
             <tbody>
-              {allNotes.map((note) => (
+              {allNotes?.map((note) => (
                 <tr key={note.id}>
                   <td>{note.titulo}</td>
                   <td>{note.texto}</td>
-                  <td>
+                  {/* <td> */}
                     {/* <EditNote note={note} /> */}
-                  </td>
+                  {/* </td> */}
                   <td>
                     <button
                       className="bg-red-500 text-white px-3 py-1 rounded"
