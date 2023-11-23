@@ -1,17 +1,21 @@
 import Link from "next/link";
-import Image from "next/image";
 
-export default function TopNavBar() {
+export default function HomeNavBar() {
 	return (
 		<nav className="shadow">
 			<div className="px-2 py-3 flex justify-between ">
 				<div>
-					<a href="/home" className="link">Home</a>
-					<a href="/dashboard" className="link">Dashboard</a>
+					<Link href="/home" className="link">
+						Home
+					</Link>
 				</div>
 				<div>
-					<a href="/register" className="link">Register</a>
-					<a href="/login" className="link">Log in</a>
+					<Link href="/register" className="link">
+						Register
+					</Link>
+					<Link href="/login" className="link">
+						Log in
+					</Link>
 				</div>
 			</div>
 		</nav>

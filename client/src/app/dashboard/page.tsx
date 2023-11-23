@@ -1,25 +1,22 @@
-import type { Metadata } from 'next'
-import Link from "next/link";
-// import InputText from '@/app/(components)/Button'
-import {Header} from '@/app/(components)/Header';
-import InputTodo from '../(components)/InputTodo';
-import React, {Fragment} from 'react';
+import type { Metadata } from "next";
+import React from "react";
+import DashboardNavBar from "@/app/(components)/DashboardNavBar";
+import InputNote from "@/app/(components)/InputNote";
+import AreaInputNote from "@/app/(components)/AreaInputNote";
+
 
 export const metadata: Metadata = {
-  title: 'Notes'
-}
+	title: "Notes",
+};
 
-export default function Dashboard(){
-    return(
-        <>
-        <div>
-          <Header/>
-          <div className="bg-indigo-200 w-full h-screen">
-            <br />
-            <InputTodo/>
-          </div>
-        </div>
-        
-        </>
-    )
+export default function Dashboard() {
+	return (
+		<>
+			<div>
+				<DashboardNavBar />
+				<InputNote />
+				{/* List Notes */}
+			</div>
+		</>
+	);
 }
