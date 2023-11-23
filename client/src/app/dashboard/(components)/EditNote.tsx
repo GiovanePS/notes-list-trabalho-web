@@ -1,22 +1,15 @@
 "use client";
-import React, { Fragment, useState, ChangeEvent, MouseEvent } from "react";
+import React, { useState, ChangeEvent, MouseEvent } from "react";
 
-interface EditTodoProps {
-  todo: {
-    todo_id: number;
-    description: string;
-  };
-}
-
-const EditTodo: React.FC<EditTodoProps> = ({ todo }) => {
-  const [description, setDescription] = useState<string>(todo.description);
+export default function EditNote(note: any) {
+  const [texto, setTexto] = useState<string>(note.texto);
 
   const updateDescription = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const body = { description };
+      const body = { texto };
       const response = await fetch(
-        `http://localhost:3000/todos/${todo.todo_id}`,
+        `http://localhost:5000/notes/${note.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -24,27 +17,26 @@ const EditTodo: React.FC<EditTodoProps> = ({ todo }) => {
         }
       );
 
-      window.location.href = "/";
     } catch (err: any) {
       console.error(err.message);
     }
   };
 
   return (
-    <Fragment>
+    <>
       <button
         type="button"
         className="bg-yellow-500 text-white px-3 py-1 rounded"
         data-toggle="modal"
-        data-target={`#id${todo.todo_id}`}
+        data-target={`#id${note.id}`}
       >
         Edit
       </button>
 
       <div
         className="modal"
-        id={`id${todo.todo_id}`}
-        onClick={() => setDescription(todo.description)}
+        id={`id${note.id}`}
+        onClick={() => setTexto(note.texto)}
       >
         <div className="modal-dialog">
           <div className="modal-content">
@@ -54,7 +46,7 @@ const EditTodo: React.FC<EditTodoProps> = ({ todo }) => {
                 type="button"
                 className="close"
                 data-dismiss="modal"
-                onClick={() => setDescription(todo.description)}
+                onClick={() => setTexto(note.texto)}
               >
                 &times;
               </button>
@@ -64,9 +56,9 @@ const EditTodo: React.FC<EditTodoProps> = ({ todo }) => {
               <input
                 type="text"
                 className="border border-gray-300 p-2 w-full"
-                value={description}
+                value={texto}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setDescription(e.target.value)
+                  setTexto(e.target.value)
                 }
               />
             </div>
@@ -84,7 +76,7 @@ const EditTodo: React.FC<EditTodoProps> = ({ todo }) => {
                 type="button"
                 className="bg-red-500 text-white px-3 py-1 rounded"
                 data-dismiss="modal"
-                onClick={() => setDescription(todo.description)}
+                onClick={() => setTexto(note.texto)}
               >
                 Close
               </button>
@@ -92,8 +84,6 @@ const EditTodo: React.FC<EditTodoProps> = ({ todo }) => {
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
-
-export default EditTodo;

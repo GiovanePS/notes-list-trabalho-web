@@ -2,7 +2,7 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import Button from "../../(components)/Button"
 import InputText from "../../(components)/InputText"
-import EditTodo from "../../(components)/EditTodo";
+import EditNote from "./EditNote";
 
 interface Note {
   id: number;
@@ -107,9 +107,9 @@ export default function ListNotes() {
               <tr key={note.id}>
                 <td>{note.titulo}</td>
                 <td>{note.texto}</td>
-                {/* <td> */}
-                  {/* <EditNote note={note} /> */}
-                {/* </td> */}
+                <td>
+                  <EditNote note={note as Note} />
+                </td>
                 <td>
                   <button
                     className="bg-red-500 text-white px-3 py-1 rounded"
