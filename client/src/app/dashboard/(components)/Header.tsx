@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import Image from "next/image";
-import Button from './Button';
+import Button from '../../(components)/Button';
 import { useRouter } from 'next/navigation';
-import notepadImage from './(public)/notepad-mobile.png'
+import notepadImage from '../../../../public/header/notepad-mobile.png'
 
 
-export  function Header(){
+export default function Header(){
     const router = useRouter()
 
     const logoutHandler = async () => {
@@ -37,7 +37,6 @@ export  function Header(){
             </div>
             </nav>
     </header>
-            
     )
 }
 

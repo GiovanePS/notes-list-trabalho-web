@@ -2,7 +2,7 @@ type InputTextProps = {
 	id: string;
 	type: string;
 	name: string;
-	placeholder: string;
+	placeholder?: string;
 };
 
 export default function InputText(props: InputTextProps) {
