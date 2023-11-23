@@ -81,7 +81,7 @@ app.get('/notes', isAuth, async (req: Request, res: Response, next: NextFunction
     })
 
     const allNotes: Note[] = []
-    await Promise.all(notes_of_user.map(async obj => {
+    await Promise.all(notes_of_user.map(async (obj: any) => {
       const note = await Note.findByPk(obj.note_id)
       if (note) {
         allNotes.push(note)
@@ -90,6 +90,27 @@ app.get('/notes', isAuth, async (req: Request, res: Response, next: NextFunction
     )
 
     res.json(allNotes)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
+app.post('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = req.user as User
+    const { titulo, texto } = req.body
+    const newNote = await Note.create({
+      titulo: titulo,
+      texto: texto
+    })
+
+    const assignNota = await UserNote.create({
+      user_id: user.id,
+      note_id: newNote.id,
+      admin_id: user.id
+    })
+
+    res.status(200).send()
   } catch (error) {
     console.error(error)
   }

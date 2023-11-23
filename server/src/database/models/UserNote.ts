@@ -3,19 +3,19 @@ import sequelize from '../index'
 import User from './User'
 import Note from './Note'
 
-interface UserNoteAttributes {
+interface UserNote {
   id: number,
   user_id: number,
   note_id: number,
   admin_id: number,
 }
 
-interface UserNoteCreationAttributes extends Optional<UserNoteAttributes, 'id'> {}
+interface UserNoteCreationAttributes extends Optional<UserNote, 'id'> {}
 
-interface UserNoteInstance extends Model<UserNoteAttributes, UserNoteCreationAttributes>, UserNoteAttributes {}
+interface UserNoteInstance extends Model<UserNote, UserNoteCreationAttributes>, UserNote {}
 
 
-export const UserNote = sequelize.define<UserNoteInstance, UserNoteAttributes>('user_note', {
+export const UserNote = sequelize.define<UserNoteInstance, UserNote>('user_note', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
