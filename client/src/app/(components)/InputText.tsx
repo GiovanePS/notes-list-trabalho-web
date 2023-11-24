@@ -1,7 +1,8 @@
 type InputTextProps = {
 	id: string;
 	type: string;
-	placeholder: string;
+	name: string;
+	placeholder?: string;
 };
 
 export default function InputText(props: InputTextProps) {
@@ -11,8 +12,10 @@ export default function InputText(props: InputTextProps) {
 				className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 focus:outline-none focus:shadow-outline"
 				id={props.id}
 				type={props.type}
+				name={props.name}
 				placeholder={props.placeholder}
 				autoComplete="id"
+				required
 			/>
 		</div>
 	);
