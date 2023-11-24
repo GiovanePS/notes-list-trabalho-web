@@ -1,7 +1,7 @@
 "use client";
 
 import React, { Fragment, useState, FormEvent } from "react";
-import Button from "./Button";
+import Button from "../../(components)/Button";
 
 export default function InputTodo() {
 	const [description, setDescription] = useState<string>("");
@@ -25,7 +25,7 @@ export default function InputTodo() {
 	return (
 		<Fragment>
 			<div className="container mx-auto">
-				<h1 className="text-center mt-5">Pern Todo List</h1>
+				<h1 className="text-center mt-5">Note List</h1>
 				<form
 					className="flex items-center mx-2"
 					onSubmit={onSubmitForm}
