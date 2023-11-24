@@ -123,6 +123,14 @@ app.post('/notes', isAuth, async (req: Request, res: Response, next: NextFunctio
   }
 })
 
+app.put('/', isAuth, (req: Request, res: Response, next: NextFunction) => {
+  try {
+    console.log('edit')
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 // apagar uma nota
 app.delete('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {
