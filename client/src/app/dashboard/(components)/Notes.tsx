@@ -117,7 +117,7 @@ export default function Notes() {
 				</form>
 			</div>
 			<div className="container mx-auto mt-10">
-				<table className="min-w-full">
+				<table className="min-w-full table-auto">
 					<tbody className="">
 						<Note text="Fist Note" title="First Title" />
 						<Note text="Second Note" title="Second Title" />
