@@ -2,7 +2,6 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import Button from "../../(components)/Button"
 import InputText from "../../(components)/InputText"
-import EditNote from "./EditNote";
 
 interface Note {
   id: number;
@@ -10,7 +9,9 @@ interface Note {
   texto: string;
 }
 
-export default function ListNotes() {
+const SERVER_URL = 'http://localhost:5000'
+
+export default function Notes() {
   const [allNotes, setAllNotes] = useState<Note[]>([]);
   
   const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
@@ -25,11 +26,10 @@ export default function ListNotes() {
     }
   }
 
-  //add note
   const addNote = async (titulo: string, texto: string) => {
     try {
       const body = { titulo, texto }
-      const response = await fetch("http://localhost:5000/notes", {
+      const response = await fetch(`${SERVER_URL}/notes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -44,23 +44,31 @@ export default function ListNotes() {
     }
   }
 
-  // delete todo function
+  const editNote = async (id: number) => {
+    console.log(id)
+  }
+
   const deleteNote = async (id: number) => {
     try {
-      const deleteTodo = await fetch(`http://localhost:3000/todos/${id}`, {
+      const body = { id }
+      const response = await fetch(`${SERVER_URL}/notes`, {
         method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+        credentials: 'include'
       });
 
-      setAllNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+      if (response.status === 200) {
+        getAllNotes()
+      }
     } catch (err: any) {
       console.error(err.message);
     }
   };
 
   const getAllNotes = async () => {
-    console.log('contador')
     try {
-      const response = await fetch("http://localhost:5000/notes", {
+      const response = await fetch(`${SERVER_URL}/notes`, {
         method: 'GET',
 				headers: { 'Content-Type': 'application/json' },
 				credentials: 'include',
@@ -88,7 +96,7 @@ export default function ListNotes() {
       <div className="flex items-center justify-center mt-5">
         <form onSubmit={onSubmitForm}>
           <InputText id="titulo" name="titulo" type="text" placeholder="Inserir título" />
-          <InputText id="texto" name="texto" type="text" placeholder="Inserir nota" />
+          <InputText id="texto" name="texto" type="text" placeholder="Inserir texto" />
           <Button text="Adicionar"/>
       </form>
       </div>
@@ -96,8 +104,7 @@ export default function ListNotes() {
         <table className="table-auto text-white">
           <thead>
             <tr>
-              <th className="p-8">Title</th>
-              <th className="p-8">Description</th>
+              <th className="p-8">Título</th>
               <th className="p-8">Edit</th>
               <th className="p-8">Delete</th>
             </tr>
@@ -106,16 +113,15 @@ export default function ListNotes() {
             {allNotes?.map((note) => (
               <tr key={note.id}>
                 <td>{note.titulo}</td>
-                <td>{note.texto}</td>
                 <td>
-                  <EditNote note={note as Note} />
+                  <Button text="Editar" type="button" onClick={() => {editNote(note.id)}}/>
                 </td>
                 <td>
                   <button
                     className="bg-red-500 text-white px-3 py-1 rounded"
                     onClick={() => deleteNote(note.id)}
                   >
-                    Delete
+                    Deletar
                   </button>
                 </td>
               </tr>

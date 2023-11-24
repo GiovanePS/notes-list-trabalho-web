@@ -1,7 +1,7 @@
 "use client"
 
 import Header from './(components)/Header';
-import ListNotes from './(components)/ListNotes';
+import Notes from './(components)/Notes';
 import React, { useEffect, useState } from 'react';
 import { checkAuth } from '@/services/authService';
 import { useRouter } from 'next/navigation';
@@ -34,7 +34,7 @@ export default function Dashboard() {
           <Header/>
           <div className="bg-[#242424] w-full h-screen">
             <br />
-            <ListNotes/>
+            <Notes />
           </div>
         </div>
       </>

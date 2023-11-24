@@ -29,6 +29,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
+// função de login
 app.post('/login', (req: Request, res: Response, next: NextFunction) => {
   passport.authenticate('local', (error: any, user: any, info: any) => {
     if (!user) return res.status(401).json({ message: "email ou senha incorretos."})
@@ -40,6 +41,7 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
   })(req, res, next)
 })
 
+// função de registro
 app.post('/register', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { username, email, password } = req.body
@@ -53,6 +55,8 @@ app.post('/register', async (req: Request, res: Response, next: NextFunction) =>
   }
 })
 
+
+// função logout
 app.get('/logout', (req, res, next) => {
   req.logout(error => {
     if (error) {
@@ -63,6 +67,7 @@ app.get('/logout', (req, res, next) => {
   res.status(200).send()
 })
 
+// verificar autenticação (sem ser middleware)
 app.get('/check', (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     res.status(200).send()
@@ -71,6 +76,7 @@ app.get('/check', (req: Request, res: Response) => {
   }
 })
 
+//  enviar todas as notas de um usuário
 app.get('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as User
@@ -95,6 +101,7 @@ app.get('/notes', isAuth, async (req: Request, res: Response, next: NextFunction
   }
 })
 
+// adicionar nota
 app.post('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as User
@@ -108,6 +115,28 @@ app.post('/notes', isAuth, async (req: Request, res: Response, next: NextFunctio
       user_id: user.id,
       note_id: newNote.id,
       admin_id: user.id
+    })
+
+    res.status(200).send()
+  } catch (error) {
+    console.error(error)
+  }
+})
+
+// apagar uma nota
+app.delete('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.body
+    await Note.destroy({
+      where: {
+        id: id
+      }
+    })
+
+    await UserNote.destroy({
+      where: {
+        note_id: id
+      }
     })
 
     res.status(200).send()
