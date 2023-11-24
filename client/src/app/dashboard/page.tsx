@@ -34,7 +34,6 @@ export default function Dashboard() {
 		<>
 			<div>
 				<DashboardNavBar />
-				<InputNote />
 				<Notes />
 			</div>
 		</>
