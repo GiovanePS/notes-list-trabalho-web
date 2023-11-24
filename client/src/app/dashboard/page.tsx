@@ -1,7 +1,9 @@
 "use client"
 
-import Header from './(components)/Header';
+import DashboardNavBar from './(components)/DashboardNavBar';
 import Notes from './(components)/Notes';
+import InputNote from './(components)/InputNote';
+
 import React, { useEffect, useState } from 'react';
 import { checkAuth } from '@/services/authService';
 import { useRouter } from 'next/navigation';
@@ -27,17 +29,15 @@ export default function Dashboard() {
 		fetchAuthStatus()
 	}, [router])
 
-  if (isAuthenticated) {
-    return(
-      <>
-        <div>
-          <Header/>
-          <div className="bg-[#242424] w-full h-screen">
-            <br />
-            <Notes />
-          </div>
-        </div>
-      </>
-    )
+  if (true) {
+    return (
+		<>
+			<div>
+				<DashboardNavBar />
+				<InputNote />
+				<Notes />
+			</div>
+		</>
+	);
   }
 }

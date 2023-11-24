@@ -91,44 +91,27 @@ export default function Notes() {
   }, []);
 
   return (
-    <>
-      <h1 className="text-center mt-5 text-2xl font-bold text-white">Notas</h1>
-      <div className="flex items-center justify-center mt-5">
-        <form onSubmit={onSubmitForm}>
-          <InputText id="titulo" name="titulo" type="text" placeholder="Inserir título" />
-          <InputText id="texto" name="texto" type="text" placeholder="Inserir texto" />
-          <Button text="Adicionar"/>
-      </form>
-      </div>
-      <div className="flex justify-center items-center">
-        <table className="table-auto text-white">
-          <thead>
-            <tr>
-              <th className="p-8">Título</th>
-              <th className="p-8">Edit</th>
-              <th className="p-8">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allNotes?.map((note) => (
-              <tr key={note.id}>
-                <td>{note.titulo}</td>
-                <td>
-                  <Button text="Editar" type="button" onClick={() => {editNote(note.id)}}/>
-                </td>
-                <td>
-                  <button
-                    className="bg-red-500 text-white px-3 py-1 rounded"
-                    onClick={() => deleteNote(note.id)}
-                  >
-                    Deletar
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </>
+		<>
+			<div className="container mx-auto mt-10">
+				<table className="min-w-full">
+					<tbody className="">
+						<tr className="bg-white border-b border-gray-200 hover:bg-gray-100">
+							<td className="px-4 py-3">Note Description</td>
+							<td>
+				        <span className="material-symbols-outlined">delete</span>
+							</td>
+						</tr>
+						<tr className="bg-white border-b border-gray-200">
+							<td className="px-4 py-3">Note 2 Description</td>
+							<td className="px-4 py-2">
+								<div className="flex justify-end opacity-0 hover:opacity-100">
+									<span className="material-symbols-outlined">delete</span>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</>
   );
 };
