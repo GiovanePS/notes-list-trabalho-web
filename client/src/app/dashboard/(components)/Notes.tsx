@@ -100,14 +100,14 @@ export default function Notes() {
 					onSubmit={onSubmitForm}
 				>
 					<input
-						className="input1"
+						className="input1 md:w-1/4 w-3/4"
 						type="text"
 						placeholder="Title"
 						name="title"
 						onChange={(e) => e.target.value}
 					/>
 					<input
-						className="input1"
+						className="input1 w-3/4"
 						type="text"
 						placeholder="Note"
 						name="text"
@@ -118,17 +118,36 @@ export default function Notes() {
 			</div>
 			<div className="container mx-auto mt-10">
 				<table className="min-w-full table-auto">
-					<tbody className="">
-						<tr className="bg-white border-b border-gray-200">
-							<td className="px-4 py-3">Titulo</td>
-							<td className="px-4 py-3">Nota</td>
+					<thead className="">
+						<tr>
+							<th className="px-4 py-2">Title</th>
+							<th className="px-4 py-2">Text</th>
 						</tr>
+					</thead>
+					<tbody className="">
+						<Note
+							note={{
+								id: 1,
+								titulo: "First Titulo",
+								texto: "Texto da nota do primeiro titulo criado",
+							}}
+							onClick={() => editNote(1)}
+						/>
+						<Note
+							note={{
+								id: 2,
+								titulo: "Segundo Titulo",
+								texto: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat, quaerat necessitatibus? Commodi saepe ut quis dolores unde fugit, fuga amet ducimus et, deserunt officia eum voluptatum sapiente aperiam doloribus impedit?",
+							}}
+							onClick={() => editNote(2)}
+						/>
 						{allNotes?.map((nota) => (
 							<Note
 								note={nota}
-                onClick={() => deleteNote(nota.id)}
+								onClick={() => deleteNote(nota.id)}
 							/>
 						))}
+						{/* Default Notes */}
 					</tbody>
 				</table>
 			</div>
