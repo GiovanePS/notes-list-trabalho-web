@@ -1,5 +1,8 @@
 import { Sequelize } from 'sequelize'
 import 'dotenv/config'
+import path from 'path'
+const envPath = path.resolve(__dirname, '..', '.env')
+require('dotenv').config({ path: envPath })
 
 const sequelize = new Sequelize({
   dialect: 'postgres',
