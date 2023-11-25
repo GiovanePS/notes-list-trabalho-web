@@ -129,7 +129,7 @@ export default function Notes() {
 								id={nota.id}
 								title={nota.title}
 								text={nota.text}
-                onDelete={() => deleteNote(nota.id)}
+								onDelete={() => deleteNote(nota.id)}
 							/>
 						))}
 					</tbody>
