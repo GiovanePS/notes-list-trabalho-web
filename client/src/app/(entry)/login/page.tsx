@@ -50,15 +50,15 @@ export default function LoginPage() {
 
 	return (
 		<>
-			<h1 className="header1">Sign in</h1>
+			<h1 className="header1">Log In</h1>
 			<form onSubmit={submitHandler} className="px-8 pt-6 pb-8 mb-4">
 				<InputText id="email" type="text" name='email' placeholder="Email" />
-				<InputText id="password" type="password" name='password' placeholder="Password" />
-				<Button text="Sign in"/>
+				<InputText id="password" type="password" name='password' placeholder="Senha" />
+				<Button text="Entrar"/>
 				<div className="mt-6 text-center text-gray-700 text-sm">
-					Don't have an account?{" "}
+					Não possui conta?{" "}
 					<Link href="/register" className="text-blue-400 hover:text-blue-300">
-						Register here
+						Registre-se!
 					</Link>
 				</div>
 			</form>

@@ -123,10 +123,19 @@ app.post('/notes', isAuth, async (req: Request, res: Response, next: NextFunctio
   }
 })
 
-app.put('/', isAuth, (req: Request, res: Response, next: NextFunction) => {
+// editar nota
+app.put('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log('edit')
+    const { id, titulo, texto } = req.body
+    const noteToEdit = await Note.findByPk(id)
+    await noteToEdit?.update({
+      titulo: titulo,
+      texto: texto
+    })
+
+    res.status(200).send()
   } catch (error) {
+    res.status(400).send()
     console.error(error)
   }
 })
