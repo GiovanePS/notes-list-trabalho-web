@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import NoteIcon from "./NoteIcon";
 
 type NoteProps = {
@@ -7,22 +7,43 @@ type NoteProps = {
 };
 
 export default function Note(props: NoteProps) {
+	// State to track visibility of icons
+	const [showIcons, setShowIcons] = useState(false);
+
+	// Event handler to toggle visibility
+	const toggleIcons = (e: React.MouseEvent) => {
+		setShowIcons(!showIcons);
+	};
+
 	return (
 		<tr className="bg-white hover:bg-gray-100 group" key={props.note.id}>
 			<td className="px-4 py-2 w-1/4">{props.note.titulo}</td>
 			<td className="px-4 py-2 border-2 w-3/4 border-red-200">
 				{props.note.texto}
 			</td>
-			<td className="py-2">
+
+			<td className="py-2 relative">
 				<div className="md:flex hidden items-center space-x-2 opacity-0 group-hover:opacity-100">
 					<NoteIcon name="edit" />
 					<NoteIcon name="person_add" />
 					<NoteIcon name="delete" onClick={props.onClick} />
 				</div>
-				<div className="md:hidden">
+				
+				<div className="md:hidden" onClick={toggleIcons}>
 					<NoteIcon name="more_vert" />
 				</div>
+				
+				{showIcons && ( // Conditional rendering based on showIcons state
+					<div className="absolute right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+						<div className="">
+							<NoteIcon name="edit" />
+							<NoteIcon name="person_add" />
+							<NoteIcon name="delete" onClick={props.onClick} />
+						</div>
+					</div>
+				)}
 			</td>
 		</tr>
 	);
 }
+
