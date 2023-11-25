@@ -3,6 +3,7 @@ import session from 'express-session'
 import sequelize from './database'
 import passport from 'passport'
 import cors from 'cors'
+import bcrypt from 'bcrypt'
 import './authentication'
 import 'dotenv/config'
 import User from './database/models/User'
@@ -45,11 +46,15 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
 app.post('/register', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { username, email, password } = req.body
+    const hash_password = await bcrypt.hash(password, 10)
+
     await User.create({
       nome: username,
       email: email,
-      senha_hash: password,
+      senha_hash: hash_password,
     })
+
+    res.status(200).send()
   } catch (error) {
     console.error(error)
   }
@@ -123,6 +128,23 @@ app.post('/notes', isAuth, async (req: Request, res: Response, next: NextFunctio
   }
 })
 
+// editar nota
+app.put('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id, titulo, texto } = req.body
+    const noteToEdit = await Note.findByPk(id)
+    await noteToEdit?.update({
+      titulo: titulo,
+      texto: texto
+    })
+
+    res.status(200).send()
+  } catch (error) {
+    res.status(400).send()
+    console.error(error)
+  }
+})
+
 // apagar uma nota
 app.delete('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -141,6 +163,30 @@ app.delete('/notes', isAuth, async (req: Request, res: Response, next: NextFunct
 
     res.status(200).send()
   } catch (error) {
+    console.error(error)
+  }
+})
+
+// compartilhar nota com outro usuário.
+app.post('/notes/share', isAuth, async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = req.user as User
+    const { user_id_to_share, titulo, texto } = req.body
+    
+    const sharedNote = await Note.create({
+      titulo: titulo,
+      texto: texto
+    })
+    
+    await UserNote.create({
+      user_id: user_id_to_share,
+      note_id: sharedNote.id,
+      admin_id: user.id,
+    })
+
+    res.status(200).send()
+  } catch (error) {
+    res.status(400).send()
     console.error(error)
   }
 })

@@ -11,10 +11,10 @@ export default function HomeNavBar() {
 				</div>
 				<div>
 					<Link href="/register" className="link">
-						Register
+						Registrar-se
 					</Link>
 					<Link href="/login" className="link">
-						Log in
+						Entrar
 					</Link>
 				</div>
 			</div>

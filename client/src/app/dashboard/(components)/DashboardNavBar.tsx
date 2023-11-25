@@ -33,10 +33,7 @@ export default function DashboardNavBar(){
 					</Link>
 				</div>
 				<div>
-					<Button text="Log out" type="button" onClick={logoutHandler} />
-					{/* <Link href="/login" className="link" onClick={logoutHandler}>
-						Log out
-					</Link> */}
+					<Button text="Sair" type="button" onClick={logoutHandler} />
 				</div>
 			</div>
 		</nav>

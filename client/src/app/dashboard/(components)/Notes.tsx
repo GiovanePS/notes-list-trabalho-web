@@ -1,4 +1,5 @@
 "use client";
+
 import React, { FormEvent, useEffect, useState } from "react";
 import Button from "../../(components)/Button"
 import Note from "./Note"
@@ -102,16 +103,16 @@ export default function Notes() {
 					<input
 						className="input1"
 						type="text"
-						id="title"
-						name="title"
 						placeholder="Title"
+						name="title"
+						onChange={(e) => e.target.value}
 					/>
 					<input
 						className="input1"
 						type="text"
-						id="text"
-						name="text"
 						placeholder="Note"
+						name="text"
+						onChange={(e) => e.target.value}
 					/>
 					<Button text="Add" />
 				</form>
@@ -119,8 +120,18 @@ export default function Notes() {
 			<div className="container mx-auto mt-10">
 				<table className="min-w-full table-auto">
 					<tbody className="">
-						<Note text="Fist Note" title="First Title" />
-						<Note text="Second Note" title="Second Title" />
+						<tr className="bg-white border-b border-gray-200">
+							<td className="px-4 py-3">Titulo</td>
+							<td className="px-4 py-3">Nota</td>
+						</tr>
+						{allNotes?.map((nota) => (
+							<Note
+								id={nota.id}
+								title={nota.title}
+								text={nota.text}
+                onDelete={() => deleteNote(nota.id)}
+							/>
+						))}
 					</tbody>
 				</table>
 			</div>
