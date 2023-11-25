@@ -126,7 +126,7 @@ export default function Notes() {
 						{allNotes?.map((nota) => (
 							<Note
 								note={nota}
-                onDelete={() => deleteNote(nota.id)}
+                onClick={() => deleteNote(nota.id)}
 							/>
 						))}
 					</tbody>

@@ -3,7 +3,7 @@ import NoteIcon from "./NoteIcon";
 
 type NoteProps = {
 	note: any
-	onDelete: () => void;
+	onClick?: React.MouseEventHandler<HTMLButtonElement>
 };
 
 export default function Button(props: NoteProps) {
@@ -14,7 +14,7 @@ export default function Button(props: NoteProps) {
 			<td className="flex justify-end items-center space-x-4 px-4 py-2 opacity-0 hover:opacity-100">
 				<NoteIcon name="edit" />
         <NoteIcon name="person_add" />
-        <NoteIcon name="delete" onClick={props.onDelete}/>
+        <NoteIcon name="delete" onClick={props.onClick}/>
 			</td>
 		</tr>
 	);
