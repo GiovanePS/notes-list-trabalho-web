@@ -2,12 +2,13 @@
 
 import React, { FormEvent, useEffect, useState } from "react";
 import Button from "../../(components)/Button"
-import InputText from "../../(components)/InputText"
+import Note from "./Note"
+
 
 interface Note {
   id: number;
-  titulo: string;
-  texto: string;
+  title: string;
+  text: string;
 }
 
 const SERVER_URL = 'http://localhost:5000'
@@ -19,17 +20,17 @@ export default function Notes() {
     event.preventDefault()
     try {
       const formData = new FormData(event.currentTarget)
-      const titulo = formData.get('titulo')!.toString()
-      const texto = formData.get('texto')!.toString()
-      addNote(titulo, texto)
+      const title = formData.get('title')!.toString()
+      const text = formData.get('text')!.toString()
+      addNote(title, text)
     } catch (error) {
       console.error(error)
     }
   }
 
-  const addNote = async (titulo: string, texto: string) => {
+  const addNote = async (title: string, text: string) => {
     try {
-      const body = { titulo, texto }
+      const body = { title, text }
       const response = await fetch(`${SERVER_URL}/notes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -93,47 +94,44 @@ export default function Notes() {
 
   return (
 		<>
-      <div className="container mx-auto">
-				<h1 className="text-center mt-5">Notas</h1>
+			<div className="container mx-auto">
+				<h1 className="text-center my-6 mr-6">Note List</h1>
 				<form
-					className="flex items-center mx-2"
+					className="flex flex-col md:flex-row items-center justify-center mx-2"
 					onSubmit={onSubmitForm}
 				>
 					<input
-						className="shadow border rounded w-full py-2 px-3 mr-6 text-gray-700 focus:outline-none focus:shadow-outline"
+						className="input1"
 						type="text"
-            placeholder="Adicionar título"
-            name="titulo"
-            onChange={(e) => (e.target.value)}
+						placeholder="Title"
+						name="title"
+						onChange={(e) => e.target.value}
 					/>
-          <input
-						className="shadow border rounded w-full py-2 px-3 mr-6 text-gray-700 focus:outline-none focus:shadow-outline"
+					<input
+						className="input1"
 						type="text"
-            placeholder="Adicionar texto"
-            name="texto"
-            onChange={(e) => (e.target.value)}
+						placeholder="Note"
+						name="text"
+						onChange={(e) => e.target.value}
 					/>
 					<Button text="Add" />
 				</form>
 			</div>
 			<div className="container mx-auto mt-10">
-				<table className="min-w-full">
+				<table className="min-w-full table-auto">
 					<tbody className="">
 						<tr className="bg-white border-b border-gray-200">
-              <td className="px-4 py-3">Titulo</td>
-              <td className="px-4 py-3">Nota</td>
+							<td className="px-4 py-3">Titulo</td>
+							<td className="px-4 py-3">Nota</td>
 						</tr>
-            {allNotes?.map((nota) => (
-						<tr className="bg-white border-b border-gray-200 hover:bg-gray-100" key={nota.id}>
-							<td className="px-4 py-3">{nota.titulo}</td>
-							<td className="px-4 py-3">{nota.texto}</td>
-							<td className="px-4 py-2">
-								<div className="flex justify-end opacity-0 hover:opacity-100">
-									<span className="material-symbols-outlined cursor-pointer" onClick={() => {deleteNote(nota.id)}}>delete</span>
-								</div>
-							</td>
-						</tr>
-            ))}
+						{allNotes?.map((nota) => (
+							<Note
+								id={nota.id}
+								title={nota.title}
+								text={nota.text}
+                onDelete={() => deleteNote(nota.id)}
+							/>
+						))}
 					</tbody>
 				</table>
 			</div>
