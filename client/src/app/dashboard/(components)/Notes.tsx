@@ -100,7 +100,7 @@ export default function Notes() {
 					onSubmit={onSubmitForm}
 				>
 					<input
-						className="input1 w-1/4"
+						className="input1 md:w-1/4 w-3/4"
 						type="text"
 						placeholder="Title"
 						name="title"
@@ -120,8 +120,8 @@ export default function Notes() {
 				<table className="min-w-full table-auto">
 					<thead className="">
 						<tr>
-							<th className="px-4 py-2 w-1/4">Title</th>
-							<th className="px-4 py-2 w-3/4">Text</th>
+							<th className="px-4 py-2">Title</th>
+							<th className="px-4 py-2">Text</th>
 						</tr>
 					</thead>
 					<tbody className="">

@@ -13,11 +13,14 @@ export default function Note(props: NoteProps) {
 			<td className="px-4 py-2 border-2 w-3/4 border-red-200">
 				{props.note.texto}
 			</td>
-			<td className="px-4 py-2 opacity-0 group-hover:opacity-100">
-				<div className="flex justify-end items-center space-x-4">
+			<td className="py-2">
+				<div className="md:flex hidden items-center space-x-2 opacity-0 group-hover:opacity-100">
 					<NoteIcon name="edit" />
 					<NoteIcon name="person_add" />
 					<NoteIcon name="delete" onClick={props.onClick} />
+				</div>
+				<div className="md:hidden">
+					<NoteIcon name="more_vert" />
 				</div>
 			</td>
 		</tr>
