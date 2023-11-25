@@ -2,6 +2,7 @@ import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 
 import { User } from './database/models/User'
+import bcrypt from 'bcrypt'
 
 passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password'}, async (email, password, done) => {
   try {
@@ -14,7 +15,7 @@ passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password
       return done(null, false)
     }
 
-    if (password !== user.senha_hash) {
+    if (await bcrypt.compare(user.senha_hash, password)) {
       return done(null, false)
     }
 
