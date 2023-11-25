@@ -4,11 +4,10 @@ import React, { FormEvent, useEffect, useState } from "react";
 import Button from "../../(components)/Button"
 import Note from "./Note"
 
-
 interface Note {
   id: number;
-  title: string;
-  text: string;
+  titulo: string;
+  texto: string;
 }
 
 const SERVER_URL = 'http://localhost:5000'
@@ -28,9 +27,9 @@ export default function Notes() {
     }
   }
 
-  const addNote = async (title: string, text: string) => {
+  const addNote = async (titulo: string, texto: string) => {
     try {
-      const body = { title, text }
+      const body = { titulo, texto }
       const response = await fetch(`${SERVER_URL}/notes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -114,7 +113,7 @@ export default function Notes() {
 						name="text"
 						onChange={(e) => e.target.value}
 					/>
-					<Button text="Add" />
+					<Button text="Adicionar" />
 				</form>
 			</div>
 			<div className="container mx-auto mt-10">
@@ -126,10 +125,8 @@ export default function Notes() {
 						</tr>
 						{allNotes?.map((nota) => (
 							<Note
-								id={nota.id}
-								title={nota.title}
-								text={nota.text}
-								onDelete={() => deleteNote(nota.id)}
+								note={nota}
+                onClick={() => deleteNote(nota.id)}
 							/>
 						))}
 					</tbody>
