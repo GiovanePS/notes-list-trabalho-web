@@ -1,11 +1,13 @@
 import express, { Request, Response, NextFunction } from 'express'
 import session from 'express-session'
-import sequelize from './database'
+import sequelize from './database/sequelize_module'
 import passport from 'passport'
 import cors from 'cors'
 import bcrypt from 'bcrypt'
 import './authentication'
-import 'dotenv/config'
+import dotenv from 'dotenv'
+import path = require('path')
+dotenv.config({ path: path.resolve(__dirname, '.env')})
 import User from './database/models/User'
 import Note from './database/models/Note'
 import UserNote from './database/models/UserNote'
