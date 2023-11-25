@@ -40,7 +40,7 @@ export default function Note(props: NoteProps) {
 				key={props.note.id}
 			>
 				<td className="px-4 py-2 w-1/4">{props.note.titulo}</td>
-				<td className="px-4 py-2 border-2 w-3/4 border-red-200">
+				<td className="px-4 py-2 border-2 w-3/4 border-black-200">
 					{props.note.texto}
 				</td>
 
