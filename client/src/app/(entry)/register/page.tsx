@@ -32,16 +32,16 @@ export default function RegisterPage() {
 	
 	return (
 		<>
-			<h1 className="header1">Sign up</h1>
+			<h1 className="header1">Registrar-se</h1>
 			<form onSubmit={submitHandler} className="px-8 pt-6 pb-8 mb-4">
-				<InputText id="username" type="text" name='username' placeholder="Username" />
+				<InputText id="username" type="text" name='username' placeholder="Nome de usuário" />
 				<InputText id="email" type="email" name='email' placeholder="Email" />
-				<InputText id="password" type="password" name='password' placeholder="Password" />
+				<InputText id="password" type="password" name='password' placeholder="Senha" />
 				<Button text="Register" />
 				<div className="mt-6 text-center text-gray-700 text-[15px]">
-					Already have an account?{" "}
+					Já possui conta?{" "}
 					<Link href="/login" className="text-blue-400 hover:text-blue-300">
-						Login here
+						Faça login!
 					</Link>
 				</div>
 			</form>

@@ -2,7 +2,6 @@
 
 import DashboardNavBar from './(components)/DashboardNavBar';
 import Notes from './(components)/Notes';
-import InputNote from './(components)/InputNote';
 
 import React, { useEffect, useState } from 'react';
 import { checkAuth } from '@/services/authService';
@@ -29,12 +28,11 @@ export default function Dashboard() {
 		fetchAuthStatus()
 	}, [router])
 
-  if (true) {
+  if (isAuthenticated) {
     return (
 		<>
 			<div>
 				<DashboardNavBar />
-				<InputNote />
 				<Notes />
 			</div>
 		</>
