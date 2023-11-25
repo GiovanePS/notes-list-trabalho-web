@@ -2,6 +2,7 @@ import React from "react";
 
 type NoteIconProps = {
 	name: string;
+	onClick?: () => void;
 };
 
 export default function NoteIcon(props: NoteIconProps) {
