@@ -1,8 +1,12 @@
+import { ChangeEvent } from "react";
+
 type InputTextProps = {
 	id: string;
 	type: string;
 	name: string;
+	value?: string;
 	placeholder?: string;
+	onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 };
 
 export default function InputText(props: InputTextProps) {
@@ -13,8 +17,9 @@ export default function InputText(props: InputTextProps) {
 				id={props.id}
 				type={props.type}
 				name={props.name}
+				value={props.value}
 				placeholder={props.placeholder}
-				autoComplete="id"
+				onChange={props.onChange}
 				required
 			/>
 		</div>
