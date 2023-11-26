@@ -72,7 +72,7 @@ app.get('/user', isAuth, (req: Request, res: Response) => {
   }
 })
 
-app.put('user', isAuth, async (req: Request, res: Response) => {
+app.put('/user', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as User
     const { username, email, password } = req.body

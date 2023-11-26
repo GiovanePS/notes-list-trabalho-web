@@ -56,6 +56,7 @@ export default function Profile() {
     }, [])
 
     const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
         try {
             const formData = new FormData(event.currentTarget)
             const username = formData.get('username')!.toString()
