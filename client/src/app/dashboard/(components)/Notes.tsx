@@ -125,29 +125,12 @@ export default function Notes() {
 						</tr>
 					</thead>
 					<tbody className="">
-						<Note
-							note={{
-								id: 1,
-								titulo: "First Titulo",
-								texto: "Texto da nota do primeiro titulo criado",
-							}}
-							onClick={() => editNote(1)}
-						/>
-						<Note
-							note={{
-								id: 2,
-								titulo: "Segundo Titulo",
-								texto: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat, quaerat necessitatibus? Commodi saepe ut quis dolores unde fugit, fuga amet ducimus et, deserunt officia eum voluptatum sapiente aperiam doloribus impedit?",
-							}}
-							onClick={() => editNote(2)}
-						/>
 						{allNotes?.map((nota) => (
 							<Note
 								note={nota}
 								onClick={() => deleteNote(nota.id)}
 							/>
 						))}
-						{/* Default Notes */}
 					</tbody>
 				</table>
 			</div>
