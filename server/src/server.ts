@@ -62,6 +62,15 @@ app.post('/register', async (req: Request, res: Response, next: NextFunction) =>
   }
 })
 
+// Rota para pegar username e email do usuário.
+app.get('/getuser', isAuth, (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = req.user as User
+    res.status(200).json({ username: user.nome, email: user.email })
+  } catch (error) {
+    console.error(error)
+  }
+})
 
 // função logout
 app.get('/logout', (req, res, next) => {
