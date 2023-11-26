@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from "react";
 import Icon from "./Icon";
 
-type NotificationProps = {
+type ToastProps = {
 	text: string;
-	type: "success" | "error";
+	type: string;
+	show: boolean;
 };
 
-export default function Notification(props: NotificationProps) {
-	const [show, setShow] = useState(true);
+export default function Toast(props: ToastProps) {
+	const [show, setShow] = useState(props.show);
 
-	const closeNotification = () => {
+	const closeToast = () => {
 		setShow(false);
 	};
 
 	useEffect(() => {
-		const timer = setTimeout(closeNotification, 10000);
+		const timer = setTimeout(closeToast, 3000);
 
 		return () => clearTimeout(timer);
 	}, []);
 
 	if (!show) return null;
+	console.log("show: ", show);
 
 	const color = props.type === "success" ? "green" : "red";
 	const icon = props.type === "success" ? "check_circle" : "error";

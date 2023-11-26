@@ -16,6 +16,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, note, onSave }) => {
 		onClose();
 	};
 
+	
 	if (!isOpen) return null;
 
 	return (
@@ -34,7 +35,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, note, onSave }) => {
 						/>
 						<textarea
 							className="input w-full p-2 mt-2" // Adjusted for full width
-							rows={5}
+							rows={8}
 							value={texto}
 							onChange={(e) => setTexto(e.target.value)}
 						/>

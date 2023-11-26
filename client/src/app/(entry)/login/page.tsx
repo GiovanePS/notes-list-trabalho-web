@@ -1,9 +1,9 @@
 "use client"
-
+import { useState } from "react";
 import Link from "next/link";
 import InputText from '@/app/(components)/InputText';
 import Button from '@/app/(components)/Button';
-import Notification from '@/app/(components)/Notification';
+import Toast from '@/app/(components)/Toast';
 import { FormEvent, useEffect } from 'react';
 import { useRouter } from "next/navigation";
 import { checkAuth } from "@/services/authService";
@@ -11,7 +11,11 @@ import { checkAuth } from "@/services/authService";
 export default function LoginPage() {
 	const router = useRouter()
 
-  useEffect(() => {
+	const [toastShow, setToastShow] = useState(false);
+	const [toastType, setToastType] = useState("success");
+	const [toastText, setToastText] = useState("");
+
+  	useEffect(() => {
     const fetchAuthStatus = async () => {
 			try {
 				const checkingAuth: any = await checkAuth()
@@ -42,6 +46,9 @@ export default function LoginPage() {
 			})
 
 			if (response.status == 200) {
+				setToastShow(true);
+				setToastText('Login efetuado com sucesso!');
+				console.log('Login efetuado com sucesso!')
 				router.push('/dashboard')
 			}
 		} catch (error) {
@@ -63,7 +70,13 @@ export default function LoginPage() {
 					</Link>
 				</div>
 			</form>
-			<Notification type="success" text="Updates Saved"/>
+			<Button text="Toast" onClick={() => {
+				setToastShow(true);
+				setToastText('Login efetuado com sucesso!');
+				setToastType('success');
+				console.log(toastShow)
+			}} />
+			<Toast type={toastType} text={toastText} show={toastShow} />
 		</>
   );
 }
