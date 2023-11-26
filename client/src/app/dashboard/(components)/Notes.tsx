@@ -117,14 +117,16 @@ export default function Notes() {
 				</form>
 			</div>
 			<div className="container mx-auto mt-10">
-				<table className="min-w-full table-auto">
-					<thead className="">
-						<tr>
-							<th className="px-4 py-2">Título</th>
-							<th className="px-4 py-2">Texto</th>
+				<table className="min-w-full">
+					<thead>
+						<tr className="border-b-2 border-gray-700">
+							<th className="px-4 py-2 text-left">Título</th>
+							<th className="px-4 py-2 text-left">Texto</th>
 						</tr>
 					</thead>
 					<tbody className="">
+            <Note note={{ id: 1, titulo: 'titulo', texto: 'texto' }} onClick={() => deleteNote(1)} />
+            <Note note={{ id: 2, titulo: 'titulo', texto: 'texto' }} onClick={() => deleteNote(2)} />
 						{allNotes?.map((nota) => (
 							<Note
 								note={nota}

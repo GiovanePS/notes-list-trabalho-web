@@ -18,4 +18,8 @@
 	.label {
 		@apply block text-sm font-medium text-gray-700;
 	}
+
+	.notification {
+		@apply flex items-center w-full max-w-xs p-4 my-4 text-gray-600 bg-white rounded-lg shadow;
+	}
 }

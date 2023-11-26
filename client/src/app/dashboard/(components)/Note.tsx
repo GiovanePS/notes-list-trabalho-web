@@ -1,5 +1,5 @@
-import React, { useState} from "react";
-import NoteIcon from "./NoteIcon";
+import React, { useState } from "react";
+import NoteIcon from "../../(components)/NoteIcon";
 import EditModal from "./EditModal";
 
 type NoteProps = {
@@ -8,7 +8,6 @@ type NoteProps = {
 };
 
 export default function Note(props: NoteProps) {
-	
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const openEditModal = () => setIsModalOpen(true);
@@ -18,7 +17,7 @@ export default function Note(props: NoteProps) {
 		// Update the note here
 		closeModal();
 	};
-	
+
 	// State to track visibility of icons
 	const [showIcons, setShowIcons] = useState(false);
 
@@ -36,13 +35,11 @@ export default function Note(props: NoteProps) {
 				onSave={handleSave}
 			/>
 			<tr
-				className="bg-white hover:bg-gray-100 group"
+				className="bg-white hover:bg-gray-50 border-b rounded group"
 				key={props.note.id}
 			>
 				<td className="px-4 py-2 w-1/4">{props.note.titulo}</td>
-				<td className="px-4 py-2 w-3/4">
-					{props.note.texto}
-				</td>
+				<td className="px-4 py-2 w-3/4">{props.note.texto}</td>
 
 				<td className="py-2 relative">
 					<div className="md:flex hidden items-center space-x-2 opacity-0 group-hover:opacity-100">
@@ -72,4 +69,3 @@ export default function Note(props: NoteProps) {
 		</>
 	);
 }
-
