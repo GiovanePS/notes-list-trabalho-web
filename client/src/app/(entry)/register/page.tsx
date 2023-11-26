@@ -4,9 +4,11 @@ import Link from "next/link";
 import InputText from '@/app/(components)/InputText'
 import Button from '@/app/(components)/Button'
 import { FormEvent } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
-  
+  const router = useRouter()
+
 	async function submitHandler(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault()
 		try {
@@ -22,9 +24,9 @@ export default function RegisterPage() {
 				body: JSON.stringify(body),
 			})
 
-			const jsonData = await response.json()
-
-			console.log(jsonData)
+			if (response.status === 200) {
+				router.push('/login')
+			}
 		} catch (error) {
 			console.error(error)
 		}
