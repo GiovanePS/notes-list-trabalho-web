@@ -3,6 +3,7 @@
 import Link from "next/link";
 import InputText from '@/app/(components)/InputText';
 import Button from '@/app/(components)/Button';
+import Notification from '@/app/(components)/Notification';
 import { FormEvent, useEffect } from 'react';
 import { useRouter } from "next/navigation";
 import { checkAuth } from "@/services/authService";
@@ -62,6 +63,7 @@ export default function LoginPage() {
 					</Link>
 				</div>
 			</form>
+			<Notification type="success" text="Updates Saved"/>
 		</>
   );
 }
