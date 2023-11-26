@@ -113,18 +113,23 @@ app.post('/notes', isAuth, async (req: Request, res: Response, next: NextFunctio
   try {
     const user = req.user as User
     const { titulo, texto } = req.body
-    const newNote = await Note.create({
-      titulo: titulo,
-      texto: texto
-    })
 
-    const assignNota = await UserNote.create({
-      user_id: user.id,
-      note_id: newNote.id,
-      admin_id: user.id
-    })
+    if (titulo === '') {
+      res.status(400).send()
+    } else {
+      const newNote = await Note.create({
+        titulo: titulo,
+        texto: texto
+      })
 
-    res.status(200).send()
+      const assignNote = await UserNote.create({
+        user_id: user.id,
+        note_id: newNote.id,
+        admin_id: user.id
+      })
+
+      res.status(200).send()
+    }
   } catch (error) {
     console.error(error)
   }
@@ -134,13 +139,17 @@ app.post('/notes', isAuth, async (req: Request, res: Response, next: NextFunctio
 app.put('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id, titulo, texto } = req.body
-    const noteToEdit = await Note.findByPk(id)
-    await noteToEdit?.update({
-      titulo: titulo,
-      texto: texto
-    })
+    if (titulo === '') {
+      res.send(400).send()
+    } else {
+      const noteToEdit = await Note.findByPk(id)
+      await noteToEdit?.update({
+        titulo: titulo,
+        texto: texto
+      })
 
-    res.status(200).send()
+      res.status(200).send()
+    }
   } catch (error) {
     res.status(400).send()
     console.error(error)
