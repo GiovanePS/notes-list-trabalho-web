@@ -34,7 +34,7 @@ export default function RegisterPage() {
 	
 	return (
 		<>
-			<h1 className="header1">Registrar-se</h1>
+			<h1 className="header">Registrar-se</h1>
 			<form onSubmit={submitHandler} className="px-8 pt-6 pb-8 mb-4">
 				<InputText id="username" type="text" name='username' placeholder="Nome de usuário" />
 				<InputText id="email" type="email" name='email' placeholder="Email" />

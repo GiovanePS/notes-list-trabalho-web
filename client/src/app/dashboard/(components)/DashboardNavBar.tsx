@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
+import NoteIcon from "./NoteIcon"
 
 
 export default function DashboardNavBar(){
@@ -31,7 +32,14 @@ export default function DashboardNavBar(){
 						></Image>
 					</Link>
 				</div>
-				<div>
+				<div className="flex items-center justify-between space-x-2 mr-4">
+					<NoteIcon name="contrast" />
+					<Link
+						href="/dashboard/profile"
+						className="link"
+					>
+						<NoteIcon name="person" />
+					</Link>
 					<a
 						href="/logout" // This can be a dummy href if you're handling logout on the client-side
 						onClick={(e) => {

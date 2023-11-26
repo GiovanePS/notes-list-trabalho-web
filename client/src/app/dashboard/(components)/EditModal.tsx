@@ -28,12 +28,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, note, onSave }) => {
 					<div className="flex flex-col justify-center items-center m-4">
 						<input
 							type="text"
-							className="input1 w-full p-2" // Adjusted for full width
+							className="input w-full p-2" // Adjusted for full width
 							value={titulo}
 							onChange={(e) => setTitulo(e.target.value)}
 						/>
 						<textarea
-							className="input1 w-full p-2 mt-2" // Adjusted for full width
+							className="input w-full p-2 mt-2" // Adjusted for full width
 							rows={5}
 							value={texto}
 							onChange={(e) => setTexto(e.target.value)}

@@ -7,7 +7,7 @@ export default function HomeNavBar() {
 				<div>
 					<Link
 						href="/home"
-						className="my-0 mx-4 text-gray-700 leading-5 hover:text-blue-600"
+						className="link"
 					>
 						Home
 					</Link>

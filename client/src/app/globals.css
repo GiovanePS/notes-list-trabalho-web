@@ -3,15 +3,19 @@
 @tailwind utilities;
 
 @layer components {
-	.header1 {
-		@apply flex justify-center mb-4 font-bold text-gray-700;
+	.header {
+		@apply flex justify-center my-8 font-bold text-gray-700;
 	}
 
 	.link {
-		@apply my-0 mx-4 text-gray-700 leading-5 hover:text-blue-600;
+		@apply my-0 mr-4 text-gray-700 leading-5 hover:text-blue-600;
 	}
 
-	.input1 {
+	.input {
 		@apply shadow border rounded md:w-3/5 px-3 py-2 mr-6 my-2 text-gray-700 focus:outline-none;
+	}
+
+	.label {
+		@apply block text-sm font-medium text-gray-700;
 	}
 }

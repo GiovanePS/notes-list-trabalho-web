@@ -50,7 +50,7 @@ export default function LoginPage() {
 
 	return (
 		<>
-			<h1 className="header1">Log In</h1>
+			<h1 className="header">Log In</h1>
 			<form onSubmit={submitHandler} className="px-8 pt-6 pb-8 mb-4">
 				<InputText id="email" type="text" name='email' placeholder="Email" />
 				<InputText id="password" type="password" name='password' placeholder="Senha" />

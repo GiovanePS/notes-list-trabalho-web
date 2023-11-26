@@ -100,14 +100,14 @@ export default function Notes() {
 					onSubmit={onSubmitForm}
 				>
 					<input
-						className="input1 md:w-1/4 w-3/4"
+						className="input md:w-1/4 w-3/4"
 						type="text"
 						placeholder="Adicionar título"
 						name="title"
 						onChange={(e) => e.target.value}
 					/>
 					<input
-						className="input1 w-3/4"
+						className="input w-3/4"
 						type="text"
 						placeholder="Adicionar texto"
 						name="text"
