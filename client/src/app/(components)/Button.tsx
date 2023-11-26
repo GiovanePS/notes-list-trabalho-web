@@ -1,17 +1,22 @@
 import React from "react";
 
 type ButtonProps = {
-	text: string,
-	type?: "button" | "submit" | "reset" | undefined,
-	onClick?: React.MouseEventHandler<HTMLButtonElement>
+	text: string;
+	onClick?: React.MouseEventHandler<HTMLButtonElement>;
+	color?: "gray";
 };
 
 export default function Button(props: ButtonProps) {
+	
+	const buttonStyle = props.color === "gray" 
+    ? "bg-white hover:bg-gray-200 text-gray-700 border border-gray-300" 
+    : "bg-blue-500 hover:bg-blue-700 text-white";
+
 	return (
-		<div className="flex items-center justify-center my-6">
+		<div className="flex items-center justify-center">
 			<button
-				className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
-				type={props.type || "submit"}
+				className={`${buttonStyle} font-bold py-2 px-4 rounded-md hover:shadow focus:outline-none focus:shadow-outline`}
+				type="submit"
 				onClick={props.onClick}>
 				{props.text}
 			</button>
