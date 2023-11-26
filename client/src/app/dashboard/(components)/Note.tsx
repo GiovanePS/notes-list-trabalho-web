@@ -5,6 +5,7 @@ import EditModal from "./EditModal";
 type NoteProps = {
 	note: any;
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
+	toEdit?: () => void;
 };
 
 export default function Note(props: NoteProps) {
@@ -14,8 +15,25 @@ export default function Note(props: NoteProps) {
 	const openEditModal = () => setIsModalOpen(true);
 	const closeModal = () => setIsModalOpen(false);
 
-	const handleSave = (updatedNote: { titulo: string; texto: string }) => {
-		// Update the note here
+	const handleSave = async (id: number, titulo: string, texto: string) => {
+		try {
+			const body = { id, titulo, texto }
+			const response = await fetch('http://localhost:5000/notes', {
+				method: 'PUT',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+        credentials: 'include'
+			})
+
+			if (response.status === 200) {
+				if (props.toEdit) {
+					props.toEdit()
+				}
+			}
+		} catch (error) {
+			console.error(error)
+		}
+		
 		closeModal();
 	};
 	
@@ -32,7 +50,7 @@ export default function Note(props: NoteProps) {
 			<EditModal
 				isOpen={isModalOpen}
 				onClose={closeModal}
-				note={{ titulo: props.note.titulo, texto: props.note.texto }}
+				note={props.note}
 				onSave={handleSave}
 			/>
 			<tr

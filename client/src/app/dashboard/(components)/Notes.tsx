@@ -13,7 +13,7 @@ interface Note {
 const SERVER_URL = 'http://localhost:5000'
 
 export default function Notes() {
-  const [allNotes, setAllNotes] = useState<Note[]>([]);
+  const [allNotes, setAllNotes] = useState<Note[]>([])
   
   const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -43,10 +43,6 @@ export default function Notes() {
     } catch (error) {
       console.error(error)
     }
-  }
-
-  const editNote = async (id: number) => {
-    console.log(id)
   }
 
   const deleteNote = async (id: number) => {
@@ -129,6 +125,7 @@ export default function Notes() {
 							<Note
 								note={nota}
 								onClick={() => deleteNote(nota.id)}
+                toEdit={getAllNotes}
 							/>
 						))}
 					</tbody>

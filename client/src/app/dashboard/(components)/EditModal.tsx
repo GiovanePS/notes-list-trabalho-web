@@ -3,16 +3,16 @@ import Button from "../../(components)/Button";
 interface ModalProps {
 	isOpen: boolean;
 	onClose: () => void;
-	note: { titulo: string; texto: string };
-	onSave: (updatedNote: { titulo: string; texto: string }) => void;
+	note: { id: number, titulo: string; texto: string };
+	onSave: (id: number, titulo: string, texto: string) => void;
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, note, onSave }) => {
 	const [titulo, setTitulo] = React.useState(note.titulo);
 	const [texto, setTexto] = React.useState(note.texto);
 
-	const handleSave = () => {
-		onSave({ titulo, texto });
+	const handleClick = () => {
+		onSave(note.id, titulo, texto);
 		onClose();
 	};
 
@@ -42,7 +42,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, note, onSave }) => {
 
 					<div className="flex justify-center space-x-4">
 						<Button text="Cancelar" color="gray" onClick={onClose} />
-						<Button text="Salvar" onClick={handleSave} />
+						<Button text="Salvar" onClick={handleClick} />
 					</div>
 				</div>
 			</div>
