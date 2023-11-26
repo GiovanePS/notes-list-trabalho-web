@@ -2,10 +2,11 @@
 
 import InputText from "@/app/(components)/InputText";
 import Button from "@/app/(components)/Button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { checkAuth } from "@/services/authService";
 
+const SERVER_URL = 'http://localhost:5000'
 
 export default function Profile() {
     const router = useRouter()
@@ -34,7 +35,7 @@ export default function Profile() {
     useEffect(() => {
         const getUserData = async () => {
             try {
-                const response = await fetch('http://localhost:5000/getuser', {
+                const response = await fetch(`${SERVER_URL}/user`, {
                     method: 'GET',
                     headers: { "Content-Type": "application/json"},
                     credentials: 'include'
@@ -43,7 +44,6 @@ export default function Profile() {
                 const userData = await response.json()
 
                 if (userData) {
-                    console.log(userData.username, userData.email)
                     setUsername(userData.username || '')
                     setEmail(userData.email || '')
                 }
@@ -55,8 +55,27 @@ export default function Profile() {
         getUserData()
     }, [])
 
-    const submitHandler = () => {
-        
+    const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
+        try {
+            const formData = new FormData(event.currentTarget)
+            const username = formData.get('username')!.toString()
+            const email = formData.get('email')!.toString()
+            const password = formData.get('password')!.toString()
+    
+            const body = { username, email, password }
+            const response = await fetch(`${SERVER_URL}/user`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body),
+                credentials: 'include'
+            })
+
+            if (response.status === 200) {
+                router.push('/dashboard')
+            }
+        } catch (error) {
+            console.error(error)
+        }
     }
     
     if (isAuthenticated) {
@@ -67,7 +86,7 @@ export default function Profile() {
                     <label className="label">Usuario:</label>
                     <InputText id="username" type="text" name='username' value={username} placeholder="Usuário" onChange={e => setUsername(e.target.value)} />
                     <label className="label">Email:</label>
-                    <InputText id="email" type="email" name='email' value={email} placeholder="Email" />
+                    <InputText id="email" type="email" name='email' value={email} placeholder="Email" onChange={e => setEmail(e.target.value)} />
                     <label className="label">Senha:</label>
                     <InputText id="password" type="password" name='password' placeholder="Senha" />
                     <label className="label">Confirmar Senha:</label>

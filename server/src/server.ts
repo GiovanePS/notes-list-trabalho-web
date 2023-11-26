@@ -63,10 +63,32 @@ app.post('/register', async (req: Request, res: Response, next: NextFunction) =>
 })
 
 // Rota para pegar username e email do usuário.
-app.get('/getuser', isAuth, (req: Request, res: Response, next: NextFunction) => {
+app.get('/user', isAuth, (req: Request, res: Response) => {
   try {
     const user = req.user as User
     res.status(200).json({ username: user.nome, email: user.email })
+  } catch (error) {
+    console.error(error)
+  }
+})
+
+app.put('user', isAuth, async (req: Request, res: Response) => {
+  try {
+    const user = req.user as User
+    const { username, email, password } = req.body
+    const hash_password = await bcrypt.hash(password, 10)
+
+    await User.update({
+      nome: username,
+      email: email,
+      senha_hash: hash_password
+    }, {
+      where: {
+        id: user.id
+      }
+    })
+
+    res.status(200).send()
   } catch (error) {
     console.error(error)
   }
