@@ -41,8 +41,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, note, onSave }) => {
 					</div>
 
 					<div className="flex justify-center space-x-4">
-						<Button text="Cancel" onClick={onClose} />
-						<Button text="Save" onClick={handleSave} />
+						<Button text="Cancelar" onClick={onClose} />
+						<Button text="Salvar" onClick={handleSave} />
 					</div>
 				</div>
 			</div>

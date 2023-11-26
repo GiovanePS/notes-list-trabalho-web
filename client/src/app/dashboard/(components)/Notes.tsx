@@ -94,7 +94,7 @@ export default function Notes() {
   return (
 		<>
 			<div className="container mx-auto">
-				<h1 className="text-center my-6 mr-6">Note List</h1>
+				<h1 className="text-center my-6 mr-6">Lista de Notas</h1>
 				<form
 					className="flex flex-col md:flex-row items-center justify-center mx-2"
 					onSubmit={onSubmitForm}
@@ -102,14 +102,14 @@ export default function Notes() {
 					<input
 						className="input1 md:w-1/4 w-3/4"
 						type="text"
-						placeholder="Title"
+						placeholder="Adicionar título"
 						name="title"
 						onChange={(e) => e.target.value}
 					/>
 					<input
 						className="input1 w-3/4"
 						type="text"
-						placeholder="Note"
+						placeholder="Adicionar texto"
 						name="text"
 						onChange={(e) => e.target.value}
 					/>
@@ -120,8 +120,8 @@ export default function Notes() {
 				<table className="min-w-full table-auto">
 					<thead className="">
 						<tr>
-							<th className="px-4 py-2">Title</th>
-							<th className="px-4 py-2">Text</th>
+							<th className="px-4 py-2">Título</th>
+							<th className="px-4 py-2">Texto</th>
 						</tr>
 					</thead>
 					<tbody className="">
