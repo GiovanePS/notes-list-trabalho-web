@@ -31,10 +31,7 @@ export default function Dashboard() {
   if (isAuthenticated) {
     return (
 		<>
-			<div>
-				<DashboardNavBar />
-				<Notes />
-			</div>
+			<Notes />
 		</>
 	);
   }

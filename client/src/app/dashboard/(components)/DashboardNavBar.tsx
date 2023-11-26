@@ -1,8 +1,7 @@
+"use client"
 import Link from 'next/link'
 import Image from "next/image";
-import Button from '../../(components)/Button';
 import { useRouter } from 'next/navigation';
-import notepadImage from '../../../../public/header/notepad-mobile.png'
 
 
 export default function DashboardNavBar(){
@@ -20,11 +19,11 @@ export default function DashboardNavBar(){
 
     return (
 		<nav className="shadow">
-			<div className="px-6 py-2 flex justify-between">
+			<div className="px-6 py-2 flex justify-between items-center">
 				<div className="flex items-center justify-between">
 					<Link href="/dashboard" legacyBehavior>
 						<Image
-							src={notepadImage}
+							src="/home/notepad-icon.png"
 							width={24}
 							height={33}
 							alt="Left Bro"
@@ -33,7 +32,16 @@ export default function DashboardNavBar(){
 					</Link>
 				</div>
 				<div>
-					<Button text="Sair" onClick={logoutHandler} />
+					<a
+						href="/logout" // This can be a dummy href if you're handling logout on the client-side
+						onClick={(e) => {
+							e.preventDefault(); // Prevent default navigation
+							logoutHandler();
+						}}
+						className="link"
+					>
+						Sair
+					</a>
 				</div>
 			</div>
 		</nav>

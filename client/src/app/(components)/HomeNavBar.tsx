@@ -5,7 +5,10 @@ export default function HomeNavBar() {
 		<nav className="shadow">
 			<div className="px-2 py-3 flex justify-between ">
 				<div>
-					<Link href="/home" className="link">
+					<Link
+						href="/home"
+						className="my-0 mx-4 text-gray-700 leading-5 hover:text-blue-600"
+					>
 						Home
 					</Link>
 				</div>
