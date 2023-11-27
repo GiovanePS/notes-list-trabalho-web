@@ -12,14 +12,14 @@ passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password
       }
     })
     if (!user) {
-      return done(null, false)
+      return done(null, false, { message: 'Usuário não encontrado' });
     }
 
     if (await bcrypt.compare(password, user.senha_hash)) {
       return done(null, user)
     }
 
-    return done(null, false)
+    return done(null, false, { message: 'Senha incorreta' })
   } catch (error) {
     console.error(error)
   }
