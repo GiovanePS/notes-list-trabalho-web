@@ -10,12 +10,12 @@ type NoteProps = {
 	toEdit?: () => void;
 };
 
-export default function Note({note, onClick, toEdit}: NoteProps) {
+export default function Note({note, onClick, toEdit}: NoteProps) { /*toEdit é uma função opcional que pode ser chamada para atualizar o estado das notas ao editá-las.*/
 	
-	const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+	const [isEditModalOpen, setIsEditModalOpen] = useState(false); /*estados para controlar a abertura e fechamento de modais (isEditModalOpen e isFrindModalOpen), a exibição de toasts (toastShow, toastType, toastText), e a visibilidade de ícones(showIcons, logo abaixo)*/
 	const [isFrindModalOpen, setIsFriendModalOpen] = useState(false);
 
-	const openEditModal = () => setIsEditModalOpen(true);
+	const openEditModal = () => setIsEditModalOpen(true); /*funções que manipulam os estados supramencionados*/
 	const closeEditModal = () => setIsEditModalOpen(false);
 
 	const openFriendModal = () => setIsFriendModalOpen(true);
@@ -33,18 +33,18 @@ export default function Note({note, onClick, toEdit}: NoteProps) {
 
 	const closeToast = () => setToastShow(false);
 
-	const handleSave = async (id: number, titulo: string, texto: string) => {
+	const handleSave = async (id: number, titulo: string, texto: string) => { /*A função handleSave é chamada quando o usuário salva a edição de uma nota. Ela faz uma solicitação PUT para atualizar os detalhes da nota no servidor.*/
 		try {
-			const body = { id, titulo, texto };
+			const body = { id, titulo, texto }; /*Criação de objeto contendo id da nota atualizada, novo título, novo texto*/
 			const response = await fetch("http://localhost:5000/notes", {
-				method: "PUT",
+				method: "PUT", /*Utiliza a API fetch para fazer uma solicitação PUT para a URL "http://localhost:5000/notes" com o corpo da requisição contendo o objeto body. */
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(body),
 				credentials: "include",
 			});
 
 			if (response.status === 200) {
-				showToast("success", "Nota editada com sucesso!");
+				showToast("success", "Nota editada com sucesso!"); /*Se a resposta do servidor tem status 200 (OK), exibe um toast de sucesso e chama a função toEdit (se fornecida) para atualizar o estado das notas.*/
 				if (toEdit) {
 					toEdit();
 				}
@@ -53,14 +53,14 @@ export default function Note({note, onClick, toEdit}: NoteProps) {
 			console.error(error);
 		}
 
-		closeEditModal();
+		closeEditModal(); /*Fecha o modal de edição, independentemente do resultado da solicitação.*/
 	};
 
-	const handleShare = async (email: string) => {
+	const handleShare = async (email: string) => { /* A função handleShare é chamada quando o usuário compartilha uma nota com um amigo. Ela faz uma solicitação POST para informar ao servidor que a nota deve ser compartilhada.*/
 		try {
 			const note_id = note.id
 			const body = { email, note_id };
-			const response = await fetch("http://localhost:5000/notes/share", {
+			const response = await fetch("http://localhost:5000/notes/share", { /*Utiliza a API fetch para fazer uma solicitação POST para a URL "http://localhost:5000/notes/share" com o corpo da requisição contendo o objeto body.*/
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(body),
@@ -68,14 +68,14 @@ export default function Note({note, onClick, toEdit}: NoteProps) {
 			});
 
 			if (response.status === 200) {
-				showToast("success", "Nota compartilhada com sucesso!")
+				showToast("success", "Nota compartilhada com sucesso!") /*Se a resposta do servidor tem status 200 (OK), exibe um toast de sucesso.*/
 			}
 		} catch (error) {
 			showToast("error", "Erro ao compartilhar nota.")
 			console.error(error);
 		}
 
-		closeFrindModal();
+		closeFrindModal(); /*Fecha o modal de compartilhamento.*/
 	}
 
 	// State to track visibility of icons
@@ -105,7 +105,7 @@ export default function Note({note, onClick, toEdit}: NoteProps) {
 				isOpen={toastShow}
 				onClose={closeToast}
 			/>
-			<tr
+			<tr /*renderização do componente*/
 				className="bg-white hover:bg-gray-50 border-b rounded group"
 				key={note.id}
 			>

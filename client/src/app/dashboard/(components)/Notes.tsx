@@ -148,7 +148,7 @@ export default function Notes() { /*submissão de um formulário para adicionar 
 					</tbody>
 				</table>
 			</div>
-      <Toast
+      <Toast /*componente utilizado para exibir mensagens temporárias na interface do usuário, como mensagens de sucesso, erro ou informações.*/
 				type={toastType}
 				text={toastText}
 				isOpen={toastShow}
