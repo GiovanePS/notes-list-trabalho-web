@@ -35,50 +35,6 @@ app.use(passport.session())
 
 app.use(router)
 
-/* // função de login AUTH
-app.post('/login', (req: Request, res: Response, next: NextFunction) => {
-  passport.authenticate('local', (error: any, user: any, info: any) => {
-    if (!user) return res.status(401).json({ message: "email ou senha incorretos."})
-
-    req.login(user, (error) => {
-      if (error) {
-        res.send(401).send()
-        throw error
-      } else {
-        res.status(200).send()
-      }
-    })
-  })(req, res, next)
-}) */
-
-/* // função de registro AUTH
-app.post('/register', async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { username, email, password } = req.body
-    const hash_password = await bcrypt.hash(password, 10)
-
-    await User.create({
-      nome: username,
-      email: email,
-      senha_hash: hash_password,
-    })
-
-    res.status(201).send()
-  } catch (error) {
-    console.error(error)
-  }
-}) */
-
-// Rota para pegar username e email do usuário. USER
-app.get('/user', isAuth, (req: Request, res: Response) => {
-  try {
-    const user = req.user as User
-    res.status(200).json({ username: user.nome, email: user.email })
-  } catch (error) {
-    console.error(error)
-  }
-})
-
 // Rota para alterar dados do usuário. USER
 app.put('/user', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {

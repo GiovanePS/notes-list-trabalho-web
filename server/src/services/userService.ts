@@ -18,13 +18,13 @@ export const userService = {
     },
 
     update: async (id: number, attributes: {
-        email: string,
         nome: string,
+        email: string,
         senha_hash: string
     }) => {
-        const [affectedRows, updatedUsers] = await User.update(attributes, { where: { id }, returning: true })
-
-        return updatedUsers[0]
+        const updatedUser = await User.update(attributes, { 
+            where: { id }
+        })
+        return updatedUser
     },
 }
-  
