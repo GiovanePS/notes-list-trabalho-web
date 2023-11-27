@@ -28,12 +28,12 @@ export default function AddFriendModal({ isOpen, onClose, onAdd }: FriendModalPr
 					</h3>
 					<div className="flex flex-col justify-center items-center m-4">
 						<label className="text-left label">
-                            Email do Amigo:
-                        </label>
-                        <input
+              Email do Amigo:
+            </label>
+            <input
 							type="text"
 							className="input w-full p-2 my-4"
-                            onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
 						/>
 					</div>
 					<div className="flex justify-center space-x-4">

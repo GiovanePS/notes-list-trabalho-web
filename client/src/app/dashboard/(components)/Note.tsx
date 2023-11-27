@@ -56,22 +56,22 @@ export default function Note({note, onClick, toEdit}: NoteProps) {
 		closeEditModal();
 	};
 
-	const handleShare = async (name: string) => {
+	const handleShare = async (email: string) => {
 		try {
-			const body = { name };
-			const response = await fetch("http://localhost:5000/notes", {
-				method: "PUT",
+			const note_id = note.id
+			const body = { email, note_id };
+			const response = await fetch("http://localhost:5000/notes/share", {
+				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(body),
 				credentials: "include",
 			});
 
 			if (response.status === 200) {
-				if (toEdit) {
-					toEdit();
-				}
+				showToast("success", "Nota compartilhada com sucesso!")
 			}
 		} catch (error) {
+			showToast("error", "Erro ao compartilhar nota.")
 			console.error(error);
 		}
 
