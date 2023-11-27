@@ -1,6 +1,6 @@
 type ButtonProps = {
 	text: string;
-	onClick?: React.MouseEventHandler<HTMLButtonElement>;
+	onClick?: (React.MouseEventHandler<HTMLButtonElement>);
 	color?: "gray";
 };
 

@@ -3,6 +3,7 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import Button from "../../(components)/Button"
 import Note from "./Note"
+import Toast from "@/app/(components)/Toast";
 
 interface Note {
   id: number;
@@ -12,22 +13,33 @@ interface Note {
 
 const SERVER_URL = 'http://localhost:5000'
 
-export default function Notes() {
-  const [allNotes, setAllNotes] = useState<Note[]>([])
-  
-  const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+export default function Notes() { /*submissão de um formulário para adicionar novas notas*/
+  const [allNotes, setAllNotes] = useState<Note[]>([]) /*allNotes  armazena a lista de todas as notas, setAllNotes atualiza esse estado*/
+
+  const [toastShow, setToastShow] = useState(false);
+  const [toastType, setToastType] = useState("success");
+  const [toastText, setToastText] = useState("");
+
+  const showToast = (type: string, text: string) => {
+		setToastText(text);
+		setToastType(type);
+		setToastShow(true);
+  };
+  const closeToast = () => setToastShow(false);
+
+  const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => { /*Esta função é chamada quando o usuário envia o formulário para adicionar uma nova nota */
+    event.preventDefault() /*impede o recarregamento da página*/
     try {
       const formData = new FormData(event.currentTarget)
-      const title = formData.get('title')!.toString()
+      const title = formData.get('title')!.toString() /*Obtendo os valores q foram inseridos em "título" e "texto"*/
       const text = formData.get('text')!.toString()
-      addNote(title, text)
+      addNote(title, text) /*Chama a função addNote para adicionar a nova nota*/
     } catch (error) {
       console.error(error)
     }
   }
 
-  const addNote = async (titulo: string, texto: string) => {
+  const addNote = async (titulo: string, texto: string) => { /*A função addNote faz uma solicitação POST para adicionar uma nova nota ao servidor usando a API fetch. */
     try {
       const body = { titulo, texto }
       const response = await fetch(`${SERVER_URL}/notes`, {
@@ -38,16 +50,20 @@ export default function Notes() {
       })
 
       if (response.status === 200) {
+        showToast('success', 'Nota adicionada com sucesso!')
         getAllNotes()
+      } else if (response.status === 400) {
+        showToast('error', 'Nota sem título não pode ser adicionada!')
       }
     } catch (error) {
+      showToast('error', 'Erro ao adicionar nota')
       console.error(error)
     }
   }
 
-  const deleteNote = async (id: number) => {
+  const deleteNote = async (id: number) => {  
     try {
-      const body = { id }
+      const body = { id }  /* A função deleteNote faz uma solicitação DELETE para excluir uma nota com base no ID fornecido.*/
       const response = await fetch(`${SERVER_URL}/notes`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -56,14 +72,15 @@ export default function Notes() {
       });
 
       if (response.status === 200) {
-        getAllNotes()
+        showToast('success', 'Nota deletada com sucesso!')
+        getAllNotes() /*Se a solicitação for bem-sucedida, a função chama getAllNotes para obter todas as notas atualizadas.*/
       }
     } catch (err: any) {
       console.error(err.message);
     }
   };
 
-  const getAllNotes = async () => {
+  const getAllNotes = async () => {  /*A função getAllNotes faz uma solicitação GET para obter todas as notas do servidor.*/
     try {
       const response = await fetch(`${SERVER_URL}/notes`, {
         method: 'GET',
@@ -77,17 +94,17 @@ export default function Notes() {
         arr.push(note)
       })
 
-      setAllNotes(arr)
+      setAllNotes(arr) /*Se a solicitação for bem-sucedida, os dados são convertidos para o formato Note e atualizam o estado allNotes.*/
     } catch (err: any) {
       console.error(err.message);
     }
   };
 
   useEffect(() => {
-    getAllNotes();
+    getAllNotes(); /*O hook useEffect é utilizado para chamar a função getAllNotes quando o componente é montado.*/
   }, []);
 
-  return (
+  return ( /* renderização do componente*/
 		<>
 			<div className="container mx-auto">
 				<h1 className="text-center my-6 mr-6">Lista de Notas</h1>
@@ -120,19 +137,25 @@ export default function Notes() {
 							<th className="px-4 py-2 text-left">Texto</th>
 						</tr>
 					</thead>
-					<tbody className="">
-            <Note note={{ id: 1, titulo: 'titulo', texto: 'texto' }} onClick={() => deleteNote(1)} />
-            <Note note={{ id: 2, titulo: 'titulo', texto: 'texto' }} onClick={() => deleteNote(2)} />
+					<tbody>
+            <Note note={{id: 0, titulo: 'Test Note', texto: 'Testing Functionalities'}} onDelete={() => {}} toEdit={getAllNotes} />
 						{allNotes?.map((nota) => (
 							<Note
+                key={nota.id}
 								note={nota}
-								onClick={() => deleteNote(nota.id)}
+								onDelete={() => deleteNote(nota.id)}
                 toEdit={getAllNotes}
 							/>
 						))}
 					</tbody>
 				</table>
 			</div>
+      <Toast /*componente utilizado para exibir mensagens temporárias na interface do usuário, como mensagens de sucesso, erro ou informações.*/
+				type={toastType}
+				text={toastText}
+				isOpen={toastShow}
+				onClose={closeToast}
+			/>
 		</>
   );
 };

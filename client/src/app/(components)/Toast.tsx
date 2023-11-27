@@ -1,4 +1,4 @@
-	import React, { useState, useEffect } from "react";
+	import React, { useEffect } from "react";
 	import Icon from "./Icon";
 
 	type ToastProps = {
@@ -11,7 +11,7 @@
 	export default function Toast({ text, type, isOpen, onClose }: ToastProps) {
 		useEffect(() => {
 			if (isOpen) {
-				const timer = setTimeout(onClose, 3000);
+				const timer = setTimeout(onClose, 2000);
 				return () => clearTimeout(timer);
 			}
 		}, [isOpen, onClose]);

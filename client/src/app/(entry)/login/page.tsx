@@ -1,61 +1,77 @@
-"use client"
+"use client";
+
 import { useState } from "react";
 import Link from "next/link";
-import InputText from '@/app/(components)/InputText';
-import Button from '@/app/(components)/Button';
-import Toast from '@/app/(components)/Toast';
-import { FormEvent, useEffect } from 'react';
-import { useRouter } from "next/navigation";
+import InputText from "@/app/(components)/InputText";
+import Button from "@/app/(components)/Button";
+import Toast from "@/app/(components)/Toast";
+import { FormEvent, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { checkAuth } from "@/services/authService";
 
 export default function LoginPage() {
-	const router = useRouter()
+	const router = useRouter();
+	const searchParams = useSearchParams()
 
 	const [toastShow, setToastShow] = useState(false);
 	const [toastType, setToastType] = useState("success");
 	const [toastText, setToastText] = useState("");
-	
-	const openToast = () => setToastShow(true);
+
+	const showToast = (type: string, text: string) => { /*Gerencia exibição de toast*/
+		setToastText(text);
+		setToastType(type);
+		setToastShow(true);
+	};
+
 	const closeToast = () => setToastShow(false);
 
-  	useEffect(() => {
-    const fetchAuthStatus = async () => {
+	useEffect(() => {
+		const fetchAuthStatus = async () => {
 			try {
-				const checkingAuth: any = await checkAuth()
-        if (checkingAuth) {
-          router.push('/dashboard')
-        }
+				const checkingAuth: any = await checkAuth(); /*Utiliza o hook useEffect para verificar se o usuário já está autenticado quando a página é carregada.*/
+				if (checkingAuth) {
+					router.push("/dashboard"); /*Redireciona automaticamente para a página de dashboard se o usuário já estiver autenticado.*/
+				}
 			} catch (error) {
-				console.error(error)
+				console.error(error);
 			}
-		}
+		};
 
-		fetchAuthStatus()
-	}, [router])
+		fetchAuthStatus();
+	}, [router]);
+
+	useEffect(() => { /*Utiliza outro useEffect para verificar se a query string contém um parâmetro "registered" igual a "true".*/
+		const registeredUser = searchParams.get('registered')
+
+		if (registeredUser === 'true') {
+			showToast("success", "Conta criada com sucesso!") /*Se sim, exibe um toast indicando que a conta foi criada com sucesso.*/
+		}
+	}, [])
 
 	async function submitHandler(event: FormEvent<HTMLFormElement>) {
-		event.preventDefault()
+		event.preventDefault();
 		try {
-			const formData = new FormData(event.currentTarget)
-			const email = formData.get('email')!.toString()
-			const password = formData.get('password')!.toString()
-			
-			const body = { email, password }
-			const response = await fetch('http://localhost:5000/login', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(body),
-				credentials: 'include',
-			})
+			const formData = new FormData(event.currentTarget); /*Obtém os dados do formulário (email e senha) e faz uma solicitação POST para o servidor de autenticação.*/
+			const email = formData.get("email")!.toString();
+			const password = formData.get("password")!.toString();
 
-			if (response.status == 200) {
-				setToastText('Login efetuado com sucesso!');
-				setToastType('success');
-				openToast;
-				router.push('/dashboard');
+			const body = { email, password };
+			const response = await fetch("http://localhost:5000/login", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(body),
+				credentials: "include",
+			});
+
+			if (response.status == 200) { /*Se o login for bem-sucedido (status 200), redireciona para a página de dashboard.*/
+				showToast("success", "Login realizado com sucesso");
+				router.push("/dashboard");
+			} else if (response.status === 401) { /*Se houver falha na autenticação (status 401), exibe um toast informando que o usuário ou a senha estão incorretos.*/
+				showToast('error', "Usuário ou senha incorretos.")
 			}
 		} catch (error) {
-			console.error(error)
+			showToast("error", "Erro ao realizar login"); /*Em caso de erro durante a solicitação, exibe um toast indicando um erro no login.*/
+			console.error(error);
 		}
 	}
 
@@ -77,7 +93,7 @@ export default function LoginPage() {
 				/>
 				<Button text="Entrar" />
 				<div className="mt-6 text-center text-gray-700 text-sm">
-					Não possui conta?{" "}
+					Não possui conta? {" "}
 					<Link
 						href="/register"
 						className="text-blue-400 hover:text-blue-300"
@@ -86,14 +102,6 @@ export default function LoginPage() {
 					</Link>
 				</div>
 			</form>
-			<Button
-				text="Toast"
-				onClick={() => {
-					setToastText("Login efetuado com sucesso!");
-					setToastType("success");
-					setToastShow(true);
-				}}
-			/>
 			<Toast
 				type={toastType}
 				text={toastText}

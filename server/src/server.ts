@@ -38,8 +38,12 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
     if (!user) return res.status(401).json({ message: "email ou senha incorretos."})
 
     req.login(user, (error) => {
-      if (error) throw error
-      res.status(200).send()
+      if (error) {
+        res.send(401).send()
+        throw error
+      } else {
+        res.status(200).send()
+      }
     })
   })(req, res, next)
 })
@@ -56,12 +60,43 @@ app.post('/register', async (req: Request, res: Response, next: NextFunction) =>
       senha_hash: hash_password,
     })
 
-    res.status(200).send()
+    res.status(201).send()
   } catch (error) {
     console.error(error)
   }
 })
 
+// Rota para pegar username e email do usuário.
+app.get('/user', isAuth, (req: Request, res: Response) => {
+  try {
+    const user = req.user as User
+    res.status(200).json({ username: user.nome, email: user.email })
+  } catch (error) {
+    console.error(error)
+  }
+})
+
+app.put('/user', isAuth, async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = req.user as User
+    const { username, email, password } = req.body
+    const hash_password = await bcrypt.hash(password, 10)
+
+    await User.update({
+      nome: username,
+      email: email,
+      senha_hash: hash_password
+    }, {
+      where: {
+        id: user.id
+      }
+    })
+
+    res.status(200).send()
+  } catch (error) {
+    console.error(error)
+  }
+})
 
 // função logout
 app.get('/logout', (req, res, next) => {
@@ -182,20 +217,25 @@ app.delete('/notes', isAuth, async (req: Request, res: Response, next: NextFunct
 app.post('/notes/share', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as User
-    const { user_id_to_share, titulo, texto } = req.body
+    const { email, note_id } = req.body
     
-    const sharedNote = await Note.create({
-      titulo: titulo,
-      texto: texto
+    const userToShare = await User.findOne({
+      where: {
+        email: email
+      }
     })
     
-    await UserNote.create({
-      user_id: user_id_to_share,
-      note_id: sharedNote.id,
-      admin_id: user.id,
-    })
+    if (userToShare) {
+      await UserNote.create({
+        user_id: userToShare.id,
+        note_id: note_id,
+        admin_id: user.id,
+      })
 
-    res.status(200).send()
+      res.status(200).send()
+    } else {
+      res.status(404).send()
+    }
   } catch (error) {
     res.status(400).send()
     console.error(error)
