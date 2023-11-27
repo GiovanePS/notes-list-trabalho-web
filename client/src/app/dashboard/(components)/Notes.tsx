@@ -53,6 +53,7 @@ export default function Notes() { /*submissão de um formulário para adicionar 
         getAllNotes()
       }
     } catch (error) {
+      showToast('error', 'Erro ao adicionar nota')
       console.error(error)
     }
   }
