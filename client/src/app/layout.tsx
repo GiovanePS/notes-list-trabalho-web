@@ -14,7 +14,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) { /*
 					href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
 					rel="stylesheet"
 				/>
-				<link rel="shortcut icon" href="/favicon.png" />
+				<link rel="shortcut icon" href="/favicon.png"/>
 			</head>
 
 			<body>{children}</body>
