@@ -5,7 +5,9 @@ import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import InputText from '@/app/(components)/InputText'
 import Button from '@/app/(components)/Button'
-import Toast from '@/app/(components)/Toast'
+import { useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import Toast from "@/app/(components)/Toast";
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -31,18 +33,17 @@ export default function RegisterPage() {
 			const password = formData.get('password')!.toString()
 
 			const body = { username, email, password }
-			const response = await fetch('http://localhost:5000/register', {
+			const response = await fetch('http://localhost:5000/register', { /*Faz uma solicitação POST para o servidor com os dados do formulário.*/
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(body),
 			})
 
-			if (response.status === 200) {
-				showToast('success', 'Usuário criado com sucesso!')
-				router.push('/login')
+			if (response.status === 201) {
+				router.push('/login?registered=true') /*Se a resposta for bem-sucedida (status 201), redireciona o usuário para a página de login com um parâmetro de consulta indicando que o registro foi bem-sucedido.*/
 			}
 		} catch (error) {
-			showToast('error', 'Erro ao criar usuário')
+			showToast("error", "Não foi possível registrar usuário.")
 			console.error(error)
 		}
 	}

@@ -4,18 +4,19 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import NoteIcon from "../../(components)/NoteIcon";
 import Button from "@/app/(components)/Button";
+import notepad_icon from '../(public)/notepad-icon.png'
 
 export default function DashboardNavBar() {
 	const router = useRouter();
 
-	const logoutHandler = async () => {
-		const response = await fetch("http://localhost:5000/logout", {
+	const logoutHandler = async () => { /*Função assíncrona chamada quando o botão "Sair" é clicado na barra de navegação.*/
+		const response = await fetch("http://localhost:5000/logout", { /*Utiliza a API fetch para fazer uma solicitação GET para a URL "http://localhost:5000/logout" com as opções especificadas.*/
 			method: "GET",
-			headers: { "Content-Type": "application/json" },
-			credentials: "include",
+			headers: { "Content-Type": "application/json" }, /*Indica que os dados são do tipo Json*/
+			credentials: "include", /*Inclui cookies na solicitação*/
 		});
 
-		router.push("/login");
+		router.push("/login"); /*Após a conclusão da solicitação, redireciona o usuário para a página de login.*/
 	};
 
 	return (
@@ -24,10 +25,11 @@ export default function DashboardNavBar() {
 				<div className="flex items-center justify-between">
 					<Link href="/dashboard" legacyBehavior>
 						<Image
-							src="/home/notepad-icon.png"
+							className="cursor-pointer"
+							src={ notepad_icon }
 							width={24}
 							height={33}
-							alt="Left Bro"
+							alt="notepad icon"
 							priority
 						></Image>
 					</Link>

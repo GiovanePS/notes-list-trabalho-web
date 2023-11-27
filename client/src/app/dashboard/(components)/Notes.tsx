@@ -19,6 +19,7 @@ export default function Notes() { /*submissão de um formulário para adicionar 
   const [toastShow, setToastShow] = useState(false);
   const [toastType, setToastType] = useState("success");
   const [toastText, setToastText] = useState("");
+
   const showToast = (type: string, text: string) => {
 		setToastText(text);
 		setToastType(type);
@@ -51,6 +52,8 @@ export default function Notes() { /*submissão de um formulário para adicionar 
       if (response.status === 200) {
         showToast('success', 'Nota adicionada com sucesso!')
         getAllNotes()
+      } else if (response.status === 400) {
+        showToast('error', 'Nota sem título não pode ser adicionada!')
       }
     } catch (error) {
       showToast('error', 'Erro ao adicionar nota')
@@ -137,6 +140,7 @@ export default function Notes() { /*submissão de um formulário para adicionar 
 					<tbody className="">
 						{allNotes?.map((nota) => (
 							<Note
+                key={nota.id}
 								note={nota}
 								onClick={() => deleteNote(nota.id)}
                 toEdit={getAllNotes}
@@ -145,7 +149,7 @@ export default function Notes() { /*submissão de um formulário para adicionar 
 					</tbody>
 				</table>
 			</div>
-      <Toast
+      <Toast /*componente utilizado para exibir mensagens temporárias na interface do usuário, como mensagens de sucesso, erro ou informações.*/
 				type={toastType}
 				text={toastText}
 				isOpen={toastShow}

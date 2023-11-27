@@ -1,4 +1,4 @@
-# Projeto Web - Note List
+# Projeto Web - Notes List
 
 Faremos uma note-list padrão, em que os diferentes usuários poderão interagir uns com os outros através do compartilhamento de listas de anotações.
 
