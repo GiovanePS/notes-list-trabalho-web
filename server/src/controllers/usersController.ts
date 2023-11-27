@@ -11,9 +11,11 @@ export const usersController = {
         try {
             const user = req.user as User
             res.status(200).json({ username: user.nome, email: user.email })
-          } catch (error) {
-            console.error(error)
-          }
+          } catch (err) {
+            if (err instanceof Error) {
+                return res.status(400).json({ message: err.message })     
+            }
+        }
     },
 
     // PUT /user
