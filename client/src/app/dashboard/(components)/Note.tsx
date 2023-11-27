@@ -6,11 +6,11 @@ import Toast from "@/app/(components)/Toast";
 
 type NoteProps = {
 	note: any;
-	onClick?: React.MouseEventHandler<HTMLButtonElement>;
+	onDelete?: () => void;
 	toEdit?: () => void;
 };
 
-export default function Note({note, onClick, toEdit}: NoteProps) { /*toEdit é uma função opcional que pode ser chamada para atualizar o estado das notas ao editá-las.*/
+export default function Note({note, onDelete, toEdit}: NoteProps) { /*toEdit é uma função opcional que pode ser chamada para atualizar o estado das notas ao editá-las.*/
 	
 	const [isEditModalOpen, setIsEditModalOpen] = useState(false); /*estados para controlar a abertura e fechamento de modais (isEditModalOpen e isFrindModalOpen), a exibição de toasts (toastShow, toastType, toastText), e a visibilidade de ícones(showIcons, logo abaixo)*/
 	const [isFrindModalOpen, setIsFriendModalOpen] = useState(false);
@@ -53,7 +53,7 @@ export default function Note({note, onClick, toEdit}: NoteProps) { /*toEdit é u
 			console.error(error);
 		}
 
-		closeEditModal(); /*Fecha o modal de edição, independentemente do resultado da solicitação.*/
+		closeEditModal();
 	};
 
 	const handleShare = async (email: string) => { /* A função handleShare é chamada quando o usuário compartilha uma nota com um amigo. Ela faz uma solicitação POST para informar ao servidor que a nota deve ser compartilhada.*/
@@ -78,12 +78,10 @@ export default function Note({note, onClick, toEdit}: NoteProps) { /*toEdit é u
 		closeFrindModal(); /*Fecha o modal de compartilhamento.*/
 	}
 
-	// State to track visibility of icons
-	const [showIcons, setShowIcons] = useState(false);
+	const [showMobileIcons, setShowMobileIcons] = useState(false);
 
-	// Event handler to toggle visibility (mobile)
-	const toggleIcons = (e: React.MouseEvent) => {
-		setShowIcons(!showIcons);
+	const toggleIcons = () => {
+		setShowMobileIcons(!showMobileIcons);
 	};
 
 	return (
@@ -113,25 +111,25 @@ export default function Note({note, onClick, toEdit}: NoteProps) { /*toEdit é u
 				<td className="px-4 py-2 w-3/4">{note.texto}</td>
 
 				<td className="py-2 relative">
+					{/* Desktop */}
 					<div className="md:flex hidden items-center space-x-2 opacity-0 group-hover:opacity-100">
 						<NoteIcon name="edit" onClick={openEditModal} />
 						<NoteIcon name="person_add" onClick={openFriendModal} />
-						<NoteIcon name="delete" onClick={onClick} />
+						<NoteIcon name="delete" onClick={onDelete} />
 					</div>
 
-					<div className="md:hidden" onClick={toggleIcons}>
-						<NoteIcon name="more_vert" />
-					</div>
-
-					{showIcons && ( // Conditional rendering based on showIcons state
-						<div className="relative right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-							<div className="">
+					{/* Mobile */}
+					<div className="md:hidden">
+						<NoteIcon name="more_vert" onClick={toggleIcons} />
+						{showMobileIcons && (
+							<div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
+								{/* <div className="relative right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"> */}
 								<NoteIcon name="edit" onClick={openEditModal} />
-								<NoteIcon name="person_add" />
-								<NoteIcon name="delete" onClick={onClick} />
+								<NoteIcon name="person_add" onClick={openFriendModal} />
+								<NoteIcon name="delete" onClick={onDelete} />
 							</div>
-						</div>
-					)}
+						)}
+					</div>
 				</td>
 			</tr>
 		</>
