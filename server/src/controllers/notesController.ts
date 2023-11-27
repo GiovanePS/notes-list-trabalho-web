@@ -5,7 +5,7 @@ import { Note } from "../database/models/Note"
 
 export const notesController = {
 
-    // POST /notes
+    // POST /notes - cria uma nota
     save: async (req: Request, res: Response) => {
         try {
             const user = req.user as User
@@ -33,7 +33,7 @@ export const notesController = {
         }
     },
 
-    // PUT /notes
+    // PUT /notes - atualiza uma nota
     update: async (req: Request, res: Response) => {
         try {
             const { id, titulo, texto } = req.body
@@ -54,7 +54,7 @@ export const notesController = {
         }
     },
 
-    // DELETE /notes
+    // DELETE /notes - exclui uma nota
     delete: async (req: Request, res: Response) => {
         try {
             const { id } = req.body

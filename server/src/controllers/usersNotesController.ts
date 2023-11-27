@@ -5,7 +5,7 @@ import { Note } from "../database/models/Note"
 
 export const usersNotesController = {
     
-    //POST /notes/share
+    //POST /notes/share - compartilha uma nota através da chave: email
     share: async (req: Request, res: Response) => {
         try {
             const user = req.user as User

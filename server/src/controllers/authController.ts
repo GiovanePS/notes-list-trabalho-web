@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import { userService } from "../services/userService"
 import passport from "passport"
 
-// POST /register
+// POST /register - registro do usuário
 export const authController = {
     register: async (req: Request, res: Response) => {
         const { username, email, password } = req.body
@@ -31,7 +31,7 @@ export const authController = {
         }
     },
 
-// POST /login
+// POST /login - login do usuário
     login: async (req: Request, res: Response) => {
         passport.authenticate('local', (error: any, user: any, info: any) => {
             if (!user) return res.status(401).json({ message: "E-mail e/ou senha incorreto(s)."})
@@ -47,7 +47,7 @@ export const authController = {
           })(req, res)
     },
 
-// GET /check
+// GET /check - verifica autenticacao sem middleware
     check: (req: Request, res: Response) => {
         if (req.isAuthenticated()) {
             res.status(200).send()

@@ -6,7 +6,7 @@ import { Note } from "../database/models/Note"
 import { userService } from "../services/userService"
 
 export const usersController = {
-    // GET /user
+    // GET /user - busca dados do usuário
     show: async (req: Request, res: Response) => {
         try {
             const user = req.user as User
@@ -18,7 +18,7 @@ export const usersController = {
         }
     },
 
-    // PUT /user
+    // PUT /user - atualiza dados do usuário
     update: async (req: Request, res: Response) => {
         const user = req.user as User
         const { username, email, password } = req.body
@@ -50,7 +50,7 @@ export const usersController = {
           res.status(200).send()
     },
 
-    // GET /notes
+    // GET /notes - busca notas do usuário atual
     notes: async (req: Request, res: Response) => {
         const user = req.user as User
         
