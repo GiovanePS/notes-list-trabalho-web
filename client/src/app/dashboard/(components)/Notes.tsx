@@ -19,6 +19,7 @@ export default function Notes() { /*submissão de um formulário para adicionar 
   const [toastShow, setToastShow] = useState(false);
   const [toastType, setToastType] = useState("success");
   const [toastText, setToastText] = useState("");
+
   const showToast = (type: string, text: string) => {
 		setToastText(text);
 		setToastType(type);

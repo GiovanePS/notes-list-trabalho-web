@@ -6,11 +6,12 @@ import InputText from "@/app/(components)/InputText";
 import Button from "@/app/(components)/Button";
 import Toast from "@/app/(components)/Toast";
 import { FormEvent, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { checkAuth } from "@/services/authService";
 
 export default function LoginPage() {
 	const router = useRouter();
+	const searchParams = useSearchParams()
 
 	const [toastShow, setToastShow] = useState(false);
 	const [toastType, setToastType] = useState("success");
@@ -38,6 +39,14 @@ export default function LoginPage() {
 
 		fetchAuthStatus();
 	}, [router]);
+
+	useEffect(() => {
+		const registeredUser = searchParams.get('registered')
+
+		if (registeredUser === 'true') {
+			showToast("success", "Conta criada com sucesso!")
+		}
+	}, [])
 
 	async function submitHandler(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();

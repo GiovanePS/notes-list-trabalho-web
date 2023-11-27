@@ -38,8 +38,7 @@ export default function RegisterPage() {
 			})
 
 			if (response.status === 201) {
-				showToast("success", "Conta registrada com sucesso!")
-				router.push('/login')
+				router.push('/login?registered=true')
 			}
 		} catch (error) {
 			showToast("error", "Não foi possível registrar usuário.")
