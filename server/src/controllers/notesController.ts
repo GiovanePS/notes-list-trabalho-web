@@ -53,4 +53,29 @@ export const notesController = {
             }
         }
     },
+
+    // DELETE /notes
+    delete: async (req: Request, res: Response) => {
+        try {
+            const { id } = req.body
+            await Note.destroy({
+                where: {
+                    id: id
+                }
+            })
+            await UserNote.destroy({
+                where: {
+                    note_id: id
+                }
+            })
+            res.status(200).send()
+
+        } catch (err) {
+            if (err instanceof Error) {
+                return res.status(400).json({ message: err.message})
+            }
+        }
+    },
+
+    
 }

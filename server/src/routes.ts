@@ -16,10 +16,11 @@ router.get('/check', authController.check)
 router.get('/user', isAuth, usersController.show)
 router.put('/user', isAuth, usersController.update)
 router.get('/logout', usersController.logout)
-router.get('/notes',isAuth,usersController.notes)
+router.get('/notes', isAuth, usersController.notes)
 
 // NOTES
 router.post('/notes', isAuth, notesController.save)
-router.put('/notes',isAuth,notesController.update)
+router.put('/notes', isAuth, notesController.update)
+router.delete('/notes', isAuth, notesController.delete)
 
 export { router }

@@ -34,28 +34,6 @@ app.use(passport.session())
 
 app.use(router)
 
-// apagar uma nota NOTES
-app.delete('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { id } = req.body
-    await Note.destroy({
-      where: {
-        id: id
-      }
-    })
-
-    await UserNote.destroy({
-      where: {
-        note_id: id
-      }
-    })
-
-    res.status(200).send()
-  } catch (error) {
-    console.error(error)
-  }
-})
-
 // compartilhar nota com outro usuário. USERSNOTE
 app.post('/notes/share', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {
