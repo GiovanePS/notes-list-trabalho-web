@@ -137,12 +137,13 @@ export default function Notes() { /*submissão de um formulário para adicionar 
 							<th className="px-4 py-2 text-left">Texto</th>
 						</tr>
 					</thead>
-					<tbody className="">
+					<tbody>
+            <Note note={{id: 0, titulo: 'Test Note', texto: 'Testing Functionalities'}} onDelete={() => {}} toEdit={getAllNotes} />
 						{allNotes?.map((nota) => (
 							<Note
                 key={nota.id}
 								note={nota}
-								onClick={() => deleteNote(nota.id)}
+								onDelete={() => deleteNote(nota.id)}
                 toEdit={getAllNotes}
 							/>
 						))}
