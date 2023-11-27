@@ -9,20 +9,20 @@ import Toast from "@/app/(components)/Toast";
 
 export default function RegisterPage() {
   const router = useRouter()
-
-	const [toastShow, setToastShow] = useState(false);
+	
+	const [toastShow, setToastShow] = useState(false); /*Estado para exibição de toast.*/
 	const [toastType, setToastType] = useState("success");
 	const [toastText, setToastText] = useState("");
 
-	const showToast = (type: string, text: string) => {
+	const showToast = (type: string, text: string) => { /*Função para exibir o Toast.*/
 		setToastText(text);
 		setToastType(type);
 		setToastShow(true);
 	};
 
-	const closeToast = () => setToastShow(false);
+	const closeToast = () => setToastShow(false); /*Função para fechar o Toast.*/
 
-	async function submitHandler(event: FormEvent<HTMLFormElement>) {
+	async function submitHandler(event: FormEvent<HTMLFormElement>) { /* Lida com o envio do formulário de registro. */
 		event.preventDefault()
 		try {
 			const formData = new FormData(event.currentTarget)
@@ -31,14 +31,14 @@ export default function RegisterPage() {
 			const password = formData.get('password')!.toString()
 
 			const body = { username, email, password }
-			const response = await fetch('http://localhost:5000/register', {
+			const response = await fetch('http://localhost:5000/register', { /*Faz uma solicitação POST para o servidor com os dados do formulário.*/
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(body),
 			})
 
 			if (response.status === 201) {
-				router.push('/login?registered=true')
+				router.push('/login?registered=true') /*Se a resposta for bem-sucedida (status 201), redireciona o usuário para a página de login com um parâmetro de consulta indicando que o registro foi bem-sucedido.*/
 			}
 		} catch (error) {
 			showToast("error", "Não foi possível registrar usuário.")
