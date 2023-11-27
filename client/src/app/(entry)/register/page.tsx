@@ -39,6 +39,10 @@ export default function RegisterPage() {
 			if (response.status === 201) {
 				router.push('/login?registered=true') /*Se a resposta for bem-sucedida (status 201), redireciona o usuário para a página de login com um parâmetro de consulta indicando que o registro foi bem-sucedido.*/
 			}
+
+			if (response.status === 400) {
+				showToast("error", "Este e-mail já está cadastrado.")
+			}
 		} catch (error) {
 			showToast("error", "Não foi possível registrar usuário.")
 			console.error(error)
