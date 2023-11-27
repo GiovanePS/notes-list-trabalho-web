@@ -6,13 +6,19 @@ type IconProps = {
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-export default function NoteIcon(props: IconProps) {
-	const textColorClass = props.color ? `text-${props.color}-500` : "text-gray-600";
+export default function Icon({ name, color, onClick }: IconProps) {
+	let textColorClass = "text-gray-600"; // Default case - no color class is applied
+
+	if (color === "green") {
+		textColorClass = "text-green-500";
+	} else if (color === "red") {
+		textColorClass = "text-red-500";
+	}
 
 	return (
-		<button onClick={props.onClick}>
+		<button onClick={onClick}>
 			<span className={`material-symbols-outlined ${textColorClass}`}>
-				{props.name}
+				{name}
 			</span>
 		</button>
 	);

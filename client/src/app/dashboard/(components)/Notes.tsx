@@ -3,6 +3,7 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import Button from "../../(components)/Button"
 import Note from "./Note"
+import Toast from "@/app/(components)/Toast";
 
 interface Note {
   id: number;
@@ -14,7 +15,17 @@ const SERVER_URL = 'http://localhost:5000'
 
 export default function Notes() {
   const [allNotes, setAllNotes] = useState<Note[]>([])
-  
+
+  const [toastShow, setToastShow] = useState(false);
+  const [toastType, setToastType] = useState("success");
+  const [toastText, setToastText] = useState("");
+  const showToast = (type: string, text: string) => {
+		setToastText(text);
+		setToastType(type);
+		setToastShow(true);
+  };
+  const closeToast = () => setToastShow(false);
+
   const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
@@ -38,6 +49,7 @@ export default function Notes() {
       })
 
       if (response.status === 200) {
+        showToast('success', 'Nota adicionada com sucesso!')
         getAllNotes()
       }
     } catch (error) {
@@ -56,6 +68,7 @@ export default function Notes() {
       });
 
       if (response.status === 200) {
+        showToast('success', 'Nota deletada com sucesso!')
         getAllNotes()
       }
     } catch (err: any) {
@@ -121,8 +134,6 @@ export default function Notes() {
 						</tr>
 					</thead>
 					<tbody className="">
-            <Note note={{ id: 1, titulo: 'titulo', texto: 'texto' }} onClick={() => deleteNote(1)} />
-            <Note note={{ id: 2, titulo: 'titulo', texto: 'texto' }} onClick={() => deleteNote(2)} />
 						{allNotes?.map((nota) => (
 							<Note
 								note={nota}
@@ -133,6 +144,12 @@ export default function Notes() {
 					</tbody>
 				</table>
 			</div>
+      <Toast
+				type={toastType}
+				text={toastText}
+				isOpen={toastShow}
+				onClose={closeToast}
+			/>
 		</>
   );
 };

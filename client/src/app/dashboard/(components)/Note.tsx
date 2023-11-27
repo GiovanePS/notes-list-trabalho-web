@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NoteIcon from "../../(components)/NoteIcon";
 import EditModal from "./EditModal";
 import FriendModal from "./FriendModal";
+import Toast from "@/app/(components)/Toast";
 
 type NoteProps = {
 	note: any;
@@ -10,6 +11,7 @@ type NoteProps = {
 };
 
 export default function Note({note, onClick, toEdit}: NoteProps) {
+	
 	const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 	const [isFrindModalOpen, setIsFriendModalOpen] = useState(false);
 
@@ -18,6 +20,18 @@ export default function Note({note, onClick, toEdit}: NoteProps) {
 
 	const openFriendModal = () => setIsFriendModalOpen(true);
 	const closeFrindModal = () => setIsFriendModalOpen(false);
+
+	const [toastShow, setToastShow] = useState(false);
+	const [toastType, setToastType] = useState("success");
+	const [toastText, setToastText] = useState("");
+
+	const showToast = (type: string, text: string) => {
+		setToastText(text);
+		setToastType(type);
+		setToastShow(true);
+	};
+
+	const closeToast = () => setToastShow(false);
 
 	const handleSave = async (id: number, titulo: string, texto: string) => {
 		try {
@@ -30,6 +44,7 @@ export default function Note({note, onClick, toEdit}: NoteProps) {
 			});
 
 			if (response.status === 200) {
+				showToast("success", "Nota editada com sucesso!");
 				if (toEdit) {
 					toEdit();
 				}
@@ -84,6 +99,12 @@ export default function Note({note, onClick, toEdit}: NoteProps) {
 				onClose={closeFrindModal}
 				onAdd={handleShare}
 			/>
+			<Toast
+				type={toastType}
+				text={toastText}
+				isOpen={toastShow}
+				onClose={closeToast}
+			/>
 			<tr
 				className="bg-white hover:bg-gray-50 border-b rounded group"
 				key={note.id}
@@ -94,7 +115,7 @@ export default function Note({note, onClick, toEdit}: NoteProps) {
 				<td className="py-2 relative">
 					<div className="md:flex hidden items-center space-x-2 opacity-0 group-hover:opacity-100">
 						<NoteIcon name="edit" onClick={openEditModal} />
-						<NoteIcon name="person_add" onClick={openFriendModal}/>
+						<NoteIcon name="person_add" onClick={openFriendModal} />
 						<NoteIcon name="delete" onClick={onClick} />
 					</div>
 
@@ -107,10 +128,7 @@ export default function Note({note, onClick, toEdit}: NoteProps) {
 							<div className="">
 								<NoteIcon name="edit" onClick={openEditModal} />
 								<NoteIcon name="person_add" />
-								<NoteIcon
-									name="delete"
-									onClick={onClick}
-								/>
+								<NoteIcon name="delete" onClick={onClick} />
 							</div>
 						</div>
 					)}

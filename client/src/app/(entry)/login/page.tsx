@@ -1,61 +1,66 @@
-"use client"
+"use client";
 import { useState } from "react";
 import Link from "next/link";
-import InputText from '@/app/(components)/InputText';
-import Button from '@/app/(components)/Button';
-import Toast from '@/app/(components)/Toast';
-import { FormEvent, useEffect } from 'react';
+import InputText from "@/app/(components)/InputText";
+import Icon from "@/app/(components)/Icon";
+import Button from "@/app/(components)/Button";
+import Toast from "@/app/(components)/Toast";
+import { FormEvent, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { checkAuth } from "@/services/authService";
 
 export default function LoginPage() {
-	const router = useRouter()
+	const router = useRouter();
 
 	const [toastShow, setToastShow] = useState(false);
 	const [toastType, setToastType] = useState("success");
 	const [toastText, setToastText] = useState("");
-	
-	const openToast = () => setToastShow(true);
+
+	const showToast = (type: string, text: string) => {
+		setToastText(text);
+		setToastType(type);
+		setToastShow(true);
+	};
+
 	const closeToast = () => setToastShow(false);
 
-  	useEffect(() => {
-    const fetchAuthStatus = async () => {
+	useEffect(() => {
+		const fetchAuthStatus = async () => {
 			try {
-				const checkingAuth: any = await checkAuth()
-        if (checkingAuth) {
-          router.push('/dashboard')
-        }
+				const checkingAuth: any = await checkAuth();
+				if (checkingAuth) {
+					router.push("/dashboard");
+				}
 			} catch (error) {
-				console.error(error)
+				console.error(error);
 			}
-		}
+		};
 
-		fetchAuthStatus()
-	}, [router])
+		fetchAuthStatus();
+	}, [router]);
 
 	async function submitHandler(event: FormEvent<HTMLFormElement>) {
-		event.preventDefault()
+		event.preventDefault();
 		try {
-			const formData = new FormData(event.currentTarget)
-			const email = formData.get('email')!.toString()
-			const password = formData.get('password')!.toString()
-			
-			const body = { email, password }
-			const response = await fetch('http://localhost:5000/login', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
+			const formData = new FormData(event.currentTarget);
+			const email = formData.get("email")!.toString();
+			const password = formData.get("password")!.toString();
+
+			const body = { email, password };
+			const response = await fetch("http://localhost:5000/login", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(body),
-				credentials: 'include',
-			})
+				credentials: "include",
+			});
 
 			if (response.status == 200) {
-				setToastText('Login efetuado com sucesso!');
-				setToastType('success');
-				openToast;
-				router.push('/dashboard');
+				showToast("success", "Login realizado com sucesso");
+				router.push("/dashboard");
 			}
 		} catch (error) {
-			console.error(error)
+			showToast("error", "Erro ao realizar login");
+			console.error(error);
 		}
 	}
 
@@ -88,11 +93,9 @@ export default function LoginPage() {
 			</form>
 			<Button
 				text="Toast"
-				onClick={() => {
-					setToastText("Login efetuado com sucesso!");
-					setToastType("success");
-					setToastShow(true);
-				}}
+				onClick={() =>
+					showToast("error", "Login efetuado com sucesso!")
+				}
 			/>
 			<Toast
 				type={toastType}
