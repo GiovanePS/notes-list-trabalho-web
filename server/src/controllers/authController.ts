@@ -54,5 +54,5 @@ export const authController = {
           } else {
             res.status(401).send()
           }
-    },
+    }
 }

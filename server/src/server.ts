@@ -7,10 +7,6 @@ import './authentication'
 import dotenv from 'dotenv'
 import path = require('path')
 dotenv.config({ path: path.resolve(__dirname, '.env')})
-import User from './database/models/User'
-import Note from './database/models/Note'
-import UserNote from './database/models/UserNote'
-import isAuth from './middlewares/auth'
 import { router } from "./routes"
 
 const app = express()
@@ -33,35 +29,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(router)
-
-// compartilhar nota com outro usuário. USERSNOTE
-app.post('/notes/share', isAuth, async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const user = req.user as User
-    const { email, note_id } = req.body
-    
-    const userToShare = await User.findOne({
-      where: {
-        email: email
-      }
-    })
-    
-    if (userToShare) {
-      await UserNote.create({
-        user_id: userToShare.id,
-        note_id: note_id,
-        admin_id: user.id,
-      })
-
-      res.status(200).send()
-    } else {
-      res.status(404).send()
-    }
-  } catch (error) {
-    res.status(400).send()
-    console.error(error)
-  }
-})
 
 app.listen(PORT, () => {
   sequelize.authenticate().then(() => {

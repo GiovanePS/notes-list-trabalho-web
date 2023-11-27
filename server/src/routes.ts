@@ -3,7 +3,7 @@ import isAuth from './middlewares/auth'
 import { authController } from "./controllers/authController"
 import { usersController } from "./controllers/usersController"
 import { notesController } from "./controllers/notesController"
-import { usersNoteController } from "./controllers/usersNoteController"
+import { usersNotesController } from "./controllers/usersNotesController"
 
 const router = express.Router()
 
@@ -22,5 +22,8 @@ router.get('/notes', isAuth, usersController.notes)
 router.post('/notes', isAuth, notesController.save)
 router.put('/notes', isAuth, notesController.update)
 router.delete('/notes', isAuth, notesController.delete)
+
+// USERSNOTES
+router.post('/notes/share', isAuth, usersNotesController.share)
 
 export { router }
