@@ -51,7 +51,6 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
   })(req, res, next)
 }) */
 
-
 /* // função de registro AUTH
 app.post('/register', async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -80,6 +79,7 @@ app.get('/user', isAuth, (req: Request, res: Response) => {
   }
 })
 
+// Rota para alterar dados do usuário. USER
 app.put('/user', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as User

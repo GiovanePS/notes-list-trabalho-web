@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import bcrypt from 'bcrypt'
 import { userService } from "../services/userService"
+import passport from "passport"
 
 // POST /register
 export const authController = {
@@ -30,5 +31,19 @@ export const authController = {
         }
     },
 
-    
+// POST /login
+    login: async (req: Request, res: Response) => {
+        passport.authenticate('local', (error: any, user: any, info: any) => {
+            if (!user) return res.status(401).json({ message: "E-mail e/ou senha incorreto(s)."})
+        
+            req.login(user, (error) => {
+              if (error) {
+                res.send(401).send()
+                throw error
+              } else {
+                res.status(200).send()
+              }
+            })
+          })(req, res)
+    }
 }
