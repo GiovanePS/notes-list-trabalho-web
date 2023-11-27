@@ -64,13 +64,13 @@ export default function LoginPage() {
 			});
 
 			if (response.status == 200) { /*Se o login for bem-sucedido (status 200), redireciona para a página de dashboard.*/
-				showToast("success", "Login realizado com sucesso");
+				showToast("success", "Login realizado com sucesso!");
 				router.push("/dashboard");
 			} else if (response.status === 401) { /*Se houver falha na autenticação (status 401), exibe um toast informando que o usuário ou a senha estão incorretos.*/
-				showToast('error', "Usuário ou senha incorretos.")
+				showToast('error', "E-mail e/ou senha incorreto(s).")
 			}
 		} catch (error) {
-			showToast("error", "Erro ao realizar login"); /*Em caso de erro durante a solicitação, exibe um toast indicando um erro no login.*/
+			showToast("error", "Erro ao realizar login."); /*Em caso de erro durante a solicitação, exibe um toast indicando um erro no login.*/
 			console.error(error);
 		}
 	}
