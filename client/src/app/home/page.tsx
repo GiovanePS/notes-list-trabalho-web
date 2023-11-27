@@ -7,11 +7,11 @@ import notepad_desktop from './(public)/notepad-desktop.png'
 import notepad_mobile from './(public)/notepad-mobile.png'
 import both_mobile from './(public)/both-mobile.png'
 
-export default function HomePage() {
+export default function HomePage() { /*Página inicial*/
 	return (
-		<div className="container mx-auto">
+		<div className="container mx-auto"> {/*Container flexível, centraliza o conteúdo vertical e horizontalmente */}
 			<div className="flex justify-center h-full mt-8 md:h-[calc(100vh-58px)] md:mt-0">
-				<div className="flex md:flex-row items-center justify-between">
+				<div className="flex md:flex-row items-center justify-between"> {/*elementos em fila*/}
 					{/* Illustration Left */}
 					<div className="hidden md:block">
 						<Image
@@ -24,7 +24,7 @@ export default function HomePage() {
 					</div>
 					{/* Content Center */}
 					<div className="flex flex-col items-center text-center max-w-sm">
-						<div className="block md:hidden">
+						<div className="block md:hidden"> {/*Conteúdo responsivo, mostrando ou ocultando certas imagens com base no tamanho da tela */}
 							<Image
 								src={ notepad_mobile }
 								width={68}
@@ -53,7 +53,7 @@ export default function HomePage() {
 								height={146}
 								alt="Bro and Girl"
 							/>
-						</div>
+						</div> {/*Quando clicado leva para a página register*/}
 						<Link href="/register">
 							<Button text="Começar" />
 						</Link>
