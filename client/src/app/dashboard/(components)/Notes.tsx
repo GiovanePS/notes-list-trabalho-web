@@ -12,22 +12,22 @@ interface Note {
 
 const SERVER_URL = 'http://localhost:5000'
 
-export default function Notes() { /*submissão de um formulário para adicionar novas notas*/
-  const [allNotes, setAllNotes] = useState<Note[]>([]) /*allNotes  armazena a lista de todas as notas, setAllNotes atualiza esse estado*/
+export default function Notes() {
+  const [allNotes, setAllNotes] = useState<Note[]>([])
   
-  const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => { /*Esta função é chamada quando o usuário envia o formulário para adicionar uma nova nota */
-    event.preventDefault() /*impede o recarregamento da página*/
+  const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     try {
       const formData = new FormData(event.currentTarget)
-      const title = formData.get('title')!.toString() /*Obtendo os valores q foram inseridos em "título" e "texto"*/
+      const title = formData.get('title')!.toString()
       const text = formData.get('text')!.toString()
-      addNote(title, text) /*Chama a função addNote para adicionar a nova nota*/
+      addNote(title, text)
     } catch (error) {
       console.error(error)
     }
   }
 
-  const addNote = async (titulo: string, texto: string) => { /*A função addNote faz uma solicitação POST para adicionar uma nova nota ao servidor usando a API fetch. */
+  const addNote = async (titulo: string, texto: string) => {
     try {
       const body = { titulo, texto }
       const response = await fetch(`${SERVER_URL}/notes`, {
@@ -38,16 +38,16 @@ export default function Notes() { /*submissão de um formulário para adicionar 
       })
 
       if (response.status === 200) {
-        getAllNotes() /*Se a solicitação for bem-sucedida, a função chama getAllNotes para obter todas as notas atualizadas.*/
+        getAllNotes()
       }
     } catch (error) {
       console.error(error)
     }
   }
 
-  const deleteNote = async (id: number) => {  
+  const deleteNote = async (id: number) => {
     try {
-      const body = { id }  /* A função deleteNote faz uma solicitação DELETE para excluir uma nota com base no ID fornecido.*/
+      const body = { id }
       const response = await fetch(`${SERVER_URL}/notes`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -56,14 +56,14 @@ export default function Notes() { /*submissão de um formulário para adicionar 
       });
 
       if (response.status === 200) {
-        getAllNotes() /*Se a solicitação for bem-sucedida, a função chama getAllNotes para obter todas as notas atualizadas.*/
+        getAllNotes()
       }
     } catch (err: any) {
       console.error(err.message);
     }
   };
 
-  const getAllNotes = async () => {  /*A função getAllNotes faz uma solicitação GET para obter todas as notas do servidor.*/
+  const getAllNotes = async () => {
     try {
       const response = await fetch(`${SERVER_URL}/notes`, {
         method: 'GET',
@@ -77,17 +77,17 @@ export default function Notes() { /*submissão de um formulário para adicionar 
         arr.push(note)
       })
 
-      setAllNotes(arr) /*Se a solicitação for bem-sucedida, os dados são convertidos para o formato Note e atualizam o estado allNotes.*/
+      setAllNotes(arr)
     } catch (err: any) {
       console.error(err.message);
     }
   };
 
   useEffect(() => {
-    getAllNotes(); /*O hook useEffect é utilizado para chamar a função getAllNotes quando o componente é montado.*/
+    getAllNotes();
   }, []);
 
-  return ( /* renderização do componente*/
+  return (
 		<>
 			<div className="container mx-auto">
 				<h1 className="text-center my-6 mr-6">Lista de Notas</h1>
