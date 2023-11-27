@@ -17,7 +17,7 @@ export default function LoginPage() {
 	const [toastType, setToastType] = useState("success");
 	const [toastText, setToastText] = useState("");
 
-	const showToast = (type: string, text: string) => {
+	const showToast = (type: string, text: string) => { /*Gerencia exibição de toast*/
 		setToastText(text);
 		setToastType(type);
 		setToastShow(true);
@@ -28,9 +28,9 @@ export default function LoginPage() {
 	useEffect(() => {
 		const fetchAuthStatus = async () => {
 			try {
-				const checkingAuth: any = await checkAuth();
+				const checkingAuth: any = await checkAuth(); /*Utiliza o hook useEffect para verificar se o usuário já está autenticado quando a página é carregada.*/
 				if (checkingAuth) {
-					router.push("/dashboard");
+					router.push("/dashboard"); /*Redireciona automaticamente para a página de dashboard se o usuário já estiver autenticado.*/
 				}
 			} catch (error) {
 				console.error(error);
@@ -40,18 +40,18 @@ export default function LoginPage() {
 		fetchAuthStatus();
 	}, [router]);
 
-	useEffect(() => {
+	useEffect(() => { /*Utiliza outro useEffect para verificar se a query string contém um parâmetro "registered" igual a "true".*/
 		const registeredUser = searchParams.get('registered')
 
 		if (registeredUser === 'true') {
-			showToast("success", "Conta criada com sucesso!")
+			showToast("success", "Conta criada com sucesso!") /*Se sim, exibe um toast indicando que a conta foi criada com sucesso.*/
 		}
 	}, [])
 
 	async function submitHandler(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		try {
-			const formData = new FormData(event.currentTarget);
+			const formData = new FormData(event.currentTarget); /*Obtém os dados do formulário (email e senha) e faz uma solicitação POST para o servidor de autenticação.*/
 			const email = formData.get("email")!.toString();
 			const password = formData.get("password")!.toString();
 
@@ -63,14 +63,14 @@ export default function LoginPage() {
 				credentials: "include",
 			});
 
-			if (response.status == 200) {
+			if (response.status == 200) { /*Se o login for bem-sucedido (status 200), redireciona para a página de dashboard.*/
 				showToast("success", "Login realizado com sucesso");
 				router.push("/dashboard");
-			} else if (response.status === 401) {
+			} else if (response.status === 401) { /*Se houver falha na autenticação (status 401), exibe um toast informando que o usuário ou a senha estão incorretos.*/
 				showToast('error', "Usuário ou senha incorretos.")
 			}
 		} catch (error) {
-			showToast("error", "Erro ao realizar login");
+			showToast("error", "Erro ao realizar login"); /*Em caso de erro durante a solicitação, exibe um toast indicando um erro no login.*/
 			console.error(error);
 		}
 	}
