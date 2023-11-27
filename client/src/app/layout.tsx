@@ -10,11 +10,11 @@ export default function RootLayout({children}: {children: React.ReactNode}) { /*
 		<html lang="pt-br">
 			<head>
 				<title>NotesApp</title>
+          		<link rel="shortcut icon" href="/favicon.svg"/>
 				<link
 					href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
 					rel="stylesheet"
 				/>
-				<link rel="shortcut icon" href="/favicon.png"/>
 			</head>
 
 			<body>{children}</body>
