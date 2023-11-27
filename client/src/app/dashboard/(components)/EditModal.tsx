@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import Button from "../../(components)/Button";
 	
-interface ModalProps {
+interface EditModalProps {
 	isOpen: boolean;
 	onClose: () => void;
 	note: { id: number, titulo: string; texto: string };
 	onSave: (id: number, titulo: string, texto: string) => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, note, onSave }) => {
+const Modal: React.FC<EditModalProps> = ({ isOpen, onClose, note, onSave }) => {
 	const [titulo, setTitulo] = useState(note.titulo);
 	const [texto, setTexto] = useState(note.texto);
 
@@ -16,7 +16,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, note, onSave }) => {
 		onSave(note.id, titulo, texto);
 		onClose();
 	};
-
 	
 	if (!isOpen) return null;
 

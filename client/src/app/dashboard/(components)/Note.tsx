@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NoteIcon from "../../(components)/NoteIcon";
 import EditModal from "./EditModal";
+import FriendModal from "./FriendModal";
 
 type NoteProps = {
 	note: any;
@@ -9,10 +10,14 @@ type NoteProps = {
 };
 
 export default function Note({note, onClick, toEdit}: NoteProps) {
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+	const [isFrindModalOpen, setIsFriendModalOpen] = useState(false);
 
-	const openModal = () => setIsModalOpen(true);
-	const closeModal = () => setIsModalOpen(false);
+	const openEditModal = () => setIsEditModalOpen(true);
+	const closeEditModal = () => setIsEditModalOpen(false);
+
+	const openFriendModal = () => setIsFriendModalOpen(true);
+	const closeFrindModal = () => setIsFriendModalOpen(false);
 
 	const handleSave = async (id: number, titulo: string, texto: string) => {
 		try {
@@ -33,8 +38,30 @@ export default function Note({note, onClick, toEdit}: NoteProps) {
 			console.error(error);
 		}
 
-		closeModal();
+		closeEditModal();
 	};
+
+	const handleShare = async (name: string) => {
+		try {
+			const body = { name };
+			const response = await fetch("http://localhost:5000/notes", {
+				method: "PUT",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(body),
+				credentials: "include",
+			});
+
+			if (response.status === 200) {
+				if (toEdit) {
+					toEdit();
+				}
+			}
+		} catch (error) {
+			console.error(error);
+		}
+
+		closeFrindModal();
+	}
 
 	// State to track visibility of icons
 	const [showIcons, setShowIcons] = useState(false);
@@ -47,10 +74,15 @@ export default function Note({note, onClick, toEdit}: NoteProps) {
 	return (
 		<>
 			<EditModal
-				isOpen={isModalOpen}
-				onClose={closeModal}
+				isOpen={isEditModalOpen}
+				onClose={closeEditModal}
 				note={note}
 				onSave={handleSave}
+			/>
+			<FriendModal
+				isOpen={isFrindModalOpen}
+				onClose={closeFrindModal}
+				onAdd={handleShare}
 			/>
 			<tr
 				className="bg-white hover:bg-gray-50 border-b rounded group"
@@ -61,8 +93,8 @@ export default function Note({note, onClick, toEdit}: NoteProps) {
 
 				<td className="py-2 relative">
 					<div className="md:flex hidden items-center space-x-2 opacity-0 group-hover:opacity-100">
-						<NoteIcon name="edit" onClick={openModal} />
-						<NoteIcon name="person_add" />
+						<NoteIcon name="edit" onClick={openEditModal} />
+						<NoteIcon name="person_add" onClick={openFriendModal}/>
 						<NoteIcon name="delete" onClick={onClick} />
 					</div>
 
@@ -73,7 +105,7 @@ export default function Note({note, onClick, toEdit}: NoteProps) {
 					{showIcons && ( // Conditional rendering based on showIcons state
 						<div className="relative right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
 							<div className="">
-								<NoteIcon name="edit" onClick={openModal} />
+								<NoteIcon name="edit" onClick={openEditModal} />
 								<NoteIcon name="person_add" />
 								<NoteIcon
 									name="delete"
