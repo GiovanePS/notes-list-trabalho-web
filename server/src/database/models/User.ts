@@ -8,7 +8,7 @@ export interface User {
   senha_hash: string
 }
 
-interface UserCreationAttributes extends Optional<User, 'id'> {}
+export interface UserCreationAttributes extends Optional<User, 'id'> {}
 
 interface UserInstance extends Model<User, UserCreationAttributes>, User {}
 

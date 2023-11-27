@@ -12,6 +12,7 @@ import User from './database/models/User'
 import Note from './database/models/Note'
 import UserNote from './database/models/UserNote'
 import isAuth from './middlewares/auth'
+import { router } from "./routes"
 
 const app = express()
 const PORT = process.env.SERVER_PORT || 5000
@@ -32,7 +33,9 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-// função de login
+app.use(router)
+
+/* // função de login AUTH
 app.post('/login', (req: Request, res: Response, next: NextFunction) => {
   passport.authenticate('local', (error: any, user: any, info: any) => {
     if (!user) return res.status(401).json({ message: "email ou senha incorretos."})
@@ -46,9 +49,10 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
       }
     })
   })(req, res, next)
-})
+}) */
 
-// função de registro
+
+/* // função de registro AUTH
 app.post('/register', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { username, email, password } = req.body
@@ -64,9 +68,9 @@ app.post('/register', async (req: Request, res: Response, next: NextFunction) =>
   } catch (error) {
     console.error(error)
   }
-})
+}) */
 
-// Rota para pegar username e email do usuário.
+// Rota para pegar username e email do usuário. USER
 app.get('/user', isAuth, (req: Request, res: Response) => {
   try {
     const user = req.user as User
@@ -98,7 +102,7 @@ app.put('/user', isAuth, async (req: Request, res: Response, next: NextFunction)
   }
 })
 
-// função logout
+// função logout USER
 app.get('/logout', (req, res, next) => {
   req.logout(error => {
     if (error) {
@@ -109,7 +113,7 @@ app.get('/logout', (req, res, next) => {
   res.status(200).send()
 })
 
-// verificar autenticação (sem ser middleware)
+// verificar autenticação (sem ser middleware) AUTH
 app.get('/check', (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     res.status(200).send()
@@ -118,7 +122,7 @@ app.get('/check', (req: Request, res: Response) => {
   }
 })
 
-//  enviar todas as notas de um usuário
+//  enviar todas as notas de um usuário USER
 app.get('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as User
@@ -143,7 +147,7 @@ app.get('/notes', isAuth, async (req: Request, res: Response, next: NextFunction
   }
 })
 
-// adicionar nota
+// adicionar nota NOTES
 app.post('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as User
@@ -170,7 +174,7 @@ app.post('/notes', isAuth, async (req: Request, res: Response, next: NextFunctio
   }
 })
 
-// editar nota
+// editar nota NOTES
 app.put('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id, titulo, texto } = req.body
@@ -191,7 +195,7 @@ app.put('/notes', isAuth, async (req: Request, res: Response, next: NextFunction
   }
 })
 
-// apagar uma nota
+// apagar uma nota NOTES
 app.delete('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.body
@@ -213,7 +217,7 @@ app.delete('/notes', isAuth, async (req: Request, res: Response, next: NextFunct
   }
 })
 
-// compartilhar nota com outro usuário.
+// compartilhar nota com outro usuário. USERSNOTE
 app.post('/notes/share', isAuth, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as User
