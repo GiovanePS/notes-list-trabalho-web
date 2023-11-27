@@ -51,6 +51,8 @@ export default function Notes() { /*submissão de um formulário para adicionar 
       if (response.status === 200) {
         showToast('success', 'Nota adicionada com sucesso!')
         getAllNotes()
+      } else if (response.status === 400) {
+        showToast('error', 'Nota sem título não pode ser adicionada!')
       }
     } catch (error) {
       console.error(error)
@@ -136,6 +138,7 @@ export default function Notes() { /*submissão de um formulário para adicionar 
 					<tbody className="">
 						{allNotes?.map((nota) => (
 							<Note
+                key={nota.id}
 								note={nota}
 								onClick={() => deleteNote(nota.id)}
                 toEdit={getAllNotes}

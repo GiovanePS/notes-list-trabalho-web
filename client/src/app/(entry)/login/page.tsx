@@ -1,8 +1,8 @@
 "use client";
+
 import { useState } from "react";
 import Link from "next/link";
 import InputText from "@/app/(components)/InputText";
-import Icon from "@/app/(components)/Icon";
 import Button from "@/app/(components)/Button";
 import Toast from "@/app/(components)/Toast";
 import { FormEvent, useEffect } from "react";
@@ -57,6 +57,8 @@ export default function LoginPage() {
 			if (response.status == 200) {
 				showToast("success", "Login realizado com sucesso");
 				router.push("/dashboard");
+			} else if (response.status === 401) {
+				showToast('error', "Usuário ou senha incorretos.")
 			}
 		} catch (error) {
 			showToast("error", "Erro ao realizar login");
@@ -82,7 +84,7 @@ export default function LoginPage() {
 				/>
 				<Button text="Entrar" />
 				<div className="mt-6 text-center text-gray-700 text-sm">
-					Não possui conta?{" "}
+					Não possui conta? {" "}
 					<Link
 						href="/register"
 						className="text-blue-400 hover:text-blue-300"
@@ -91,12 +93,6 @@ export default function LoginPage() {
 					</Link>
 				</div>
 			</form>
-			<Button
-				text="Toast"
-				onClick={() =>
-					showToast("error", "Login efetuado com sucesso!")
-				}
-			/>
 			<Toast
 				type={toastType}
 				text={toastText}

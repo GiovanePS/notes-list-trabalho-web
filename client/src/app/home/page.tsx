@@ -41,9 +41,9 @@ export default function HomePage() {
 							/>
 						</div>
 
-						<h1 className="text-5xl  my-10">Note List</h1>
+						<h1 className="text-5xl  my-10">Notes List</h1>
 						<p className="mb-6 text-lg text-gray-700">
-							O Note List possibilita que você tenha mais
+							O Notes List possibilita que você tenha mais
 							organização, do trabalho ao lazer.
 						</p>
 						<div className="block md:hidden my-4">
@@ -55,7 +55,7 @@ export default function HomePage() {
 							/>
 						</div>
 						<Link href="/register">
-							<Button text="Get Started" />
+							<Button text="Começar" />
 						</Link>
 					</div>
 					{/* Illustration Right */}

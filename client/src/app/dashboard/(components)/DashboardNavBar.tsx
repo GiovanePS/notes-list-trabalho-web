@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import NoteIcon from "../../(components)/NoteIcon";
 import Button from "@/app/(components)/Button";
+import notepad_icon from '../(public)/notepad-icon.png'
 
 export default function DashboardNavBar() {
 	const router = useRouter();
@@ -24,10 +25,11 @@ export default function DashboardNavBar() {
 				<div className="flex items-center justify-between">
 					<Link href="/dashboard" legacyBehavior>
 						<Image
-							src="/home/notepad-icon.png"
+							className="cursor-pointer"
+							src={ notepad_icon }
 							width={24}
 							height={33}
-							alt="Left Bro"
+							alt="notepad icon"
 							priority
 						></Image>
 					</Link>

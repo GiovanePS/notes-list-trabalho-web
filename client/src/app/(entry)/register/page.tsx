@@ -3,11 +3,24 @@
 import Link from "next/link";
 import InputText from '@/app/(components)/InputText'
 import Button from '@/app/(components)/Button'
-import { FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import Toast from "@/app/(components)/Toast";
 
 export default function RegisterPage() {
   const router = useRouter()
+
+	const [toastShow, setToastShow] = useState(false);
+	const [toastType, setToastType] = useState("success");
+	const [toastText, setToastText] = useState("");
+
+	const showToast = (type: string, text: string) => {
+		setToastText(text);
+		setToastType(type);
+		setToastShow(true);
+	};
+
+	const closeToast = () => setToastShow(false);
 
 	async function submitHandler(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault()
@@ -24,10 +37,12 @@ export default function RegisterPage() {
 				body: JSON.stringify(body),
 			})
 
-			if (response.status === 200) {
+			if (response.status === 201) {
+				showToast("success", "Conta registrada com sucesso!")
 				router.push('/login')
 			}
 		} catch (error) {
+			showToast("error", "Não foi possível registrar usuário.")
 			console.error(error)
 		}
 	}
@@ -47,6 +62,12 @@ export default function RegisterPage() {
 					</Link>
 				</div>
 			</form>
+			<Toast
+				type={toastType}
+				text={toastText}
+				isOpen={toastShow}
+				onClose={closeToast}
+			/>
 		</>
   );
 }
