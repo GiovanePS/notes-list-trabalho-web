@@ -17,6 +17,9 @@ export default function Profile() {
 	const [toastType, setToastType] = useState("success");
 	const [toastText, setToastText] = useState("");
 
+  const [password, setPassword] = useState<string>("");
+  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+
 	const showToast = (type: string, text: string) => {
 		setToastText(text);
 		setToastType(type);
@@ -71,11 +74,16 @@ export default function Profile() {
 
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+    if (password !== passwordConfirm) {
+      showToast("error", "Senha e Confirmação de Senha devem ser iguais.");
+      return;
+    }
+    
     try {
       const formData = new FormData(event.currentTarget)
       const username = formData.get('username')!.toString()
       const email = formData.get('email')!.toString()
-      const password = formData.get('password')!.toString()
 
       const body = { username, email, password }
       const response = await fetch(`${SERVER_URL}/user`, {
@@ -106,9 +114,9 @@ export default function Profile() {
             <label className="label">Email:</label>
             <InputText id="email" type="email" name='email' value={email} placeholder="Email" onChange={e => setEmail(e.target.value)} />
             <label className="label">Senha:</label>
-            <InputText id="password" type="password" name='password' placeholder="Senha" />
+            <InputText id="password" type="password" name='password' placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
             <label className="label">Confirmar Senha:</label>
-            <InputText id="password-confirm" type="password" name='password-confirm' placeholder="Confirmar Senha" />
+            <InputText id="password-confirm" type="password" name='password-confirm' placeholder="Confirmar Senha" value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)}/>
             <Button text="Salvar" />
           </form>
         </div>
