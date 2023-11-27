@@ -1,6 +1,11 @@
 import Button from "@/app/(components)/Button";
 import Image from "next/image";
 import Link from "next/link";
+import left_desktop from './(public)/left-desktop.png'
+import right_desktop from './(public)/right-desktop.png'
+import notepad_desktop from './(public)/notepad-desktop.png'
+import notepad_mobile from './(public)/notepad-mobile.png'
+import both_mobile from './(public)/both-mobile.png'
 
 export default function HomePage() {
 	return (
@@ -10,7 +15,7 @@ export default function HomePage() {
 					{/* Illustration Left */}
 					<div className="hidden md:block">
 						<Image
-							src="/home/left-desktop.png"
+							src={ left_desktop }
 							width={207}
 							height={320}
 							alt="Left Bro"
@@ -21,7 +26,7 @@ export default function HomePage() {
 					<div className="flex flex-col items-center text-center max-w-sm">
 						<div className="block md:hidden">
 							<Image
-								src="/home/notepad-mobile.png"
+								src={ notepad_mobile }
 								width={68}
 								height={93}
 								alt="Notepad"
@@ -29,7 +34,7 @@ export default function HomePage() {
 						</div>
 						<div className="hidden md:block">
 							<Image
-								src="/home/notepad-desktop.png"
+								src={ notepad_desktop }
 								width={135}
 								height={184}
 								alt="Bro and Girl"
@@ -43,7 +48,7 @@ export default function HomePage() {
 						</p>
 						<div className="block md:hidden my-4">
 							<Image
-								src="/home/both-mobile.png"
+								src={ both_mobile }
 								width={202}
 								height={146}
 								alt="Bro and Girl"
@@ -56,7 +61,7 @@ export default function HomePage() {
 					{/* Illustration Right */}
 					<div className="hidden md:block">
 						<Image
-							src="/home/right-desktop.png"
+							src={ right_desktop }
 							width={150}
 							height={360}
 							alt="Right Girl"
