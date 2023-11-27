@@ -10,7 +10,7 @@ export default function HomePage() {
 					{/* Illustration Left */}
 					<div className="hidden md:block">
 						<Image
-							src="/home/left-desktop.png"
+							src="/home/left-desktop-blue.png"
 							width={207}
 							height={320}
 							alt="Left Bro"
