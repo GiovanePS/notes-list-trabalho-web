@@ -35,40 +35,6 @@ app.use(passport.session())
 
 app.use(router)
 
-// Rota para alterar dados do usuário. USER
-app.put('/user', isAuth, async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const user = req.user as User
-    const { username, email, password } = req.body
-    const hash_password = await bcrypt.hash(password, 10)
-
-    await User.update({
-      nome: username,
-      email: email,
-      senha_hash: hash_password
-    }, {
-      where: {
-        id: user.id
-      }
-    })
-
-    res.status(200).send()
-  } catch (error) {
-    console.error(error)
-  }
-})
-
-// função logout USER
-app.get('/logout', (req, res, next) => {
-  req.logout(error => {
-    if (error) {
-      res.status(400).send()
-      return next(error)
-    }
-  })
-  res.status(200).send()
-})
-
 // verificar autenticação (sem ser middleware) AUTH
 app.get('/check', (req: Request, res: Response) => {
   if (req.isAuthenticated()) {

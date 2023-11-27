@@ -22,9 +22,8 @@ export const userService = {
         email: string,
         senha_hash: string
     }) => {
-        const updatedUser = await User.update(attributes, { 
+        await User.update(attributes, { 
             where: { id }
         })
-        return updatedUser
     },
 }

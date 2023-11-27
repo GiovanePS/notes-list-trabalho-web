@@ -1,4 +1,4 @@
-import { Request, Response } from "express"
+import { NextFunction, Request, Response } from "express"
 import bcrypt from 'bcrypt'
 import User from '../database/models/User'
 import { userService } from "../services/userService"
@@ -33,4 +33,15 @@ export const usersController = {
             }
         }
     },
+
+    // GET /logout
+    logout: (req: Request, res: Response, next: NextFunction) => {
+        req.logout(error => {
+            if (error) {
+              res.status(400).send()
+              return next(error)
+            }
+          })
+          res.status(200).send()
+    }
 }

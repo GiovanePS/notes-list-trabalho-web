@@ -14,5 +14,6 @@ router.post('/login', authController.login)
 // USERS
 router.get('/user', isAuth, usersController.show)
 router.put('/user', isAuth, usersController.update)
+router.get('/logout', usersController.logout)
 
 export { router }
