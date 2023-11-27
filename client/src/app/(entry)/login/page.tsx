@@ -14,6 +14,9 @@ export default function LoginPage() {
 	const [toastShow, setToastShow] = useState(false);
 	const [toastType, setToastType] = useState("success");
 	const [toastText, setToastText] = useState("");
+	
+	const openToast = () => setToastShow(true);
+	const closeToast = () => setToastShow(false);
 
   	useEffect(() => {
     const fetchAuthStatus = async () => {
@@ -46,10 +49,10 @@ export default function LoginPage() {
 			})
 
 			if (response.status == 200) {
-				setToastShow(true);
 				setToastText('Login efetuado com sucesso!');
-				console.log('Login efetuado com sucesso!')
-				router.push('/dashboard')
+				setToastType('success');
+				openToast;
+				router.push('/dashboard');
 			}
 		} catch (error) {
 			console.error(error)
@@ -60,23 +63,43 @@ export default function LoginPage() {
 		<>
 			<h1 className="header">Log In</h1>
 			<form onSubmit={submitHandler} className="px-8 pt-6 pb-8 mb-4">
-				<InputText id="email" type="text" name='email' placeholder="Email" />
-				<InputText id="password" type="password" name='password' placeholder="Senha" />
-				<Button text="Entrar"/>
+				<InputText
+					id="email"
+					type="text"
+					name="email"
+					placeholder="Email"
+				/>
+				<InputText
+					id="password"
+					type="password"
+					name="password"
+					placeholder="Senha"
+				/>
+				<Button text="Entrar" />
 				<div className="mt-6 text-center text-gray-700 text-sm">
 					Não possui conta?{" "}
-					<Link href="/register" className="text-blue-400 hover:text-blue-300">
+					<Link
+						href="/register"
+						className="text-blue-400 hover:text-blue-300"
+					>
 						Registre-se!
 					</Link>
 				</div>
 			</form>
-			<Button text="Toast" onClick={() => {
-				setToastShow(true);
-				setToastText('Login efetuado com sucesso!');
-				setToastType('success');
-				console.log(toastShow)
-			}} />
-			<Toast type={toastType} text={toastText} show={toastShow} />
+			<Button
+				text="Toast"
+				onClick={() => {
+					setToastText("Login efetuado com sucesso!");
+					setToastType("success");
+					setToastShow(true);
+				}}
+			/>
+			<Toast
+				type={toastType}
+				text={toastText}
+				isOpen={toastShow}
+				onClose={closeToast}
+			/>
 		</>
-  );
+	);
 }

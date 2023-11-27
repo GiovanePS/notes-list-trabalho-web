@@ -8,38 +8,38 @@ type NoteProps = {
 	toEdit?: () => void;
 };
 
-export default function Note(props: NoteProps) {
+export default function Note({note, onClick, toEdit}: NoteProps) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
-	const openEditModal = () => setIsModalOpen(true);
+	const openModal = () => setIsModalOpen(true);
 	const closeModal = () => setIsModalOpen(false);
 
 	const handleSave = async (id: number, titulo: string, texto: string) => {
 		try {
-			const body = { id, titulo, texto }
-			const response = await fetch('http://localhost:5000/notes', {
-				method: 'PUT',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-        credentials: 'include'
-			})
+			const body = { id, titulo, texto };
+			const response = await fetch("http://localhost:5000/notes", {
+				method: "PUT",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(body),
+				credentials: "include",
+			});
 
 			if (response.status === 200) {
-				if (props.toEdit) {
-					props.toEdit()
+				if (toEdit) {
+					toEdit();
 				}
 			}
 		} catch (error) {
-			console.error(error)
+			console.error(error);
 		}
-		
+
 		closeModal();
 	};
 
 	// State to track visibility of icons
 	const [showIcons, setShowIcons] = useState(false);
 
-	// Event handler to toggle visibility
+	// Event handler to toggle visibility (mobile)
 	const toggleIcons = (e: React.MouseEvent) => {
 		setShowIcons(!showIcons);
 	};
@@ -49,21 +49,21 @@ export default function Note(props: NoteProps) {
 			<EditModal
 				isOpen={isModalOpen}
 				onClose={closeModal}
-				note={props.note}
+				note={note}
 				onSave={handleSave}
 			/>
 			<tr
 				className="bg-white hover:bg-gray-50 border-b rounded group"
-				key={props.note.id}
+				key={note.id}
 			>
-				<td className="px-4 py-2 w-1/4">{props.note.titulo}</td>
-				<td className="px-4 py-2 w-3/4">{props.note.texto}</td>
+				<td className="px-4 py-2 w-1/4">{note.titulo}</td>
+				<td className="px-4 py-2 w-3/4">{note.texto}</td>
 
 				<td className="py-2 relative">
 					<div className="md:flex hidden items-center space-x-2 opacity-0 group-hover:opacity-100">
-						<NoteIcon name="edit" onClick={openEditModal} />
+						<NoteIcon name="edit" onClick={openModal} />
 						<NoteIcon name="person_add" />
-						<NoteIcon name="delete" onClick={props.onClick} />
+						<NoteIcon name="delete" onClick={onClick} />
 					</div>
 
 					<div className="md:hidden" onClick={toggleIcons}>
@@ -73,11 +73,11 @@ export default function Note(props: NoteProps) {
 					{showIcons && ( // Conditional rendering based on showIcons state
 						<div className="relative right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
 							<div className="">
-								<NoteIcon name="edit" onClick={openEditModal} />
+								<NoteIcon name="edit" onClick={openModal} />
 								<NoteIcon name="person_add" />
 								<NoteIcon
 									name="delete"
-									onClick={props.onClick}
+									onClick={onClick}
 								/>
 							</div>
 						</div>

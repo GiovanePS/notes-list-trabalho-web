@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import Button from "../../(components)/Button";
+	
 interface ModalProps {
 	isOpen: boolean;
 	onClose: () => void;
@@ -8,8 +9,8 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, note, onSave }) => {
-	const [titulo, setTitulo] = React.useState(note.titulo);
-	const [texto, setTexto] = React.useState(note.texto);
+	const [titulo, setTitulo] = useState(note.titulo);
+	const [texto, setTexto] = useState(note.texto);
 
 	const handleClick = () => {
 		onSave(note.id, titulo, texto);
