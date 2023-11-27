@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "@/app/(components)/Button";
 
 
-type FriendModalProps = {
+type FriendModalProps = { /*Representa as propriedades esperadas pelo componente.*/
     isOpen: boolean;
     onClose: () => void;
     onAdd: (email: string) => void;
@@ -12,12 +12,12 @@ export default function AddFriendModal({ isOpen, onClose, onAdd }: FriendModalPr
     
     const [email, setEmail] = useState("");
 
-    const handleClick = () => {
+    const handleClick = () => { /*Chamada quando o botão compartilhar é clicado*/
         onAdd(email);
         onClose();
     };
 
-    if (!isOpen) return null;
+    if (!isOpen) return null; /*Se isOpen for falso indica que o modal não deve ser renderizado*/
 
     return (
 		<div className="fixed inset-0 bg-gray-600 bg-opacity-50">
