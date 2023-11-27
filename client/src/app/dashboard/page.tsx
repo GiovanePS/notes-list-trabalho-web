@@ -28,9 +28,10 @@ export default function Dashboard() {
 		fetchAuthStatus()
 	}, [router])
 
-  if (true) { // isAuthenticated
+  if (isAuthenticated) {
     return (
 		<>
+			<DashboardNavBar />
 			<Notes />
 		</>
 	);

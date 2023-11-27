@@ -15,11 +15,11 @@ passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password
       return done(null, false)
     }
 
-    if (await bcrypt.compare(user.senha_hash, password)) {
-      return done(null, false)
+    if (await bcrypt.compare(password, user.senha_hash)) {
+      return done(null, user)
     }
 
-    return done(null, user)
+    return done(null, false)
   } catch (error) {
     console.error(error)
   }
