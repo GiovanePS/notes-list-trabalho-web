@@ -45,5 +45,14 @@ export const authController = {
               }
             })
           })(req, res)
-    }
+    },
+
+// GET /check
+    check: (req: Request, res: Response) => {
+        if (req.isAuthenticated()) {
+            res.status(200).send()
+          } else {
+            res.status(401).send()
+          }
+    },
 }

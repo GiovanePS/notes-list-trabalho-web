@@ -10,10 +10,12 @@ const router = express.Router()
 // AUTH
 router.post('/register', authController.register)
 router.post('/login', authController.login)
+router.get('/check', authController.check)
 
 // USERS
 router.get('/user', isAuth, usersController.show)
 router.put('/user', isAuth, usersController.update)
 router.get('/logout', usersController.logout)
+router.get('/notes',isAuth,usersController.notes)
 
 export { router }

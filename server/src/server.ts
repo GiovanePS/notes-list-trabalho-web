@@ -3,7 +3,6 @@ import session from 'express-session'
 import sequelize from './database/sequelize_module'
 import passport from 'passport'
 import cors from 'cors'
-import bcrypt from 'bcrypt'
 import './authentication'
 import dotenv from 'dotenv'
 import path = require('path')
@@ -34,15 +33,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(router)
-
-// verificar autenticação (sem ser middleware) AUTH
-app.get('/check', (req: Request, res: Response) => {
-  if (req.isAuthenticated()) {
-    res.status(200).send()
-  } else {
-    res.status(401).send()
-  }
-})
 
 //  enviar todas as notas de um usuário USER
 app.get('/notes', isAuth, async (req: Request, res: Response, next: NextFunction) => {
