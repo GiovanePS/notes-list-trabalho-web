@@ -9,8 +9,8 @@ const sequelize = new Sequelize({
   host: 'localhost',
   port: 5432,
   database: 'notes_list',
-  username: process.env.POSTGRES_USERNAME || 'postgres',
-  password: process.env.POSTGRES_PASSWORD || 'admin',
+  username: process.env.POSTGRES_USERNAME,
+  password: process.env.POSTGRES_PASSWORD,
   define: {
     underscored: true
   },

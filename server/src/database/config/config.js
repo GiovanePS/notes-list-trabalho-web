@@ -20,14 +20,12 @@ const envPath = path.resolve(__dirname, '..', '..', '.env')
 require('dotenv').config({ path: envPath })
 
 module.exports = {
-  development: {
+  production: {
     dialect: 'postgres',
-    host: 'localhost',
-    port: '5432',
+    host: process.env.POSTGRES_HOST,
+    port: process.env.POSTGRES_PORT,
     database: 'notes_list',
-    username: process.env.POSTGRES_USERNAME || 'postgres',
-    password: process.env.POSTGRES_PASSWORD || 'admin',
+    username: process.env.POSTGRES_USERNAME,
+    password: process.env.POSTGRES_PASSWORD,
   },
-  test: {},
-  production: {}
 }

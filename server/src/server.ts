@@ -14,17 +14,17 @@ import UserNote from './database/models/UserNote'
 import isAuth from './middlewares/auth'
 
 const app = express()
-const PORT = process.env.SERVER_PORT || 5000
+const PORT = process.env.SERVER_PORT
 
 app.use(express.json())
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: `${process.env.CLIENT_HOST}:${process.env.CLIENT_PORT}`,
   credentials: true
 }))
 
 app.use(session({
   name: 'session-id',
-  secret: process.env.SESSION_SECRET || 'secret',
+  secret: process.env.SESSION_SECRET || '_bRZ326bB(z&#$Kw', // SEMPRE DEFINIR SESSION_SECRET no .env
   resave: false,
   saveUninitialized: false,
 }))
