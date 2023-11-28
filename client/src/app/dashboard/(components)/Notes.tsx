@@ -4,6 +4,7 @@ import React, { FormEvent, useEffect, useState } from "react";
 import Button from "../../(components)/Button"
 import Note from "./Note"
 import Toast from "@/app/(components)/Toast";
+import { baseUrl } from "@/config";
 
 interface Note {
   id: number;

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import NoteIcon from "../../(components)/NoteIcon";
 import Button from "@/app/(components)/Button";
 import notepad_icon from '../(public)/notepad-icon.png'
+import { baseUrl } from "@/config";
 
 export default function DashboardNavBar() {
 	const router = useRouter();

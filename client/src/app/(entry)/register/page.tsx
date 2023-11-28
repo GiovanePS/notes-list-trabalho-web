@@ -5,6 +5,7 @@ import Button from '@/app/(components)/Button'
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Toast from "@/app/(components)/Toast";
+import { baseUrl } from "@/config";
 
 export default function RegisterPage() {
   const router = useRouter()

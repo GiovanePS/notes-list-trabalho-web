@@ -3,6 +3,7 @@ import NoteIcon from "../../(components)/NoteIcon";
 import EditModal from "./EditModal";
 import FriendModal from "./FriendModal";
 import Toast from "@/app/(components)/Toast";
+import { baseUrl } from "@/config";
 
 type NoteProps = {
 	note: any;

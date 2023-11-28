@@ -8,6 +8,7 @@ import Toast from "@/app/(components)/Toast";
 import { FormEvent, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { checkAuth } from "@/services/authService";
+import { baseUrl } from "@/config";
 
 export default function LoginPage() {
 	const router = useRouter();
