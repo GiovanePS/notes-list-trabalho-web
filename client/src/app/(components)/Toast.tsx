@@ -8,17 +8,17 @@
 		onClose: () => void;
 	};
 
-	export default function Toast({ text, type, isOpen, onClose }: ToastProps) {
-		useEffect(() => {
+	export default function Toast({ text, type, isOpen, onClose }: ToastProps) { /*Responsável por exibir mensagens de notificação na tela por um curto período.*/
+		useEffect(() => { /*Usa o useEffect para configurar um temporizador que chama a função onClose após 2000 milissegundos (2 segundos).O efeito é acionado sempre que a propriedade isOpen muda, garantindo que o temporizador seja configurado corretamente.*/
 			if (isOpen) {
 				const timer = setTimeout(onClose, 2000);
 				return () => clearTimeout(timer);
 			}
 		}, [isOpen, onClose]);
 
-		if (!isOpen) return null;
+		if (!isOpen) return null; /*Se isOpen for false, o componente retorna null, o que significa que o toast não será renderizado.*/
 
-		const color = type === "success" ? "green" : "red";
+		const color = type === "success" ? "green" : "red"; /*Se type for "success", o ícone é colorido de verde, indicando uma mensagem de sucesso. Caso contrário, o ícone é colorido de vermelho, indicando uma mensagem de erro.*/
 		const icon = type === "success" ? "check_circle" : "error";
 
 		return (
