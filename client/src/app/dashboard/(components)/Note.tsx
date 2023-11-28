@@ -45,7 +45,7 @@ export default function Note({note, onDelete, toEdit}: NoteProps) { /*toEdit é 
 	const handleSave = async (id: number, titulo: string, texto: string) => { /*A função handleSave é chamada quando o usuário salva a edição de uma nota. Ela faz uma solicitação PUT para atualizar os detalhes da nota no servidor.*/
 		try {
 			const body = { id, titulo, texto }; /*Criação de objeto contendo id da nota atualizada, novo título, novo texto*/
-			const response = await fetch("${baseUrl}/notes", {
+			const response = await fetch(`${baseUrl}/notes`, {
 				method: "PUT", /*Utiliza a API fetch para fazer uma solicitação PUT para a URL "${baseUrl}/notes" com o corpo da requisição contendo o objeto body. */
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(body),
@@ -69,7 +69,7 @@ export default function Note({note, onDelete, toEdit}: NoteProps) { /*toEdit é 
 		try {
 			const note_id = note.id
 			const body = { email, note_id };
-			const response = await fetch("${baseUrl}/notes/share", { /*Utiliza a API fetch para fazer uma solicitação POST para a URL "${baseUrl}/notes/share" com o corpo da requisição contendo o objeto body.*/
+			const response = await fetch(`${baseUrl}/notes/share`, { /*Utiliza a API fetch para fazer uma solicitação POST para a URL "${baseUrl}/notes/share" com o corpo da requisição contendo o objeto body.*/
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(body),

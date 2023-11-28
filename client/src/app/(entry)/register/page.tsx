@@ -31,7 +31,7 @@ export default function RegisterPage() {
 			const password = formData.get('password')!.toString()
 
 			const body = { username, email, password }
-			const response = await fetch('${baseUrl}/register', { /*Faz uma solicitação POST para o servidor com os dados do formulário.*/
+			const response = await fetch(`${baseUrl}/register`, { /*Faz uma solicitação POST para o servidor com os dados do formulário.*/
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(body),

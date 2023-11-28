@@ -12,7 +12,7 @@ interface Note {
   texto: string;
 }
 
-const SERVER_URL = '${baseUrl}'
+const SERVER_URL = `${baseUrl}`
 
 export default function Notes() { /*submissão de um formulário para adicionar novas notas*/
   const [allNotes, setAllNotes] = useState<Note[]>([]) /*allNotes  armazena a lista de todas as notas, setAllNotes atualiza esse estado*/
