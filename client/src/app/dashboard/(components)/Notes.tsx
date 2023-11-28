@@ -109,18 +109,18 @@ export default function Notes() { /*submissão de um formulário para adicionar 
 			<div className="container mx-auto">
 				<h1 className="text-center my-6 mr-6">Lista de Notas</h1>
 				<form
-					className="flex flex-col md:flex-row items-center justify-center mx-2"
+					className="flex flex-col md:flex-row items-center justify-center mx-2 md:space-x-2"
 					onSubmit={onSubmitForm}
 				>
 					<input
-						className="input md:w-1/4 w-3/4"
+						className="input md:w-1/4 w-3/4 mx-auto"
 						type="text"
 						placeholder="Adicionar título"
 						name="title"
 						onChange={(e) => e.target.value}
 					/>
 					<input
-						className="input w-3/4"
+						className="input w-3/4 mx-auto"
 						type="text"
 						placeholder="Adicionar texto"
 						name="text"
