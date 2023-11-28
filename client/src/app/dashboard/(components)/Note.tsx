@@ -78,6 +78,10 @@ export default function Note({note, onDelete, toEdit}: NoteProps) { /*toEdit é 
 			if (response.status === 200) {
 				showToast("success", "Nota compartilhada com sucesso!") /*Se a resposta do servidor tem status 200 (OK), exibe um toast de sucesso.*/
 			}
+
+			if (response.status === 404) {
+				showToast("error", "Este usuário não está cadastrado.") /*Se a resposta do servidor tem status 200 (OK), exibe um toast de sucesso.*/
+			}
 		} catch (error) {
 			showToast("error", "Erro ao compartilhar nota.")
 			console.error(error);

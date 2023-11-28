@@ -32,7 +32,7 @@ export default function AddFriendModal({ isOpen, onClose, onAdd }: FriendModalPr
             </label>
             <input
 							type="text"
-							className="input w-full p-2 my-4"
+							className="input w-full p-2 my-4 mx-auto"
               onChange={(e) => setEmail(e.target.value)}
 						/>
 					</div>
