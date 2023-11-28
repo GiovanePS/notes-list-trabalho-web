@@ -5,7 +5,7 @@ Faremos uma note-list padrão, em que os diferentes usuários poderão interagir
 - Giovane Pimentel de Sousa, 22202685.
 - Isabela Vill de Aquino, 22201632.
 - Higor Freiberger Abreu, 19100863.
-- Guilherme Henriques do Carmo
+- Guilherme Henriques do Carmo,22201630.
 
 ## Build básica de desenvolvimento client-side:
 1. git clone https://github.com/GiovanePS/todo-list-trabalho-web.git
