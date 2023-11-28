@@ -87,7 +87,7 @@ export default function Note({note, onDelete, toEdit}: NoteProps) { /*toEdit é 
 	}
 
 	const [showMobileIcons, setShowMobileIcons] = useState(false);
-
+	
 	const toggleIcons = () => {
 		setShowMobileIcons(!showMobileIcons);
 	};
@@ -130,7 +130,7 @@ export default function Note({note, onDelete, toEdit}: NoteProps) { /*toEdit é 
 					<div className="md:hidden">
 						<NoteIcon name="more_vert" onClick={toggleIcons} />
 						{showMobileIcons && (
-							<div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
+							<div className="absolute right-0 bottom-14 w-[124px] bg-white rounded-lg border shadow-xl">
 								{/* <div className="relative right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"> */}
 								<NoteIcon name="edit" onClick={openEditModal} />
 								<NoteIcon name="person_add" onClick={openFriendModal} />
