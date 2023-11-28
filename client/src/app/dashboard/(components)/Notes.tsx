@@ -107,7 +107,7 @@ export default function Notes() { /*submissão de um formulário para adicionar 
   return ( /* renderização do componente*/
 		<>
 			<div className="container mx-auto">
-				<h1 className="text-center my-6 mr-6">Lista de Notas</h1>
+				<h1 className="text-center my-4">Lista de Notas</h1>
 				<form
 					className="flex flex-col md:flex-row items-center justify-center mx-2 md:space-x-2"
 					onSubmit={onSubmitForm}
@@ -120,7 +120,7 @@ export default function Notes() { /*submissão de um formulário para adicionar 
 						onChange={(e) => e.target.value}
 					/>
 					<input
-						className="input w-3/4 mx-auto"
+						className="input w-3/4 mx-auto mb-4"
 						type="text"
 						placeholder="Adicionar texto"
 						name="text"
@@ -129,7 +129,7 @@ export default function Notes() { /*submissão de um formulário para adicionar 
 					<Button text="Adicionar" />
 				</form>
 			</div>
-			<div className="container mx-auto mt-10">
+			<div className="container mx-auto mt-6">
 				<table className="min-w-full">
 					<thead>
 						<tr className="border-b-2 border-gray-700">

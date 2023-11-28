@@ -35,7 +35,6 @@ export default function DashboardNavBar() {
 					</Link>
 				</div>
 				<div className="flex items-center justify-between space-x-2 mr-4">
-					<NoteIcon name="contrast" />
 					<Link href="/dashboard/profile" className="link">
 						<NoteIcon name="person" />
 					</Link>

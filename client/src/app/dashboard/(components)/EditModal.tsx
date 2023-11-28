@@ -26,15 +26,15 @@ const Modal: React.FC<EditModalProps> = ({ isOpen, onClose, note, onSave }) => {
 					<h3 className="text-lg leading-6 font-medium text-gray-900">
 						Editar Nota
 					</h3>
-					<div className="flex flex-col justify-center items-center m-4">
+					<div className="flex flex-col justify-center items-center m-2">
 						<input
 							type="text"
-							className="input w-full p-2" // Adjusted for full width
+							className="input w-full p-2 mx-auto" // Adjusted for full width
 							value={titulo}
 							onChange={(e) => setTitulo(e.target.value)}
 						/>
 						<textarea
-							className="input w-full p-2 mt-2" // Adjusted for full width
+							className="input w-full p-2 mt-2 mx-auto" // Adjusted for full width
 							rows={8}
 							value={texto}
 							onChange={(e) => setTexto(e.target.value)}
