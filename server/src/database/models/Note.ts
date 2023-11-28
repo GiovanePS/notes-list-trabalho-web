@@ -1,7 +1,8 @@
 import { DataTypes, Model, Optional } from 'sequelize'
 import sequelize from '../sequelize_module'
 
-export interface Note {
+/* Define um modelo Sequelize para a tabela notes */
+export interface Note { /*Define uma interface Note que representa a estrutura de um objeto de nota.*/
   id: number,
   titulo: string,
   texto: string

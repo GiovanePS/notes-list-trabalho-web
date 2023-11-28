@@ -1,6 +1,8 @@
 import { DataTypes, Model, Optional } from 'sequelize'
 import sequelize from '../sequelize_module'
 
+/* Define um modelo Sequelize para a tabela User */
+
 export interface User {
   id: number,
   email: string,
