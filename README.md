@@ -3,8 +3,8 @@
 Faremos uma note-list padrão, em que os diferentes usuários poderão interagir uns com os outros através do compartilhamento de listas de anotações.
 
 - Giovane Pimentel de Sousa
-- Isabela Vill de Aquino
-- Higor Freiberger Abreu
+- Isabela Vill de Aquino, 22201632.
+- Higor Freiberger Abreu, 19100863.
 - Guilherme Henriques do Carmo
 
 ## Build básica de desenvolvimento client-side:
