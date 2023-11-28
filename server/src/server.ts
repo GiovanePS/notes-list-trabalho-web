@@ -15,8 +15,8 @@ const PORT = process.env.SERVER_PORT
 
 app.use(express.json()) /*Usado para analisar o corpo das solicitações como JSON.*/
 app.use(cors({
-  origin: 'https://notes-list-client.vercel.app/',
-  credentials: true
+  origin: 'https://notes-list-client.vercel.app',
+  credentials: true,
 }))
 
 app.use(session({
