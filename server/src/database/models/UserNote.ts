@@ -3,6 +3,7 @@ import sequelize from '../sequelize_module'
 import User from './User'
 import Note from './Note'
 
+/* Define um modelo Sequelize para a tabela UserNote */
 interface UserNote {
   id: number,
   user_id: number,
