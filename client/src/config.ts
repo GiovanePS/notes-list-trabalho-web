@@ -1,1 +1,1 @@
-export const baseUrl = 'https://notes-list-server.vercel.app';
+export const baseUrl = "https://server-api-1j2f.onrender.com"

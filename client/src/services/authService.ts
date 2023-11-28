@@ -1,5 +1,7 @@
+import { baseUrl } from "@/config"
+
 export const checkAuth = async () => {
-  const response: Response = await fetch('http://localhost:5000/check', {  /*a função fetch é utilizada para fazer uma requisição HTTP GET para a URL 'http://localhost:5000/check'. O resultado da requisição é armazenado na variável response. */
+  const response: Response = await fetch(`${baseUrl}/check`, {  /*a função fetch é utilizada para fazer uma requisição HTTP GET para a URL 'http://localhost:5000/check'. O resultado da requisição é armazenado na variável response. */
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include' /*indica que os cookies e cabeçalhos de autorização devem ser incluídos na requisição*/
