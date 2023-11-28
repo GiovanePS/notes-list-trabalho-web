@@ -49,7 +49,7 @@ export default function Dashboard() {
 		fetchAuthStatus()
 	}, [router])
 
-  if (true) {
+  if (isAuthenticated) {
     return (
 		<>
 			<DashboardNavBar />

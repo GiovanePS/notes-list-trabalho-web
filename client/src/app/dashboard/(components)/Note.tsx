@@ -12,14 +12,22 @@ type NoteProps = {
 
 export default function Note({note, onDelete, toEdit}: NoteProps) { /*toEdit é uma função opcional que pode ser chamada para atualizar o estado das notas ao editá-las.*/
 	
-	const [isEditModalOpen, setIsEditModalOpen] = useState(false); /*estados para controlar a abertura e fechamento de modais (isEditModalOpen e isFrindModalOpen), a exibição de toasts (toastShow, toastType, toastText), e a visibilidade de ícones(showIcons, logo abaixo)*/
-	const [isFrindModalOpen, setIsFriendModalOpen] = useState(false);
+	const [isEditModalOpen, setIsEditModalOpen] = useState(false); /*estados para controlar a abertura e fechamento de modais (isEditModalOpen e isFriendModalOpen), a exibição de toasts (toastShow, toastType, toastText), e a visibilidade de ícones(showIcons, logo abaixo)*/
+	const [isFriendModalOpen, setIsFriendModalOpen] = useState(false);
 
-	const openEditModal = () => setIsEditModalOpen(true); /*funções que manipulam os estados supramencionados*/
+	/*funções que manipulam os estados supramencionados*/
+	const openEditModal = () => {
+		setIsEditModalOpen(true); 
+		setShowMobileIcons(false); 
+	};
 	const closeEditModal = () => setIsEditModalOpen(false);
 
-	const openFriendModal = () => setIsFriendModalOpen(true);
-	const closeFrindModal = () => setIsFriendModalOpen(false);
+	const openFriendModal = () => {
+		setIsFriendModalOpen(true);
+		setShowMobileIcons(false); 
+	};
+	const closeFriendModal = () => setIsFriendModalOpen(false);
+
 
 	const [toastShow, setToastShow] = useState(false);
 	const [toastType, setToastType] = useState("success");
@@ -75,7 +83,7 @@ export default function Note({note, onDelete, toEdit}: NoteProps) { /*toEdit é 
 			console.error(error);
 		}
 
-		closeFrindModal(); /*Fecha o modal de compartilhamento.*/
+		closeFriendModal(); /*Fecha o modal de compartilhamento.*/
 	}
 
 	const [showMobileIcons, setShowMobileIcons] = useState(false);
@@ -93,8 +101,8 @@ export default function Note({note, onDelete, toEdit}: NoteProps) { /*toEdit é 
 				onSave={handleSave}
 			/>
 			<FriendModal
-				isOpen={isFrindModalOpen}
-				onClose={closeFrindModal}
+				isOpen={isFriendModalOpen}
+				onClose={closeFriendModal}
 				onAdd={handleShare}
 			/>
 			<Toast

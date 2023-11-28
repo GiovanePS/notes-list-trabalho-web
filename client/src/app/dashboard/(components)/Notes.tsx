@@ -120,7 +120,7 @@ export default function Notes() { /*submissão de um formulário para adicionar 
 						onChange={(e) => e.target.value}
 					/>
 					<input
-						className="input w-3/4"
+						className="input w-3/4 mb-4"
 						type="text"
 						placeholder="Adicionar texto"
 						name="text"
@@ -138,7 +138,6 @@ export default function Notes() { /*submissão de um formulário para adicionar 
 						</tr>
 					</thead>
 					<tbody>
-            <Note note={{id: 0, titulo: 'Test Note', texto: 'Testing Functionalities'}} onDelete={() => {}} toEdit={getAllNotes} />
 						{allNotes?.map((nota) => (
 							<Note
                 key={nota.id}
