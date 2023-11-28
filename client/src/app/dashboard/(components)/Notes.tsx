@@ -72,7 +72,7 @@ export default function Notes() { /*submissão de um formulário para adicionar 
       });
 
       if (response.status === 200) {
-        showToast('success', 'Nota deletada com sucesso!')
+        showToast('success', 'Nota apagada com sucesso!')
         getAllNotes() /*Se a solicitação for bem-sucedida, a função chama getAllNotes para obter todas as notas atualizadas.*/
       }
     } catch (err: any) {
