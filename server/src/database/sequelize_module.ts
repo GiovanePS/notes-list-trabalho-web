@@ -1,16 +1,20 @@
 import { Sequelize } from 'sequelize'
-import 'dotenv/config'
 import path from 'path'
-const envPath = path.resolve(__dirname, '..', '.env')
+const envPath = path.resolve(__dirname, '..', '..', '.env')
 require('dotenv').config({ path: envPath })
 
 const sequelize = new Sequelize({
   dialect: 'postgres',
-  host: 'localhost',
+  host: process.env.POSTGRES_HOST,
   port: 5432,
-  database: 'notes_list',
-  username: process.env.POSTGRES_USERNAME,
+  database: process.env.POSTGRES_DATABASE,
+  username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
+  dialectOptions: {
+    ssl: {
+      require: true
+    }
+  },
   define: {
     underscored: true
   },
