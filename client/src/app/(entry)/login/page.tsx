@@ -56,7 +56,7 @@ export default function LoginPage() {
 			const password = formData.get("password")!.toString();
 
 			const body = { email, password };
-			const response = await fetch("http://localhost:5000/login", {
+			const response = await fetch("${baseUrl}/login", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(body),

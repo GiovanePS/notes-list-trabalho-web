@@ -10,7 +10,7 @@ export default function DashboardNavBar() {
 	const router = useRouter();
 
 	const logoutHandler = async () => { /*Função assíncrona chamada quando o botão "Sair" é clicado na barra de navegação.*/
-		const response = await fetch("http://localhost:5000/logout", { /*Utiliza a API fetch para fazer uma solicitação GET para a URL "http://localhost:5000/logout" com as opções especificadas.*/
+		const response = await fetch("${baseUrl}/logout", { /*Utiliza a API fetch para fazer uma solicitação GET para a URL "${baseUrl}/logout" com as opções especificadas.*/
 			method: "GET",
 			headers: { "Content-Type": "application/json" }, /*Indica que os dados são do tipo Json*/
 			credentials: "include", /*Inclui cookies na solicitação*/
