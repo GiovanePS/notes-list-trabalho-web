@@ -20,7 +20,7 @@ Dessa forma, se tudo der certo, o client já estará rodando no http://localhost
 2. Vá para o diretório _./server_
 3. Execute `npm install` para instalar todas as dependências.
 4. Vá para o diretório _./src_.
-5. Crie um arquivo chamado _.env_, contendo nele POSTGRES_PASSWORD='sua_senha_do_posgres'. Se seu usário não for 'postgres', coloque também POSTGRES_USERNAME='seu_usuario_do_postgres'.
+5. Crie um arquivo chamado _.env_, contendo nele POSTGRES_PASSWORD='sua_senha_do_posgres'. Se seu usário não for 'postgres', coloque também POSTGRES_USER='seu_usuario_do_postgres'.
 6. Vá para o diretório _./database_.
 7. Execute `npx sequelize-cli db:create` para criar a database _notes_list_ no postgres.
 8. Execute `npx ts-node ./scripts/sync.ts` para criar as tabelas do projeto no postgres.
