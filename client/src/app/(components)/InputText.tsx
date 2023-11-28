@@ -9,7 +9,7 @@ type InputTextProps = {
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 };
 
-export default function InputText(props: InputTextProps) {
+export default function InputText(props: InputTextProps) { /*Representa um campo de entrada de texto. */
 	return (
 		<div className="mb-4">
 			<input
@@ -19,7 +19,7 @@ export default function InputText(props: InputTextProps) {
 				name={props.name}
 				value={props.value}
 				placeholder={props.placeholder}
-				onChange={props.onChange}
+				onChange={props.onChange} /* Uma função de retorno de chamada opcional que será chamada quando o valor do campo de entrada for alterado.*/
 				required
 			/>
 		</div>
