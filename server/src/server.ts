@@ -26,12 +26,6 @@ app.use(session({
   secret: process.env.SESSION_SECRET || '_bRZ326bB(z&#$Kw', // SEMPRE DEFINIR SESSION_SECRET no .env
   resave: false,
   saveUninitialized: false,
-  cookie: {
-    httpOnly: true,
-    sameSite: 'none',
-    secure: true,
-    domain: 'notes-list-client.vercel.app',
-  }
 }))
 
 app.use(passport.initialize()) /* Inicializado para suportar autenticação.*/
