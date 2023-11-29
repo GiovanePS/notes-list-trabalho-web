@@ -17,9 +17,8 @@ app.use(express.json()) /*Usado para analisar o corpo das solicitações como JS
 app.use(cors({
   origin: 'https://notes-list-client.vercel.app',
   credentials: true,
-  exposedHeaders: '*',
-  allowedHeaders: '*',
-  methods: '*'
+  exposedHeaders: ['Content-Type', 'Set-Cookie'],
+  allowedHeaders: ['Content-Type', 'Set-Cookie'],
 }))
 
 app.use(session({
