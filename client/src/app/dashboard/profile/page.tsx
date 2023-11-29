@@ -7,8 +7,7 @@ import { useRouter } from "next/navigation";
 import { checkAuth } from "@/services/authService";
 import DashboardNavBar from "../(components)/DashboardNavBar";
 import Toast from "@/app/(components)/Toast";
-
-const SERVER_URL = 'http://localhost:5000'
+import { baseUrl } from "@/config";
 
 export default function Profile() {
   const router = useRouter()
@@ -52,7 +51,7 @@ export default function Profile() {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const response = await fetch(`${SERVER_URL}/user`, {
+        const response = await fetch(`${baseUrl}/user`, {
           method: 'GET',
           headers: { "Content-Type": "application/json"},
           credentials: 'include'
@@ -86,7 +85,7 @@ export default function Profile() {
       const email = formData.get('email')!.toString()
 
       const body = { username, email, password }
-      const response = await fetch(`${SERVER_URL}/user`, {
+      const response = await fetch(`${baseUrl}/user`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),

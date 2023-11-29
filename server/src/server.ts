@@ -17,8 +17,9 @@ app.use(express.json()) /*Usado para analisar o corpo das solicitações como JS
 app.use(cors({
   origin: 'https://notes-list-client.vercel.app',
   credentials: true,
-  exposedHeaders: ['Content-Type', 'Set-Cookie'],
-  allowedHeaders: ['Content-Type', 'Set-Cookie'],
+  exposedHeaders: '*',
+  allowedHeaders: '*',
+  methods: '*'
 }))
 
 app.use(session({
@@ -26,6 +27,9 @@ app.use(session({
   secret: process.env.SESSION_SECRET || '_bRZ326bB(z&#$Kw', // SEMPRE DEFINIR SESSION_SECRET no .env
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    sameSite: 'none'
+  }
 }))
 
 app.use(passport.initialize()) /* Inicializado para suportar autenticação.*/
