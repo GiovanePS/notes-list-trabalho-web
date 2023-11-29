@@ -28,7 +28,9 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    sameSite: 'lax',
+    sameSite: 'none',
+    secure: true,
+    domain: 'notes-list-client.vercel.app',
   }
 }))
 
